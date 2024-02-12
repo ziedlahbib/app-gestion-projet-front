@@ -22,9 +22,10 @@
         <div class="card-body px-lg-5 py-lg-5">
           <form role="form" [formGroup]="loginForm">
             <div class="form-group mb-3">
-              <div class="alert alert-warning" *ngIf='comptedesa'>{{errordesaMessage}}</div>
-              <div class="alert alert-warning" *ngIf='invalidLogin'>{{errorMessage}}</div>
-                <div class="alert alert-success" *ngIf='loginSuccess'>{{successMessage}}</div>
+              <div class="alert alert-warning" *ngIf="comptedesa" [@fadeOutAnimation]>{{errordesaMessage}}</div>
+              <div class="alert alert-warning" *ngIf="invalidLogin" [@fadeOutAnimation]>{{errorMessage}}</div>
+              <div class="alert alert-success" *ngIf="loginSuccess" [@fadeOutAnimation]>{{successMessage}}</div>
+              
               <div class="input-group input-group-alternative">
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-single-02"></i></span>

@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.initForm();
+    
   }
   ngOnDestroy() {
   }
@@ -36,8 +37,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   handleLogin() {
     this.authenticationService.authenticationService(this.loginForm.value).subscribe(
       (result) => {
-        console.log(result);
-        console.log(result.message);
         if (result.message === "Ce compte est désactivé") {
           this.authenticationService.logout();
           this.comptedesa=true
@@ -45,7 +44,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           this.invalidLogin = false;
           this.loginSuccess = true;
           this.successMessage = 'Login Successful.';
-          this.router.navigate(['/affichlistuser']);
+          this.router.navigate(['/dashboard']);
           this.authenticationService.registerSuccessfulLogin(result);
         }
       },
@@ -54,6 +53,14 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.loginSuccess = false;
       }
     );
+    this.showAlerts();
+  }
+  showAlerts(): void {
+    setTimeout(() => {
+      this.comptedesa = false;
+      this.invalidLogin = false;
+      this.loginSuccess = false;
+    }, 6000);
   }
 
 }
