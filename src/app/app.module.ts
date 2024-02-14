@@ -15,6 +15,7 @@ import { ComponentsModule } from './components/components.module';
 import { HttpInterceptorService } from './service/http-interceptor.service';
 
 
+
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -28,7 +29,8 @@ import { HttpInterceptorService } from './service/http-interceptor.service';
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    AuthLayoutComponent
+    AuthLayoutComponent,
+
   ],
   providers: [
     {
