@@ -16,6 +16,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { GestiondesutilisateurComponent } from 'src/app/pages/gestiondesutilisateur/gestiondesutilisateur.component';
+import { StarRatingComponent } from 'src/app/star-rating/star-rating.component';
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import { GestiondesutilisateurComponent } from 'src/app/pages/gestiondesutilisat
     TablesComponent,
     IconsComponent,
     MapsComponent,
-    GestiondesutilisateurComponent
+    GestiondesutilisateurComponent,
+    StarRatingComponent
   ]
 })
 
