@@ -25,38 +25,60 @@
         <div class="card-body px-lg-5 py-lg-5">
           <div class="text-center text-muted mb-4">
           </div>
-          <form role="form">
+          <form role="form" [formGroup]="userform">
             <div class="form-group">
-              <div class="input-group input-group-alternative mb-3">
+              <div class="alert alert-warning" *ngIf="userform.get('username')?.hasError('usernameTaken')">Identifiant existe </div>
+              <div class="input-group input-group-alternative mb-3" [ngClass]="{ 'invalid-input': userform.get('username').invalid && userform.get('username').touched }">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-single-02"></i></span>
+                </div> 
+                <input class="form-control" placeholder="Identifiant *" type="text" formControlName="username" >
+              </div>
+              <div class="input-group input-group-alternative mb-3" [ngClass]="{ 'invalid-input': userform.get('nom').invalid && userform.get('nom').touched }">
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
                 </div>
-                <input class="form-control" placeholder="Name" type="text">
+                <input class="form-control" placeholder="Nom *" type="text" formControlName="nom">
               </div>
             </div>
             <div class="form-group">
-              <div class="input-group input-group-alternative mb-3">
+              <div class="input-group input-group-alternative mb-3" [ngClass]="{ 'invalid-input': userform.get('prenom').invalid && userform.get('prenom').touched }">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                </div>
+                <input class="form-control" placeholder="Prénom *" type="text" formControlName="prenom">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="alert alert-warning" *ngIf="userform.get('email')?.hasError('email')">email sous la forme "exemple@exemple.xxx"</div>
+              <div class="alert alert-warning" *ngIf="userform.get('email')?.hasError('emailTaken')">email existe</div>
+              <div class="input-group input-group-alternative mb-3" [ngClass]="{ 'invalid-input': userform.get('email').invalid && userform.get('email').touched }">
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                 </div>
-                <input class="form-control" placeholder="Email" type="email">
+                <input class="form-control" placeholder="E-mail *" type="email" formControlName="email">
               </div>
             </div>
             <div class="form-group">
-              <div class="input-group input-group-alternative">
+              <div class="input-group input-group-alternative" [ngClass]="{ 'invalid-input': userform.get('password').invalid && userform.get('password').touched }">
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                 </div>
-                <input class="form-control" placeholder="Password" type="password">
+                <input class="form-control" placeholder="Mot de passe *" type="password" formControlName="password">
               </div>
             </div>
-            <div class="text-muted font-italic"><small>password strength: <span class="text-success font-weight-700">strong</span></small></div>
-            <div class="row my-4">
-              <div class="col-12">
+              <div class="form-group">
+                <div class="alert alert-warning" *ngIf="userform.get('confirmPassword')?.hasError('confirmedValidator')">Les mots de passe ne correspondent pas</div>
+                <div class="input-group input-group-alternative"  [ngClass]="{ 'invalid-input': userform.get('confirmPassword').invalid && userform.get('confirmPassword').touched }" >
+                  <div class="input-group-prepend" >
+                    <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                  </div>
+                  <input class="form-control" placeholder="Confirmer mot de passe *" type="password" formControlName="confirmPassword">
+                </div>
               </div>
-            </div>
+              <div style="color: red;">(*) Champ obligatoire</div>
             <div class="text-center">
-              <button type="button" class="btn btn-primary mt-4">Create account</button>
+              <button type="button" class="btn btn-primary mt-4"(click)="ajouter()" [disabled]="userform.invalid" >Create account</button>
             </div>
           </form>
         </div>

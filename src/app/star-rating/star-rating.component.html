@@ -1,4 +1,7 @@
-<div class="rating">
-    <span class="star" (click)="rateStar(i)" *ngFor="let star of stars; let i = index" [class.active]="i < value">&#9733;</span>
-  </div>
-  
+<div class="star-rating">
+  <ng-container *ngFor="let star of getStars()">
+    <svg height="25" width="23" class="star rating" [ngClass]="getStarClass(star)">
+      <polygon points="12.5,2.5 15.5,10 23,10 17,15.5 19,23 12.5,18.5 6,23 8,15.5 2,10 9.5,10" style="fill-rule:nonzero;"/>
+    </svg>
+  </ng-container>
+</div>

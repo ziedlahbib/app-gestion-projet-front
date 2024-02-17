@@ -9,9 +9,23 @@ import { User } from '../model/user';
 export class UserServiceService {
 
   getbyusersurl="/api/user/get-users";
+  adduserUrl="/api/auth/signup-superadmin";
+  existuserbuusernamesurl="/api/user/exist-userbyusername";
+  existrbyemailsurl="/api/user/exist-userbyemail";
   constructor(private http : HttpClient) { }
   getusers(): Observable<User[]>{
     return this.http.get<User[]>(`${this.getbyusersurl}`);
 
+  }
+  existuserByusername(username :string): Observable<Boolean>{
+    return this.http.get<Boolean>(`${this.existuserbuusernamesurl}/${username}`);
+
+  }
+  existuserByemail(email :string): Observable<Boolean>{
+    return this.http.get<Boolean>(`${this.existrbyemailsurl}/${email}`);
+
+  }
+  ajoutuser(user :User): Observable<User>{
+    return this.http.post<User>(`${this.adduserUrl}`,user);
   }
 }

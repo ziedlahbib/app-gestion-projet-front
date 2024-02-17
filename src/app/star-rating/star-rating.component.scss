@@ -1,13 +1,37 @@
-.rating {
-    font-size: 24px;
-  }
-  
-  .star {
-    color: gray;
-    cursor: pointer;
-  }
-  
-  .star.active {
-    color: yellow;
-  }
-  
+.star-rating {
+  line-height: 0;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.star-rating .star {
+  padding: 0 1px;
+}
+
+.star-rating .star polygon {
+  fill: #ddd; /* Default star color */
+  stroke: #FFC107; /* Star outline color */
+}
+
+.star-rating .star polygon:last-child {
+  fill: none;
+  stroke: #FFC107;
+}
+
+.full polygon {
+  fill: #FFC107; /* Filled star color */
+}
+
+.half polygon {
+  fill: #FFC107; /* Half star color */
+  clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+}
+
+.small-half polygon {
+  fill: #FFC107; /* Small Half star color */
+  clip-path: polygon(0 0, 30% 0, 30% 100%, 0 100%);
+}
+
+.empty polygon {
+  fill: #ddd; /* Empty star color */
+}

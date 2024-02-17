@@ -6,18 +6,26 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./star-rating.component.scss']
 })
 export class StarRatingComponent {
-  @Input() maxStars: number = 5;
-  @Input() value: number = 0;
-  @Output() valueChange = new EventEmitter<number>();
+  @Input() rating: number = 0;
 
-  stars: number[];
+  constructor() { }
 
-  constructor() {
-    this.stars = Array(this.maxStars).fill(0).map((x, i) => i);
+  ngOnInit(): void {
+  
   }
-
-  rateStar(index: number) {
-    this.value = index + 1;
-    this.valueChange.emit(this.value);
+  getStars(): number[] {
+    return Array(Math.ceil(this.rating)).fill(0).map((x, i) => i + 1);
   }
+  
+  getStarClass(star: number): string[] {
+    if (this.rating >= star) {
+      return ['full'];
+    } else if (this.rating + 0.5 >= star) {
+      return ['half'];
+    } else {
+      return ['empty'];
+    }
+  }
+  
+
 }
