@@ -18,6 +18,10 @@ import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { GestiondesutilisateurComponent } from 'src/app/pages/gestiondesutilisateur/gestiondesutilisateur.component';
 import { StarRatingComponent } from 'src/app/star-rating/star-rating.component';
 import { RangePipe } from 'src/app/range.pipe';
+import { AjouterUtilisateurComponent } from 'src/app/pages/gestiondesutilisateur/ajouter-utilisateur/ajouter-utilisateur.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
 
 
 @NgModule({
@@ -28,7 +32,7 @@ import { RangePipe } from 'src/app/range.pipe';
     HttpClientModule,
     NgbModule,
     ClipboardModule,
-    MatPaginatorModule
+    MatPaginatorModule,MatFormFieldModule, MatSelectModule, MatInputModule, FormsModule
   ],
   declarations: [
     DashboardComponent,
@@ -38,7 +42,8 @@ import { RangePipe } from 'src/app/range.pipe';
     MapsComponent,
     GestiondesutilisateurComponent,
     StarRatingComponent,
-    RangePipe 
+    RangePipe ,
+    AjouterUtilisateurComponent
 
   ]
 })

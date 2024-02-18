@@ -3,6 +3,13 @@ import { ROUTES } from '../sidebar/sidebar.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthServiceService } from 'src/app/service/auth-service.service';
+import { User } from 'src/app/model/user';
+import { jwtDecode } from "jwt-decode";
+import { UserServiceService } from 'src/app/service/user-service.service';
+
+
+
+
 
 @Component({
   selector: 'app-navbar',
@@ -13,13 +20,15 @@ export class NavbarComponent implements OnInit {
   public focus;
   public listTitles: any[];
   public location: Location;
+  user:User;
   constructor(location: Location,  private element: ElementRef, private router: Router,
-    private authenticationService: AuthServiceService) {
+    private authenticationService: AuthServiceService,private us: UserServiceService) {
     this.location = location;
   }
 
   ngOnInit() {
     this.listTitles = ROUTES.filter(listTitle => listTitle);
+    this.getuserbyid();
   }
   getTitle(){
     var titlee = this.location.prepareExternalUrl(this.location.path());
@@ -38,4 +47,15 @@ export class NavbarComponent implements OnInit {
     this.authenticationService.logout();
     
   }
+  getuserbyid(){
+    let token=localStorage.getItem('autorisation'|| '');
+    let user:any=jwtDecode(token|| '');
+    this.us.getuserById(user.jti).subscribe(
+      data=>{
+        console.log(data);
+        this.user=data;
+      }
+    )
+  }
+
 }

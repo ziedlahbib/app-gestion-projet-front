@@ -12,6 +12,7 @@ export class UserServiceService {
   adduserUrl="/api/auth/signup-superadmin";
   existuserbuusernamesurl="/api/user/exist-userbyusername";
   existrbyemailsurl="/api/user/exist-userbyemail";
+  getbyuserbyIdsurl="/api/user/get-user";
   constructor(private http : HttpClient) { }
   getusers(): Observable<User[]>{
     return this.http.get<User[]>(`${this.getbyusersurl}`);
@@ -27,5 +28,9 @@ export class UserServiceService {
   }
   ajoutuser(user :User): Observable<User>{
     return this.http.post<User>(`${this.adduserUrl}`,user);
+  }
+  getuserById(iduser :Number): Observable<User>{
+    return this.http.get<User>(`${this.getbyuserbyIdsurl}/${iduser}`);
+
   }
 }
