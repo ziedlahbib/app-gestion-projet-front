@@ -32,7 +32,9 @@ import { MatInputModule } from '@angular/material/input';
     HttpClientModule,
     NgbModule,
     ClipboardModule,
-    MatPaginatorModule,MatFormFieldModule, MatSelectModule, MatInputModule, FormsModule
+    MatPaginatorModule,MatFormFieldModule, MatSelectModule, MatInputModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   declarations: [
     DashboardComponent,
