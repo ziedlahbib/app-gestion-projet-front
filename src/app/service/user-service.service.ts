@@ -14,6 +14,7 @@ export class UserServiceService {
   existuserbuusernamesurl="/api/user/exist-userbyusername";
   existrbyemailsurl="/api/user/exist-userbyemail";
   getbyuserbyIdsurl="/api/user/get-user";
+  supprimerurl="/api/user/delete-user"
   constructor(private http : HttpClient) { }
   getusers(): Observable<User[]>{
     return this.http.get<User[]>(`${this.getbyusersurl}`);
@@ -37,5 +38,8 @@ export class UserServiceService {
   getuserById(iduser :Number): Observable<User>{
     return this.http.get<User>(`${this.getbyuserbyIdsurl}/${iduser}`);
 
+  }
+  deleteUser(id :Number): Observable<any>{
+    return this.http.delete<any>(`${this.supprimerurl}/${id}`);
   }
 }
