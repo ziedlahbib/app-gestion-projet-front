@@ -19,6 +19,7 @@ export class GestiondesutilisateurComponent implements OnInit {
 getusers(){
   this.us.getusers().subscribe(
     data=>{
+      console.log(data)
       this.users=data;
     }
   )

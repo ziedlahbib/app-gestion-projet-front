@@ -24,6 +24,7 @@
                 <th scope="col">Identifiant</th>
                 <th scope="col">E-mail</th>
                 <th scope="col">Compétence</th>
+                <th scope="col">Niveau</th>
                 <th scope="col">Note</th>
                 <th scope="col"></th>
               </tr>
@@ -50,7 +51,14 @@
                   {{user.email}}
                 </td>
                 <td>
-                  {{user.competence}}
+                  <div *ngFor="let userCompetence of user.userCompetences">
+                    <p>{{ userCompetence.competence.technologies }}</p>
+                  </div>
+                </td>
+                <td>
+                  <div *ngFor="let userCompetence of user.userCompetences">
+                    <p>{{ userCompetence.lvl }}</p>
+                  </div>
                 </td>
                 <td>
                   <app-star-rating [rating]=user.rating></app-star-rating>

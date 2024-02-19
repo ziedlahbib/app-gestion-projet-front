@@ -9,8 +9,8 @@ import { User } from 'src/app/model/user';
 import { UserServiceService } from 'src/app/service/user-service.service';
 import { Router } from '@angular/router';
 import { Observable, catchError, debounceTime, map, of, switchMap } from 'rxjs';
-// regular style toast
 import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-ajouter-utilisateur',
@@ -23,7 +23,8 @@ export class AjouterUtilisateurComponent implements OnInit {
   erole=ERole;
   tech=technologies;
   constructor(private us: UserServiceService,private formBuilder: FormBuilder, private route: Router,
-    private toastrService: ToastrService) { }
+    private toastrService: ToastrService
+    ) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -117,7 +118,7 @@ ajouter() {
     data => {
       console.log(data)
       this.toastrService.success(data.message)
-      this.route.navigate(['/user-managemen']);
+      this.route.navigate(['/user-management']);
 
     }
   )
