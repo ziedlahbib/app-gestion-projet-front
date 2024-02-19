@@ -13,8 +13,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { HttpInterceptorService } from './service/http-interceptor.service';
-import { ModifierUserComponent } from './pages/gestiondesutilisateur/modifier-user/modifier-user.component';
 import { ToastrModule } from 'ngx-toastr';
+
 
 
 
@@ -38,7 +38,7 @@ import { ToastrModule } from 'ngx-toastr';
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
-    ModifierUserComponent,
+
     
 
 

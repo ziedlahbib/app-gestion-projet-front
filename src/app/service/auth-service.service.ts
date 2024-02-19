@@ -30,5 +30,9 @@ export class AuthServiceService {
     localStorage.removeItem('role');
     this.router.navigate(['/login']);
   }
+  setToken(token: string): void {
+    // Implement your logic to store the token in localStorage or wherever it's needed
+    localStorage.setItem('autorisation',token);
+  }
 
 }

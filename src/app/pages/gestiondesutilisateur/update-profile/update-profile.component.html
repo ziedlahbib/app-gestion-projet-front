@@ -1,0 +1,136 @@
+<div *ngIf="isReady">
+    <div >
+        <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
+      style="min-height: 200px; background-image: url(assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;">
+      <!-- Mask -->
+      <span class="mask bg-gradient-danger opacity-8"></span>
+      <!-- Header container -->
+    </div>
+    <div class="container-fluid mt--7">
+      <div class="row">
+        <div class="col-xl-8 order-xl-1">
+          <div class="card bg-secondary shadow">
+            <div class="card-header bg-white border-0">
+              <div class="row align-items-center">
+                <div class="col-8">
+                  <h3 class="mb-0">Formulaire d'ajout</h3>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <form [formGroup]="userform">
+                <h6 class="heading-small text-muted mb-4">information</h6>
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <div class="alert alert-warning" *ngIf="userform.get('username')?.hasError('usernameTaken')">
+                          Identifiant existe </div>
+                        <label class="form-control-label" for="input-username">Identifiant *</label>
+                        <input type="text" id="input-username" class="form-control form-control-alternative"
+                          formControlName="username"
+                          [ngClass]="{ 'invalid-input': userform.get('username').invalid && userform.get('username').touched }">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <div class="alert alert-warning" *ngIf="userform.get('email')?.hasError('email')">email sous la
+                          forme "exemple@exemple.xxx"</div>
+                        <div class="alert alert-warning" *ngIf="userform.get('email')?.hasError('emailTaken')">email existe
+                        </div>
+                        <label class="form-control-label" for="input-email"> Adresse e-mail * </label>
+                        <input type="email" id="input-email" class="form-control form-control-alternative"
+                          formControlName="email"
+                          [ngClass]="{ 'invalid-input': userform.get('email').invalid && userform.get('email').touched }">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-first-name">Nom *</label>
+                        <input type="text" id="input-first-name" class="form-control form-control-alternative"
+                          formControlName="nom"
+                          [ngClass]="{ 'invalid-input': userform.get('nom').invalid && userform.get('nom').touched }">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-last-name">Prenom *</label>
+                        <input type="text" id="input-last-name" class="form-control form-control-alternative"
+                          formControlName="prenom"
+                          [ngClass]="{ 'invalid-input': userform.get('prenom').invalid && userform.get('prenom').touched }">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr class="my-4" />
+                <!-- Address -->
+                <h6 class="heading-small text-muted mb-4">autre</h6>
+                <div class="pl-lg-4">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <mat-form-field>
+                            <mat-label>Role *</mat-label>
+                            <mat-select formControlName="role" disabled>
+                              <mat-option *ngIf="user?.roles?.name===chef de projet"[value]="user?.roles?.name">Chef de projet</mat-option>
+                              <mat-option *ngIf="user?.roles?.name===responsable" [value]="user?.roles?.name">Responsable</mat-option>
+                              <mat-option *ngIf="user?.roles?.name===developpeur" [value]="user?.roles?.name">Développeur</mat-option>
+                              <mat-option *ngIf="user?.roles?.name===superadmin" [value]="user?.roles?.name">SuperAdmin</mat-option>
+                              <mat-option value="chef de projet">Chef de projet</mat-option>
+                              <mat-option value="responsable">Responsable</mat-option>
+                              <mat-option value="developpeur">Développeur</mat-option>
+                              <mat-option value="superadmin">SuperAdmin</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <mat-form-field>
+                            <mat-label>Technologies *</mat-label >
+                            <mat-select formControlName="competence" disabled>
+                              <mat-option [value]="user?.userCompetences?.competenc?.technologies">{{ user?.userCompetences?.competenc?.technologies }}</mat-option>
+                              <mat-option *ngFor="let c of tech | keyvalue" [value]="c.value">{{c.value}}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                        <div class="form-group">
+                          <mat-form-field>
+                            <mat-label>Niveau *</mat-label>
+                            <mat-select formControlName="lvl" disabled>
+                              <mat-option [value]="user?.userCompetences?.lvl">{{ user?.userCompetences?.lvl }}</mat-option>
+                              <mat-option value="1">1</mat-option>
+                              <mat-option value="2">2</mat-option>
+                              <mat-option value="3">3</mat-option>
+                              <mat-option value="4">4</mat-option>
+                              <mat-option value="5">5</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                <div class="row align-items-center">
+                  <div class="col-8">
+                    <h3 style="color: red;" class="mb-0">(*) Champ obligatoire</h3>
+                  </div>
+                  <div class="col-4 text-right">
+                    <button class="btn btn-icon btn-3 btn-primary" type="button" (click)="modifier()"  [disabled]="userform.invalid">
+                      <span class="btn-inner--icon"><i class="ni ni-check-bold"></i></span>
+                      <span class="btn-inner--text">Ajouter</span>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+</div>

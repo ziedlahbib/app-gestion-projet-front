@@ -51,13 +51,13 @@
                   {{user.email}}
                 </td>
                 <td>
-                  <div *ngFor="let userCompetence of user.userCompetences">
-                    <p>{{ userCompetence.competence.technologies }}</p>
+                  <div *ngIf="user.userCompetences">
+                    <p>{{ user.userCompetences.competence.technologies }}</p>
                   </div>
                 </td>
                 <td>
-                  <div *ngFor="let userCompetence of user.userCompetences">
-                    <p>{{ userCompetence.lvl }}</p>
+                  <div *ngIf="user.userCompetences" >
+                    <p>{{ user.userCompetences.lvl }}</p>
                   </div>
                 </td>
                 <td>

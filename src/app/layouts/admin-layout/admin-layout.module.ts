@@ -22,6 +22,8 @@ import { AjouterUtilisateurComponent } from 'src/app/pages/gestiondesutilisateur
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
+import { ModifierUserComponent } from 'src/app/pages/gestiondesutilisateur/modifier-user/modifier-user.component';
+import { UpdateProfileComponent } from 'src/app/pages/gestiondesutilisateur/update-profile/update-profile.component';
 
 
 
@@ -48,7 +50,9 @@ import { MatInputModule } from '@angular/material/input';
     GestiondesutilisateurComponent,
     StarRatingComponent,
     RangePipe ,
-    AjouterUtilisateurComponent
+    AjouterUtilisateurComponent,
+    ModifierUserComponent,
+    UpdateProfileComponent,
 
   ]
 })
