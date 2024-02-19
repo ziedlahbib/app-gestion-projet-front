@@ -24,6 +24,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -35,6 +36,8 @@ import { MatInputModule } from '@angular/material/input';
     MatPaginatorModule,MatFormFieldModule, MatSelectModule, MatInputModule,
     FormsModule,
     ReactiveFormsModule,
+ 
+
   ],
   declarations: [
     DashboardComponent,

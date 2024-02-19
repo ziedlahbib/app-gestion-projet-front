@@ -17,6 +17,7 @@ import { UserServiceService } from 'src/app/service/user-service.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+  isReady :boolean=false;
   public focus;
   public listTitles: any[];
   public location: Location;
@@ -54,6 +55,7 @@ export class NavbarComponent implements OnInit {
       data=>{
         console.log(data);
         this.user=data;
+        this.isReady=true;
       }
     )
   }

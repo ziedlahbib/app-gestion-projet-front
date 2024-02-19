@@ -13,6 +13,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { HttpInterceptorService } from './service/http-interceptor.service';
+import { ModifierUserComponent } from './pages/gestiondesutilisateur/modifier-user/modifier-user.component';
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -30,11 +32,13 @@ import { HttpInterceptorService } from './service/http-interceptor.service';
     RouterModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    ToastrModule.forRoot(),
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
+    ModifierUserComponent,
     
 
 

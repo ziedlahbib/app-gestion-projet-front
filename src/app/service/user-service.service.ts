@@ -10,6 +10,7 @@ export class UserServiceService {
 
   getbyusersurl="/api/user/get-users";
   adduserUrl="/api/auth/signup-superadmin";
+  addnormaluserUrl="/api/auth/signup"
   existuserbuusernamesurl="/api/user/exist-userbyusername";
   existrbyemailsurl="/api/user/exist-userbyemail";
   getbyuserbyIdsurl="/api/user/get-user";
@@ -29,6 +30,10 @@ export class UserServiceService {
   ajoutuser(user :User): Observable<User>{
     return this.http.post<User>(`${this.adduserUrl}`,user);
   }
+  ajounormaltuser(user :User): Observable<any>{
+    return this.http.post<any>(`${this.addnormaluserUrl}`,user);
+  }
+  
   getuserById(iduser :Number): Observable<User>{
     return this.http.get<User>(`${this.getbyuserbyIdsurl}/${iduser}`);
 

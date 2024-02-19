@@ -9,6 +9,8 @@ import { User } from 'src/app/model/user';
 import { UserServiceService } from 'src/app/service/user-service.service';
 import { Router } from '@angular/router';
 import { Observable, catchError, debounceTime, map, of, switchMap } from 'rxjs';
+// regular style toast
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-ajouter-utilisateur',
@@ -20,9 +22,11 @@ export class AjouterUtilisateurComponent implements OnInit {
   user: User;
   erole=ERole;
   tech=technologies;
-  constructor(private us: UserServiceService,private formBuilder: FormBuilder, private route: Router) { }
+  constructor(private us: UserServiceService,private formBuilder: FormBuilder, private route: Router,
+    private toastrService: ToastrService) { }
 
   ngOnInit(): void {
+    this.initForm();
   }
   initForm() {
     this.userform = this.formBuilder.group({
@@ -30,8 +34,11 @@ export class AjouterUtilisateurComponent implements OnInit {
       nom: ['', Validators.required],
       prenom: ['', Validators.required],
       email: ['', [Validators.required,Validators.email],[this.emailValidator]],
+      role: ['', Validators.required],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
+      competence: ['', Validators.required],
+      lvl: ['', Validators.required],
     
     }, {
       validator: this.ConfirmedValidator('password', 'confirmPassword')
@@ -106,10 +113,11 @@ export class AjouterUtilisateurComponent implements OnInit {
 }
 ajouter() {
 
-  this.us.ajoutuser(this.userform.value).subscribe(
+  this.us.ajounormaltuser(this.userform.value).subscribe(
     data => {
-      this.user = data;
-      this.route.navigate(['/login']);
+      console.log(data)
+      this.toastrService.success(data.message)
+      this.route.navigate(['/user-managemen']);
 
     }
   )
