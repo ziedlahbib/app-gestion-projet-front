@@ -24,7 +24,7 @@ export const ROUTES: RouteInfo[] = [
         class: ''
       },
       {
-        path: '/user-management/afficher utilisateurs',
+        path: '/user-management',
         title: 'Afficher les utilisateurs',
         icon: '',
         class: ''

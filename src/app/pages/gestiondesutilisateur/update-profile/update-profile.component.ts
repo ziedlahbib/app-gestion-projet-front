@@ -92,8 +92,8 @@ export class UpdateProfileComponent implements OnInit {
       nom: [data?.nom, Validators.required],
       prenom: [data?.prenom, Validators.required],
       email: [data?.email, [Validators.required,Validators.email],[this.emailValidator]],
-      role: [data?.roles.name],
-      competence: [data?.userCompetences?.competenc?.technologies],
+      role: [data?.roles?.name],
+      competence: [data?.userCompetences?.competence?.technologies],
       lvl: [data?.userCompetences?.lvl],
     
     });
@@ -133,4 +133,16 @@ export class UpdateProfileComponent implements OnInit {
       }
     )
   }
+  // In your component class
+getFormattedRole(role: string): string {
+  if (role.startsWith('ROLE_')) {
+    const formattedRole = role.replace('ROLE_', '');
+    const words = formattedRole.split('_');
+    const capitalizedWords = words.map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase());
+    return capitalizedWords.join(' ');
+  } else {
+    return role; // If the role doesn't start with "ROLE_", return it as is
+  }
+}
+
 }

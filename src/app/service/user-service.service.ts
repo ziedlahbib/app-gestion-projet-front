@@ -16,6 +16,7 @@ export class UserServiceService {
   existrbyemailsurl="/api/user/exist-userbyemail";
   getbyuserbyIdsurl="/api/user/get-user";
   supprimerurl="/api/user/delete-user";
+  modifieruserurl="/api/user/update-user"
   modifierprofileurl="/api/user/update-profile";
   forgotpassworduril="/api/forgot";
   resetpassworduril="/api/reset";
@@ -49,6 +50,20 @@ export class UserServiceService {
   }
   modifierprofile(id:Number,user:User): Observable<any>{
     return this.http.put<any>(`${this.modifierprofileurl}/${id}`,user).pipe(
+      tap((response: any) => {
+          // If the backend returns a new token, update the authentication state
+          if (response.token) {
+              this.authService.setToken(response.token);
+          }
+      }),
+      catchError(error => {
+          console.error('Error updating profile:', error);
+          return throwError(error);
+      })
+  );
+  }
+  modifieruser(id:Number,user:User): Observable<any>{
+    return this.http.put<any>(`${this.modifieruserurl}/${id}`,user).pipe(
       tap((response: any) => {
           // If the backend returns a new token, update the authentication state
           if (response.token) {

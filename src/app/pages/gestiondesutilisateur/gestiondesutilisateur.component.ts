@@ -39,4 +39,14 @@ suprimer(user :any){
     
   )
 }
+getFormattedRole(role: string): string {
+  if (role.startsWith('ROLE_')) {
+    const formattedRole = role.replace('ROLE_', '');
+    const words = formattedRole.split('_');
+    const capitalizedWords = words.map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase());
+    return capitalizedWords.join(' ');
+  } else {
+    return role; // If the role doesn't start with "ROLE_", return it as is
+  }
+}
 }

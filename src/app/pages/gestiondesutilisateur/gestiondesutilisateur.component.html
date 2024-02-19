@@ -26,6 +26,7 @@
                 <th scope="col">Compétence</th>
                 <th scope="col">Niveau</th>
                 <th scope="col">Note</th>
+                <th scope="col">Role</th>
                 <th scope="col"></th>
               </tr>
             </thead>
@@ -64,6 +65,9 @@
                   <app-star-rating [rating]=user.rating></app-star-rating>
                  
                 </td>
+                <td>
+                  {{getFormattedRole(user?.roles.name)}}
+                </td>
                 <td class="text-right">
                   <div ngbDropdown placement="bottom-right">
                     <a class="btn btn-sm btn-icon-only text-light"  ngbDropdownToggle>
@@ -71,7 +75,7 @@
                     </a>
                     <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
                       <a class="dropdown-item" (click)="suprimer(user)">supprimer</a>
-                      <a class="dropdown-item" href="javascript:void(0)">Another action</a>
+                      <a class="dropdown-item" [routerLink]="['/update-user',user.id]">afficher utilisateur</a>
                       <a class="dropdown-item" href="javascript:void(0)">Something else here</a>
                     </div>
                   </div>
