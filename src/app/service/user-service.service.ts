@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, catchError, tap, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, map, tap, throwError } from 'rxjs';
 import { User } from '../model/user';
 import { AuthServiceService } from './auth-service.service';
 
@@ -16,7 +16,9 @@ export class UserServiceService {
   existrbyemailsurl="/api/user/exist-userbyemail";
   getbyuserbyIdsurl="/api/user/get-user";
   supprimerurl="/api/user/delete-user";
-  modifierprofileurl="/api/user/update-profile"
+  modifierprofileurl="/api/user/update-profile";
+  forgotpassworduril="/api/forgot";
+  resetpassworduril="/api/reset";
   constructor(private http : HttpClient,private authService :AuthServiceService) { }
   
   getusers(): Observable<User[]>{
@@ -58,6 +60,14 @@ export class UserServiceService {
           return throwError(error);
       })
   );
+  }
+  forgotPassword(email: string): Observable<any> {
+    const params = new HttpParams().set('email', email);
+    return this.http.put<any>(`${this.forgotpassworduril}`,  params )
+  }
+  resettpassword(us: string, rt: string): Observable<any> {
+    return this.http.put(`${this.resetpassworduril}/${rt}`, us)
+      
   }
   private nomSubject = new BehaviorSubject<String>('');
   nom$: Observable<String> = this.nomSubject.asObservable();

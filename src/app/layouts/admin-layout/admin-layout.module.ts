@@ -24,6 +24,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { ModifierUserComponent } from 'src/app/pages/gestiondesutilisateur/modifier-user/modifier-user.component';
 import { UpdateProfileComponent } from 'src/app/pages/gestiondesutilisateur/update-profile/update-profile.component';
+import { ForgotpasswordComponent } from 'src/app/pages/PassowrdMangement/forgotpassword/forgotpassword.component';
+import { ResetpasswordComponent } from 'src/app/pages/PassowrdMangement/resetpassword/resetpassword.component';
 
 
 
@@ -53,6 +55,7 @@ import { UpdateProfileComponent } from 'src/app/pages/gestiondesutilisateur/upda
     AjouterUtilisateurComponent,
     ModifierUserComponent,
     UpdateProfileComponent,
+
 
   ]
 })
