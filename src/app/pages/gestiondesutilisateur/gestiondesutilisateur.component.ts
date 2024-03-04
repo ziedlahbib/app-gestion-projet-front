@@ -11,7 +11,7 @@ import { UserServiceService } from 'src/app/service/user-service.service';
 export class GestiondesutilisateurComponent implements OnInit {
 
   users:User[];
-  initialRating: number = 3
+  initialRating: number = 5
   constructor(private us:UserServiceService,private toastrService: ToastrService) { }
 
   ngOnInit(): void {

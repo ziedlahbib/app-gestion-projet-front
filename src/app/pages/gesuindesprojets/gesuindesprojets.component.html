@@ -1,1 +1,72 @@
-<p>gesuindesprojets works!</p>
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+      <div class="header-body">
+        <!-- Card stats -->
+      </div>
+    </div>
+  </div>
+  <!-- Page content -->
+  <div class="container-fluid mt--7">
+    <!-- Table -->
+    <div class="row">
+      <div class="col">
+        <div class="card shadow" style="min-height: calc(100vh - 170px);">
+          <div class="card-header border-0">
+            <h3 class="mb-0">Liste des projets</h3>
+          </div>
+          <div class="table-responsive">
+            <table class="table align-items-center table-flush">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Id</th>
+                  <th scope="col">Nom du projet</th>
+                  <th scope="col">Date limite</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let projet of projets" >
+                <tr>
+                  <th scope="row">
+                    <div class="media align-items-center">
+                      <div class="media-body">
+                        <span class="mb-0 text-sm">{{projet.id}}</span>
+                      </div>
+                    </div>
+                  </th>
+                  <td>
+                    {{projet.nom_projet}}
+                  </td>
+                  <td>
+                    {{formatDate(projet.date_limite)}}
+                  </td>
+                  
+                  <td class="text-right">
+                    <div ngbDropdown placement="bottom-right">
+                      <a class="btn btn-sm btn-icon-only text-light"  ngbDropdownToggle>
+                        <i class="fas fa-ellipsis-v"></i>
+                      </a>
+                      <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
+                        <a class="dropdown-item" (click)="suprimer(projet)">supprimer</a>
+                        <a class="dropdown-item" [routerLink]="['/update-user',projet.id]">afficher projet</a>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card-footer py-4">
+            <nav aria-label="...">
+              <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+              showFirstLastButtons
+              aria-label="Select page of periodic elements">
+              </mat-paginator>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Dark table -->
+  </div>
+  
+  
