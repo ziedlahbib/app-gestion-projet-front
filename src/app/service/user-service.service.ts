@@ -18,6 +18,8 @@ export class UserServiceService {
   supprimerurl="/api/user/delete-user";
   modifieruserurl="/api/user/update-user"
   modifierprofileurl="/api/user/update-profile";
+  activeruserurl="/api/user/activer-user"
+  desactiveruserurl="/api/user/desactiver-user"
   forgotpassworduril="/api/forgot";
   resetpassworduril="/api/reset";
   constructor(private http : HttpClient,private authService :AuthServiceService) { }
@@ -76,6 +78,12 @@ export class UserServiceService {
       })
   );
   }
+  activeruser(id:number,user:User):Observable<any>{
+   return this.http.put<any>(`${this.activeruserurl}/${id}`,user);
+  }
+  desactiveruser(id:number,user:User):Observable<any>{
+    return this.http.put<any>(`${this.desactiveruserurl}/${id}`,user);
+   }
   forgotPassword(email: string): Observable<any> {
     const params = new HttpParams().set('email', email);
     return this.http.put<any>(`${this.forgotpassworduril}`,  params )

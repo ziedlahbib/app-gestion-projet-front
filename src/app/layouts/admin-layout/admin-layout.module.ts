@@ -26,6 +26,8 @@ import { ModifierUserComponent } from 'src/app/pages/gestiondesutilisateur/modif
 import { UpdateProfileComponent } from 'src/app/pages/gestiondesutilisateur/update-profile/update-profile.component';
 import { ForgotpasswordComponent } from 'src/app/pages/PassowrdMangement/forgotpassword/forgotpassword.component';
 import { ResetpasswordComponent } from 'src/app/pages/PassowrdMangement/resetpassword/resetpassword.component';
+import { GesuindesprojetsComponent } from 'src/app/pages/gesuindesprojets/gesuindesprojets.component';
+import { AjouterprojetComponent } from 'src/app/pages/gesuindesprojets/ajouterprojet/ajouterprojet.component';
 
 
 
@@ -40,6 +42,7 @@ import { ResetpasswordComponent } from 'src/app/pages/PassowrdMangement/resetpas
     MatPaginatorModule,MatFormFieldModule, MatSelectModule, MatInputModule,
     FormsModule,
     ReactiveFormsModule,
+    
  
 
   ],
@@ -55,6 +58,8 @@ import { ResetpasswordComponent } from 'src/app/pages/PassowrdMangement/resetpas
     AjouterUtilisateurComponent,
     ModifierUserComponent,
     UpdateProfileComponent,
+    GesuindesprojetsComponent,
+    AjouterprojetComponent,
 
 
   ]

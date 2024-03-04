@@ -14,6 +14,8 @@ import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { HttpInterceptorService } from './service/http-interceptor.service';
 import { ToastrModule } from 'ngx-toastr';
+import { GesuindesprojetsComponent } from './pages/gesuindesprojets/gesuindesprojets.component';
+import { AjouterprojetComponent } from './pages/gesuindesprojets/ajouterprojet/ajouterprojet.component';
 
 
 
@@ -40,6 +42,8 @@ import { ToastrModule } from 'ngx-toastr';
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
+
+ 
 
   
 

@@ -29,6 +29,20 @@ export const ROUTES: RouteInfo[] = [
         icon: '',
         class: ''
       }
+    ]},
+    { path: '/projets-management', title: 'Gestion des projets',icon:'ni-circle-08 text-pink',class: '',children: [
+      {
+        path: '/projets-management/ajouter-projet',
+        title: 'Ajouter un projet',
+        icon: '',
+        class: ''
+      },
+      {
+        path: '/projets-management',
+        title: 'Afficher les projets',
+        icon: '',
+        class: ''
+      }
     ]}
 ];
 

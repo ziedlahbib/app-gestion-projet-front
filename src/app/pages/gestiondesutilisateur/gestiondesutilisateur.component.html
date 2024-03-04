@@ -76,7 +76,8 @@
                     <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
                       <a class="dropdown-item" (click)="suprimer(user)">supprimer</a>
                       <a class="dropdown-item" [routerLink]="['/update-user',user.id]">afficher utilisateur</a>
-                      <a class="dropdown-item" href="javascript:void(0)">Something else here</a>
+                      <a *ngIf="user.active==false" class="dropdown-item" (click)="activer(user.id,user)">activé utilisateur</a>
+                      <a  *ngIf="user.active==true"class="dropdown-item" (click)="desactiver(user.id,user)">desactivé utilisateur</a>
                     </div>
                   </div>
                 </td>

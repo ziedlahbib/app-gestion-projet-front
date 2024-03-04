@@ -39,6 +39,34 @@ suprimer(user :any){
     
   )
 }
+activer(id:number,user :User){
+  this.us.activeruser(id,user).subscribe(
+    res=>{
+      console.log(res)
+      this.us.getusers().subscribe(
+        data=>{
+          this.users=data;
+          this.toastrService.success("user activé")
+        }
+      )
+    }
+    
+  )
+}
+desactiver(id:number,user :User){
+  this.us.desactiveruser(id,user).subscribe(
+    res=>{
+      console.log(res)
+      this.us.getusers().subscribe(
+        data=>{
+          this.users=data;
+          this.toastrService.success("user desactivé")
+        }
+      )
+    }
+    
+  )
+}
 getFormattedRole(role: string): string {
   if (role.startsWith('ROLE_')) {
     const formattedRole = role.replace('ROLE_', '');

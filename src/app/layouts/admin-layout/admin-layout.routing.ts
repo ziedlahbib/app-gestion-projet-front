@@ -9,6 +9,8 @@ import { GestiondesutilisateurComponent } from 'src/app/pages/gestiondesutilisat
 import { AjouterUtilisateurComponent } from 'src/app/pages/gestiondesutilisateur/ajouter-utilisateur/ajouter-utilisateur.component';
 import { UpdateProfileComponent } from 'src/app/pages/gestiondesutilisateur/update-profile/update-profile.component';
 import { ModifierUserComponent } from 'src/app/pages/gestiondesutilisateur/modifier-user/modifier-user.component';
+import { GesuindesprojetsComponent } from 'src/app/pages/gesuindesprojets/gesuindesprojets.component';
+import { AjouterprojetComponent } from 'src/app/pages/gesuindesprojets/ajouterprojet/ajouterprojet.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
@@ -19,5 +21,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'update-profile/:id',           component: UpdateProfileComponent },
     { path: 'update-user/:id',           component: ModifierUserComponent },
     { path: 'user-management',           component: GestiondesutilisateurComponent },
-    { path: 'user-management/ajouter-utilisateur',           component: AjouterUtilisateurComponent }
+    { path: 'user-management/ajouter-utilisateur',           component: AjouterUtilisateurComponent },
+    { path: 'projets-management',           component: GesuindesprojetsComponent },
+    { path: 'projets-management/ajouter-projet',           component: AjouterprojetComponent },
 ];
