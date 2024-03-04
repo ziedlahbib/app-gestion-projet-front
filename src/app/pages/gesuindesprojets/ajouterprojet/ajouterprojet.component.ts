@@ -47,8 +47,8 @@ export class AjouterprojetComponent implements OnInit {
     this.ps.ajoutprojet(this.projetform.value).subscribe(
       data => {
         console.log(data)
-        this.toastrService.success("projet ajouté avec succé")
-        this.route.navigate(['/projets-managemen']);
+        this.toastrService.success("projet ajouté avec succés")
+        this.route.navigate(['/projets-management']);
   
       }
     )
