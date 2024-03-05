@@ -14,7 +14,7 @@
           <div class="card-header border-0">
             <h3 class="mb-0">Liste des projets</h3>
           </div>
-          <div class="table-responsive">
+          <div class="table-responsive" style="min-height: calc(100vh - 170px);">
             <table class="table align-items-center table-flush">
               <thead class="thead-light">
                 <tr>
@@ -47,7 +47,7 @@
                       </a>
                       <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
                         <a class="dropdown-item" (click)="suprimer(projet)">supprimer</a>
-                        <a class="dropdown-item" [routerLink]="['/update-user',projet.id]">afficher projet</a>
+                        <a class="dropdown-item" [routerLink]="['/projets-management/update-projet',projet.id]">afficher projet</a>
                       </div>
                     </div>
                   </td>

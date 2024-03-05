@@ -11,6 +11,7 @@ import { UpdateProfileComponent } from 'src/app/pages/gestiondesutilisateur/upda
 import { ModifierUserComponent } from 'src/app/pages/gestiondesutilisateur/modifier-user/modifier-user.component';
 import { GesuindesprojetsComponent } from 'src/app/pages/gesuindesprojets/gesuindesprojets.component';
 import { AjouterprojetComponent } from 'src/app/pages/gesuindesprojets/ajouterprojet/ajouterprojet.component';
+import { ModifierprojetComponent } from 'src/app/pages/gesuindesprojets/modifierprojet/modifierprojet.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
@@ -24,4 +25,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'user-management/ajouter-utilisateur',           component: AjouterUtilisateurComponent },
     { path: 'projets-management',           component: GesuindesprojetsComponent },
     { path: 'projets-management/ajouter-projet',           component: AjouterprojetComponent },
+    { path: 'projets-management/update-projet/:id',           component: ModifierprojetComponent },
 ];

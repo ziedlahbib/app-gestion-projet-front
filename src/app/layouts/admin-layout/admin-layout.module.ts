@@ -28,6 +28,7 @@ import { ForgotpasswordComponent } from 'src/app/pages/PassowrdMangement/forgotp
 import { ResetpasswordComponent } from 'src/app/pages/PassowrdMangement/resetpassword/resetpassword.component';
 import { GesuindesprojetsComponent } from 'src/app/pages/gesuindesprojets/gesuindesprojets.component';
 import { AjouterprojetComponent } from 'src/app/pages/gesuindesprojets/ajouterprojet/ajouterprojet.component';
+import { ModifierprojetComponent } from 'src/app/pages/gesuindesprojets/modifierprojet/modifierprojet.component';
 
 
 
@@ -60,6 +61,7 @@ import { AjouterprojetComponent } from 'src/app/pages/gesuindesprojets/ajouterpr
     UpdateProfileComponent,
     GesuindesprojetsComponent,
     AjouterprojetComponent,
+    ModifierprojetComponent,
 
 
   ]
