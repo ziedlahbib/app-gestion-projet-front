@@ -3,9 +3,11 @@ import { AbstractControl, AsyncValidatorFn, FormBuilder, FormGroup, ValidationEr
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable, catchError, debounceTime, map, of, switchMap } from 'rxjs';
+import { Competence } from 'src/app/model/competence';
 import { ERole } from 'src/app/model/erole';
 import { technologies } from 'src/app/model/technologies';
 import { User } from 'src/app/model/user';
+import { CompetenceService } from 'src/app/service/competence.service';
 import { UserServiceService } from 'src/app/service/user-service.service';
 
 @Component({
@@ -17,13 +19,24 @@ export class ModifierUserComponent implements OnInit {
   user:User;
   erole=ERole;
   tech=technologies;
+  competencelist:Competence[];
   isReady:boolean=false;
   public userform!: FormGroup;
   constructor( private formBuilder: FormBuilder, private route: Router,
-    private router:ActivatedRoute,private us:UserServiceService,private toastrService: ToastrService) { }
+    private router:ActivatedRoute,private us:UserServiceService,private toastrService: ToastrService,
+    private cs :CompetenceService) { }
 
     ngOnInit(): void {
       this.get(this.router.snapshot.params['id'])
+      this.getcompetences();
+
+    }
+    getcompetences(){
+      this.cs.getcompetences().subscribe(
+        res=>{
+          this.competencelist=res;
+        }
+      )
     }
     usernameValidator: AsyncValidatorFn = (control: AbstractControl): Observable<ValidationErrors | null> => {
       const username = control.value;
@@ -92,8 +105,6 @@ export class ModifierUserComponent implements OnInit {
         prenom: [data?.prenom, Validators.required],
         email: [data?.email, [Validators.required,Validators.email],[this.emailValidator]],
         role: [data?.roles.name],
-        competence: [data?.userCompetences?.competence?.technologies],
-        lvl: [data?.userCompetences?.lvl],
       
       });
   

@@ -10,7 +10,6 @@ export class User {
     resetToken:String;
     active:Boolean;
     roles:Role;
-    competence:String;
     rating:Number;
 
 

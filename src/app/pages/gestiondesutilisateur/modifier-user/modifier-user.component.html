@@ -65,6 +65,50 @@
                   </div>
                 </div>
                 <hr class="my-4" />
+                <h6 class="heading-small text-muted mb-4" >Compétence</h6>
+                <div class="row" *ngIf="user?.userCompetences">
+                  <div class="col-md-12" *ngFor="let comp of user.userCompetences">
+                    <div class="form-group">
+                        <mat-label>Technologies:  </mat-label>
+                        <mat-label>{{ comp.competence.technologies }}</mat-label>
+                    </div>
+                    <div class="form-group">
+                        <mat-label>Niveau :  </mat-label>
+                        <mat-label>{{ comp.lvl }}</mat-label>
+                    </div>
+                  </div>
+                </div> 
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <mat-form-field>
+                          <mat-label>Technologies *</mat-label>
+                          <mat-select >
+                            <mat-option  *ngFor="let competence of competencelist" 
+                            [value]="competence.id">{{ competence.technologies }}</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                      <!--
+                      <div class="form-group">
+                        <mat-form-field>
+                          <mat-label>Niveau *</mat-label>
+                          <mat-select formControlName="lvl" disabled>
+                            <mat-option *ngIf="user?.userCompetences?.lvl" [value]="user?.userCompetences?.lvl">
+                              {{ user?.userCompetences?.lvl }}
+                            </mat-option>
+                            <mat-option value="1">1</mat-option>
+                            <mat-option value="2">2</mat-option>
+                            <mat-option value="3">3</mat-option>
+                            <mat-option value="4">4</mat-option>
+                            <mat-option value="5">5</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                 -->
+                <hr class="my-4" />
                 <!-- Address -->
                 <h6 class="heading-small text-muted mb-4">autre</h6>
                 <div class="pl-lg-4">
@@ -79,36 +123,6 @@
                             <mat-option value="responsable">Responsable</mat-option>
                             <mat-option value="developpeur">Développeur</mat-option>
                             <mat-option value="superadmin">SuperAdmin</mat-option>
-                          </mat-select>
-                        </mat-form-field>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <mat-form-field>
-                          <mat-label>Technologies *</mat-label>
-                          <mat-select formControlName="competence" >
-                            <mat-option *ngIf="user?.userCompetences?.competence" [value]="user?.userCompetences?.competence?.technologies">
-                              {{ user?.userCompetences?.competence?.technologies }}
-                            </mat-option>
-                            <mat-option *ngFor="let c of tech | keyvalue" [value]="c.value">{{ c.value }}</mat-option>
-                          </mat-select>
-                        </mat-form-field>
-                      </div>
-                      <div class="form-group">
-                        <mat-form-field>
-                          <mat-label>Niveau *</mat-label>
-                          <mat-select formControlName="lvl" >
-                            <mat-option *ngIf="user?.userCompetences?.lvl" [value]="user?.userCompetences?.lvl">
-                              {{ user?.userCompetences?.lvl }}
-                            </mat-option>
-                            <mat-option value="1">1</mat-option>
-                            <mat-option value="2">2</mat-option>
-                            <mat-option value="3">3</mat-option>
-                            <mat-option value="4">4</mat-option>
-                            <mat-option value="5">5</mat-option>
                           </mat-select>
                         </mat-form-field>
                       </div>

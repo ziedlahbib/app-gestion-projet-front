@@ -23,8 +23,6 @@
                 <th scope="col">Prenom</th>
                 <th scope="col">Identifiant</th>
                 <th scope="col">E-mail</th>
-                <th scope="col">Compétence</th>
-                <th scope="col">Niveau</th>
                 <th scope="col">Note</th>
                 <th scope="col">Role</th>
                 <th scope="col"></th>
@@ -50,16 +48,6 @@
                 </td>
                 <td>
                   {{user.email}}
-                </td>
-                <td>
-                  <div *ngIf="user.userCompetences">
-                    <p>{{ user.userCompetences.competence.technologies }}</p>
-                  </div>
-                </td>
-                <td>
-                  <div *ngIf="user.userCompetences" >
-                    <p>{{ user.userCompetences.lvl }}</p>
-                  </div>
                 </td>
                 <td>
                   <app-star-rating [rating]=user.rating></app-star-rating>
