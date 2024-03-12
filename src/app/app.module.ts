@@ -25,6 +25,7 @@ import { ToastrModule } from 'ngx-toastr';
 
 
 
+
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -40,7 +41,7 @@ import { ToastrModule } from 'ngx-toastr';
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    AuthLayoutComponent,
+    AuthLayoutComponent
 
 
  

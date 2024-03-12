@@ -12,6 +12,7 @@ import { ModifierUserComponent } from 'src/app/pages/gestiondesutilisateur/modif
 import { GesuindesprojetsComponent } from 'src/app/pages/gesuindesprojets/gesuindesprojets.component';
 import { AjouterprojetComponent } from 'src/app/pages/gesuindesprojets/ajouterprojet/ajouterprojet.component';
 import { ModifierprojetComponent } from 'src/app/pages/gesuindesprojets/modifierprojet/modifierprojet.component';
+import { GestionDesCompetenceComponent } from 'src/app/pages/gestion-des-competence/gestion-des-competence.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
@@ -26,4 +27,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'projets-management',           component: GesuindesprojetsComponent },
     { path: 'projets-management/ajouter-projet',           component: AjouterprojetComponent },
     { path: 'projets-management/update-projet/:id',           component: ModifierprojetComponent },
+    { path: 'competence-management',           component: GestionDesCompetenceComponent },
 ];

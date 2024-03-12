@@ -21,7 +21,9 @@ export class ModifierUserComponent implements OnInit {
   tech=technologies;
   competencelist:Competence[];
   isReady:boolean=false;
+  selectedCompetenceId: Number | null = null;
   public userform!: FormGroup;
+  public compform!: FormGroup;
   constructor( private formBuilder: FormBuilder, private route: Router,
     private router:ActivatedRoute,private us:UserServiceService,private toastrService: ToastrService,
     private cs :CompetenceService) { }
@@ -29,7 +31,33 @@ export class ModifierUserComponent implements OnInit {
     ngOnInit(): void {
       this.get(this.router.snapshot.params['id'])
       this.getcompetences();
+      this.initcompForm()
 
+    }
+    initcompForm() {
+      this.compform = this.formBuilder.group({
+        lvl: [''],
+      
+      });
+  
+      this.compform.valueChanges.subscribe(
+        data => {
+          console.log(this.compform?.value);
+          console.log(this.selectedCompetenceId)
+          
+        }
+      )
+  
+      
+    }
+    affectercompuser(){
+      console.log(this.router.snapshot.params['id'])
+      this.cs.affectercompuser(this.router.snapshot.params['id'],this.selectedCompetenceId,this.compform.value).subscribe(
+        data=>{
+          this.get(this.router.snapshot.params['id'])
+          console.log(data);
+        }
+      )
     }
     getcompetences(){
       this.cs.getcompetences().subscribe(

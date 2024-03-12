@@ -29,6 +29,7 @@ import { ResetpasswordComponent } from 'src/app/pages/PassowrdMangement/resetpas
 import { GesuindesprojetsComponent } from 'src/app/pages/gesuindesprojets/gesuindesprojets.component';
 import { AjouterprojetComponent } from 'src/app/pages/gesuindesprojets/ajouterprojet/ajouterprojet.component';
 import { ModifierprojetComponent } from 'src/app/pages/gesuindesprojets/modifierprojet/modifierprojet.component';
+import { GestionDesCompetenceComponent } from 'src/app/pages/gestion-des-competence/gestion-des-competence.component';
 
 
 
@@ -62,6 +63,7 @@ import { ModifierprojetComponent } from 'src/app/pages/gesuindesprojets/modifier
     GesuindesprojetsComponent,
     AjouterprojetComponent,
     ModifierprojetComponent,
+    GestionDesCompetenceComponent,
 
 
   ]
