@@ -9,7 +9,8 @@ import { User } from '../model/user';
 })
 export class CompetenceService {
   getCompetencesUrl="/api/competence/get-competences";
-  affetercompuseUrl="/api/user/affecter-user-compenence"
+  affetercompuseUrl="/api/user/affecter-user-compenence";
+  desaffetercompuseUrl="/api/user/desaffecter-user-compenence"
   addcompUrl="/api/competence/add-competence";
   supprimerurl="/api/competence/delete-competence";
   constructor(private http : HttpClient) { }
@@ -22,6 +23,9 @@ export class CompetenceService {
   }
   affectercompuser(idu:Number,idc:Number,usercomp:any):Observable<User>{
     return this.http.put<User>(`${this.affetercompuseUrl}/${idu}/${idc}`,usercomp);
+  }
+  desaffectercompuser(idu:Number,idc:Number,usercomp:any):Observable<User>{
+    return this.http.put<User>(`${this.desaffetercompuseUrl}/${idu}/${idc}`,usercomp);
   }
   deletecomp(id :Number): Observable<any>{
     return this.http.delete<any>(`${this.supprimerurl}/${id}`);

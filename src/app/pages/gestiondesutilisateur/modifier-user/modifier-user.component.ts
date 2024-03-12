@@ -60,6 +60,15 @@ export class ModifierUserComponent implements OnInit {
         }
       );
     }
+    desaffectercompuser(comp:any) {
+      const userId = this.router.snapshot.params['id']
+      this.cs.desaffectercompuser(userId, comp.competence.id, comp).subscribe(
+        data => {
+          console.log(data);
+          this.get(userId);
+        }
+      );
+    }
     getcompetences(){
       this.cs.getcompetences().subscribe(
         res=>{
