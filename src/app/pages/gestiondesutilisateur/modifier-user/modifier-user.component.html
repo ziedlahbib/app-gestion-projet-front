@@ -69,16 +69,20 @@
                 <h6 class="heading-small text-muted mb-4">Compétence</h6>
                 <div class="row" *ngIf="user?.userCompetences">
                   <div class="col-md-12" *ngFor="let comp of user.userCompetences">
-                    <div class="form-group">
-                      <mat-label>Technologies: </mat-label>
-                      <mat-label>{{ comp.competence.technologies }}</mat-label>
-                    </div>
-                    <div class="form-group">
-                      <mat-label>Niveau : </mat-label>
-                      <mat-label>{{ comp.lvl }}</mat-label>
+                    <div class="competence-box" (mouseenter)="comp.hover = true" (mouseleave)="comp.hover = false">
+                      <div class="form-group">
+                        <mat-label>Technologies: {{ comp.competence.technologies }}</mat-label>
+                      </div>
+                      <div class="form-group">
+                        <mat-label>Niveau: {{ comp.lvl }}</mat-label>
+                      </div>
+                      <button *ngIf="comp.hover" mat-icon-button color="warn" (click)="deleteCompetence(comp)">
+                        <mat-icon>close</mat-icon>
+                      </button>
                     </div>
                   </div>
                 </div>
+                
                 <hr class="my-4" />
                 <div>
                   <div class="row">
