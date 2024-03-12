@@ -71,10 +71,10 @@
                   <div class="col-md-12" *ngFor="let comp of user.userCompetences">
                     <div class="competence-box" (mouseenter)="comp.hover = true" (mouseleave)="comp.hover = false">
                       <div class="form-group">
-                        <mat-label>Technologies: {{ comp.competence.technologies }}</mat-label>
+                        <mat-label>Technologies: {{ comp?.competence?.technologies }}</mat-label>
                       </div>
                       <div class="form-group">
-                        <mat-label>Niveau: {{ comp.lvl }}</mat-label>
+                        <mat-label>Niveau: {{ comp?.lvl }}</mat-label>
                       </div>
                       <button *ngIf="comp.hover" mat-icon-button color="warn" (click)="deleteCompetence(comp)">
                         <mat-icon>close</mat-icon>
@@ -85,21 +85,20 @@
                 
                 <hr class="my-4" />
                 <div>
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <mat-form-field>
-                          <mat-label>Technologies *</mat-label>
-                          <mat-select [(ngModel)]="selectedCompetenceId" name="competenceId">
-                            <mat-option *ngFor="let competence of competencelist" [value]="competence.id"
-                              >{{ competence.technologies
-                              }}</mat-option>
-                          </mat-select>
-                        </mat-form-field>
+                  <form [formGroup]="compform">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <mat-form-field>
+                            <mat-label>Technologies *</mat-label>
+                            <mat-select formControlName="selectedCompetenceId">
+                              <mat-option *ngFor="let competence of competencelist" [value]="competence.id"
+                                >{{ competence.technologies}}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <form [formGroup]="compform">
                     <div class="form-group">
                       <mat-form-field>
                         <mat-label>Niveau *</mat-label>

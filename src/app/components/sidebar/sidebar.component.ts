@@ -46,12 +46,6 @@ export const ROUTES: RouteInfo[] = [
     ]},
     { path: '/competence-management', title: 'Gestion des compétences',icon:'ni-circle-08 text-pink',class: '',children: [
       {
-        path: '/competence-management/ajouter-competence',
-        title: 'Ajouter un competence',
-        icon: '',
-        class: ''
-      },
-      {
         path: '/competence-management',
         title: 'Afficher les competences',
         icon: '',

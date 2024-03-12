@@ -2,6 +2,27 @@
     <div class="container-fluid">
       <div class="header-body">
         <!-- Card stats -->
+        <hr class="my-4" />
+        <div>
+          <form [formGroup]="compform">
+            <div class="form-group">
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label class="form-control-label" for="input-last-name">Technologie *</label>
+                  <input type="text" id="input-last-name" class="form-control form-control-alternative"
+                    formControlName="technologies">  
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="col-4 text-right">
+            <button class="btn btn-icon btn-3 btn-primary" type="button" (click)="ajoutercompetence()">
+              <span class="btn-inner--icon"><i class="ni ni-check-bold"></i></span>
+              <span class="btn-inner--text">ajouter competence</span>
+            </button>
+          </div>
+        </div>
+        <hr class="my-4" />
       </div>
     </div>
   </div>
@@ -43,8 +64,7 @@
                         <i class="fas fa-ellipsis-v"></i>
                       </a>
                       <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
-                        <a class="dropdown-item" (click)="suprimer(projet)">supprimer</a>
-                        <a class="dropdown-item" >afficher competence</a>
+                        <a class="dropdown-item" (click)="suprimer(c)">supprimer</a>
                       </div>
                     </div>
                   </td>

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/model/user';
+import { CompetenceService } from 'src/app/service/competence.service';
 import { UserServiceService } from 'src/app/service/user-service.service';
 
 @Component({
@@ -11,11 +14,14 @@ import { UserServiceService } from 'src/app/service/user-service.service';
 export class GestiondesutilisateurComponent implements OnInit {
 
   users:User[];
-  initialRating: number = 5
-  constructor(private us:UserServiceService,private toastrService: ToastrService) { }
+  initialRating: number = 5;
+
+  constructor(private us:UserServiceService,private toastrService: ToastrService
+    ) { }
 
   ngOnInit(): void {
     this.getusers();
+
   }
 getusers(){
   this.us.getusers().subscribe(

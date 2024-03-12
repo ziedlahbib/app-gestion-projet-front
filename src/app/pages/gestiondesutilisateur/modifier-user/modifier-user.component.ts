@@ -21,7 +21,6 @@ export class ModifierUserComponent implements OnInit {
   tech=technologies;
   competencelist:Competence[];
   isReady:boolean=false;
-  selectedCompetenceId: Number | null = null;
   public userform!: FormGroup;
   public compform!: FormGroup;
   constructor( private formBuilder: FormBuilder, private route: Router,
@@ -36,6 +35,7 @@ export class ModifierUserComponent implements OnInit {
     }
     initcompForm() {
       this.compform = this.formBuilder.group({
+        selectedCompetenceId: [''],
         lvl: [''],
       
       });
@@ -43,21 +43,22 @@ export class ModifierUserComponent implements OnInit {
       this.compform.valueChanges.subscribe(
         data => {
           console.log(this.compform?.value);
-          console.log(this.selectedCompetenceId)
+
           
         }
       )
   
       
     }
-    affectercompuser(){
-      console.log(this.router.snapshot.params['id'])
-      this.cs.affectercompuser(this.router.snapshot.params['id'],this.selectedCompetenceId,this.compform.value).subscribe(
-        data=>{
-          this.get(this.router.snapshot.params['id'])
+    affectercompuser() {
+      const userId = this.router.snapshot.params['id'];
+      const formData = this.compform.value;
+      this.cs.affectercompuser(userId, formData.selectedCompetenceId, formData).subscribe(
+        data => {
           console.log(data);
+          this.get(userId);
         }
-      )
+      );
     }
     getcompetences(){
       this.cs.getcompetences().subscribe(
