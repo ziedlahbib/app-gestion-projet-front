@@ -39,7 +39,7 @@
 
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i
-                                                            class="ni ni-calendar-grid-58"></i></span>
+                                                            class="ni ni-calendar-grid-58"></i> Date limite</span>
                                                 </div>
                                                 <input class="form-control datepicker" placeholder="Select date"
                                                     formControlName="date_limite" type="Date" />
@@ -57,6 +57,79 @@
                                             (click)="modifier()" [disabled]="projetform.invalid">
                                             <span class="btn-inner--icon"><i class="ni ni-check-bold"></i></span>
                                             <span class="btn-inner--text">modifier</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <button class="btn btn-icon btn-3 btn-primary" type="button" (click)="show()">
+                    <span class="btn-inner--icon"><i class="ni ni-check-bold"></i></span>
+                    <span class="btn-inner--text">Hide/show Formulaire tche </span>
+                </button>
+                <div *ngIf="showform"  class="card bg-secondary shadow">
+                    <div class="card-header bg-white border-0">
+                        <div class="row align-items-center">
+                            <div class="col-8">
+                                <h3 class="mb-0">Formulaire d'ajout tache</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div  class="card-body">
+                        <form [formGroup]="tacheform">
+                            <h6 class="heading-small text-muted mb-4">information</h6>
+                            <div class="pl-lg-4">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <div class="alert alert-warning"
+                                                *ngIf="tacheform.get('description')?.hasError('required')">
+                                                description est obligatoire </div>
+                                            <label class="form-control-label" for="input-username">Nom du projet
+                                                *</label>
+                                            <input type="text" class="form-control form-control-alternative"
+                                                formControlName="description">
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="alert alert-warning"
+                                                *ngIf="tacheform.get('date_debut')?.hasError('required')">
+                                                Date est obligatoire </div>
+                                            <div class="input-group input-group-alternative">
+
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i
+                                                            class="ni ni-calendar-grid-58"></i></span>
+                                                </div>
+                                                <input class="form-control datepicker" placeholder="Select date"
+                                                    formControlName="date_debut" type="Date" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="alert alert-warning"
+                                                *ngIf="tacheform.get('date_fin')?.hasError('required')">
+                                                Date est obligatoire </div>
+                                            <div class="input-group input-group-alternative">
+
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i
+                                                            class="ni ni-calendar-grid-58"></i></span>
+                                                </div>
+                                                <input class="form-control datepicker" placeholder="Select date"
+                                                    formControlName="date_fin" type="Date" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row align-items-center">
+                                    <div class="col-8">
+                                        <h3 style="color: red;" class="mb-0">(*) Champ obligatoire</h3>
+                                    </div>
+                                    <div class="col-4 text-right">
+                                        <button class="btn btn-icon btn-3 btn-primary" type="button"
+                                            (click)="modifier()" [disabled]="projetform.invalid">
+                                            <span class="btn-inner--icon"><i class="ni ni-check-bold"></i></span>
+                                            <span class="btn-inner--text">ajout tache</span>
                                         </button>
                                     </div>
                                 </div>

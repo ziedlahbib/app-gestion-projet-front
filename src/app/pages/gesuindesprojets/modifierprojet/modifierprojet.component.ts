@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Projet } from 'src/app/model/Projet';
 import { ProjetServiceService } from 'src/app/service/projet-service.service';
 import { DatePipe } from '@angular/common';
+import { TacheserviceService } from 'src/app/service/tacheservice.service';
 @Component({
   selector: 'app-modifierprojet',
   templateUrl: './modifierprojet.component.html',
@@ -13,9 +14,12 @@ import { DatePipe } from '@angular/common';
 export class ModifierprojetComponent implements OnInit {
   projet:Projet;
   isReady:boolean=false;
+  showform:boolean=false;
   public projetform!: FormGroup;
+  public tacheform!: FormGroup;
   constructor(private formBuilder: FormBuilder, private route: Router,
-    private router:ActivatedRoute,private ps:ProjetServiceService,private toastrService: ToastrService) { }
+    private router:ActivatedRoute,private ps:ProjetServiceService,private toastrService: ToastrService,
+    private ts:TacheserviceService) { }
 
   ngOnInit(): void {
     this.get(this.router.snapshot.params['id'])
@@ -30,6 +34,21 @@ export class ModifierprojetComponent implements OnInit {
         console.log(this.projetform?.value);
       }
     ) 
+  }
+  show(){
+    this.showform=!this.showform
+  }
+  initFormTAche(){
+    this.tacheform = this.formBuilder.group({
+      description: ['', [Validators.required]],
+      date_debut: ['', Validators.required],
+      date_fin: ['', Validators.required],
+    });
+    this.tacheform.valueChanges.subscribe(
+      data => {
+        console.log(this.tacheform?.value);
+      }
+    )
   }
   get(id:number){
     this.ps.getprojetbyid(id ).subscribe(
