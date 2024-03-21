@@ -8,6 +8,7 @@ import { DatePipe } from '@angular/common';
 import { TacheserviceService } from 'src/app/service/tacheservice.service';
 import { Competence } from 'src/app/model/competence';
 import { CompetenceService } from 'src/app/service/competence.service';
+import { Tache } from 'src/app/model/tache';
 @Component({
   selector: 'app-modifierprojet',
   templateUrl: './modifierprojet.component.html',
@@ -15,6 +16,7 @@ import { CompetenceService } from 'src/app/service/competence.service';
 })
 export class ModifierprojetComponent implements OnInit {
   projet:Projet;
+  tache:Tache;
   isReady:boolean=false;
   showform:boolean=false;
   public projetform!: FormGroup;
@@ -109,5 +111,43 @@ export class ModifierprojetComponent implements OnInit {
     const formattedDate = new Date(date);
     const datePipe = new DatePipe('en-US'); // Change 'en-US' to your desired locale
     return datePipe.transform(formattedDate, 'yyyy-MM-dd'); // Adjust the format as needed
+  }
+  ajoutTache(): void {
+    if (this.tacheform.valid && this.compform.valid) {
+      this.ts.ajouttache(this.tacheform.value).subscribe((data: any) => {
+        this.tache = data;
+        const tacheId = data.id;
+        this.ts.affectertacheprojet(this.router.snapshot.params['id'],data.id,data).subscribe(
+          rsultat=>{
+            if (this.compform.valid) {
+              const competenceId = this.compform.value.selectedCompetenceId;
+              this.ts.affectercomptache(tacheId, competenceId, data).subscribe(
+                (res: any) => {
+                  // Handle success response if needed
+                },
+                (error: any) => {
+                  console.error('Error affecting competence to task:', error);
+                }
+              );
+            }
+            // Loop through the selected competences
+            for (const formGroup of this.competencelistef) {
+              const competenceId = formGroup.value.selectedCompetenceId;
+              this.ts.affectercomptache(tacheId, competenceId, data).subscribe(
+                (res: any) => {
+                  // Handle success response if needed
+                },
+                (error: any) => {
+                  console.error('Error affecting competence to task:', error);
+                }
+              );
+            }
+          });
+          }
+        )
+        this.toastrService.success("tache ajouté avec succés")
+    } else {
+      console.log('Invalid form data.');
+    }
   }
 }
