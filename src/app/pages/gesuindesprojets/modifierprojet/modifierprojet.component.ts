@@ -6,6 +6,8 @@ import { Projet } from 'src/app/model/Projet';
 import { ProjetServiceService } from 'src/app/service/projet-service.service';
 import { DatePipe } from '@angular/common';
 import { TacheserviceService } from 'src/app/service/tacheservice.service';
+import { Competence } from 'src/app/model/competence';
+import { CompetenceService } from 'src/app/service/competence.service';
 @Component({
   selector: 'app-modifierprojet',
   templateUrl: './modifierprojet.component.html',
@@ -17,12 +19,36 @@ export class ModifierprojetComponent implements OnInit {
   showform:boolean=false;
   public projetform!: FormGroup;
   public tacheform!: FormGroup;
+  public compform!: FormGroup;
+  competencelist:Competence[];
+  competencelistef: any[] = [];
   constructor(private formBuilder: FormBuilder, private route: Router,
     private router:ActivatedRoute,private ps:ProjetServiceService,private toastrService: ToastrService,
-    private ts:TacheserviceService) { }
+    private ts:TacheserviceService,private cs :CompetenceService) { }
 
   ngOnInit(): void {
-    this.get(this.router.snapshot.params['id'])
+    this.get(this.router.snapshot.params['id']);
+    this.initFormTAche();
+    this.initformcomp();
+    this.getcompetences();
+  }
+  addNewForm(): void {
+    // Create a new form group for the new form
+    const newFormGroup = this.formBuilder.group({
+      selectedCompetenceId: ['', Validators.required]
+    });
+  
+    // Add the new form group to the list of forms
+    this.competencelistef.push(newFormGroup);
+    console.log(this.competencelistef); // Log the array for debugging
+  }
+  
+  getcompetences(){
+    this.cs.getcompetences().subscribe(
+      res=>{
+        this.competencelist=res;
+      }
+    )
   }
   initForm(data) {
     this.projetform = this.formBuilder.group({
@@ -47,6 +73,16 @@ export class ModifierprojetComponent implements OnInit {
     this.tacheform.valueChanges.subscribe(
       data => {
         console.log(this.tacheform?.value);
+      }
+    )
+  }
+  initformcomp(){
+    this.compform = this.formBuilder.group({
+      selectedCompetenceId: ['', [Validators.required]],
+    });
+    this.compform.valueChanges.subscribe(
+      data => {
+        console.log(this.compform?.value);
       }
     )
   }
