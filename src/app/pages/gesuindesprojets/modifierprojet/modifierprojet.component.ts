@@ -17,6 +17,7 @@ import { Tache } from 'src/app/model/tache';
 export class ModifierprojetComponent implements OnInit {
   projet:Projet;
   tache:Tache;
+  listtache:Tache[]
   isReady:boolean=false;
   showform:boolean=false;
   public projetform!: FormGroup;
@@ -33,7 +34,28 @@ export class ModifierprojetComponent implements OnInit {
     this.initFormTAche();
     this.initformcomp();
     this.getcompetences();
+    this.gettachebyproject()
   }
+  gettachebyproject(){
+    this.ts.gettachebyprojet(this.router.snapshot.params['id']).subscribe(
+      data=>{
+        console.log(data)
+        this.listtache=data;
+      }
+    )
+  }
+  deletetach(tache:any){
+    this.ts.deletetache(tache.id).subscribe(res=>{
+      this.gettachebyproject();
+      this.get(this.router.snapshot.params['id']);
+      this.toastrService.success(res.message)
+    })
+  }
+  removeForm(index: number) {
+    this.competencelistef.splice(index, 1); // Remove form group at specified index
+
+  }
+  
   addNewForm(): void {
     // Create a new form group for the new form
     const newFormGroup = this.formBuilder.group({
@@ -124,6 +146,9 @@ export class ModifierprojetComponent implements OnInit {
               this.ts.affectercomptache(tacheId, competenceId, data).subscribe(
                 (res: any) => {
                   // Handle success response if needed
+                  this.gettachebyproject();
+                  this.get(this.router.snapshot.params['id']);
+                  this.toastrService.success("tache ajoutée avec succeé")
                 },
                 (error: any) => {
                   console.error('Error affecting competence to task:', error);

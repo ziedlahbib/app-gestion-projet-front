@@ -64,7 +64,78 @@
                         </form>
                     </div>
                 </div>
-                <button class="btn btn-icon btn-3 btn-primary" type="button" (click)="show()">
+                <div style="margin-top: 20px;">
+                    <!-- Table -->
+                    <div class="row">
+                      <div class="col">
+                        <div class="card shadow" style="min-height: calc(50vh - 85px);">
+                          <div class="card-header border-0">
+                            <h3 class="mb-0">Liste des taches</h3>
+                          </div>
+                          <div class="table-responsive" style="min-height: calc(50vh - 85px);">
+                            <table class="table align-items-center table-flush">
+                              <thead class="thead-light">
+                                <tr>
+                                  <th scope="col">Id</th>
+                                  <th scope="col">description</th>
+                                  <th scope="col">Date debut</th>
+                                  <th scope="col">Date Fin</th>
+                                  <th scope="col">Technologies</th>
+                                  <th scope="col"></th>
+                                </tr>
+                              </thead>
+                              <tbody *ngFor="let t of listtache" >
+                                <tr>
+                                  <th scope="row">
+                                    <div class="media align-items-center">
+                                      <div class="media-body">
+                                        <span class="mb-0 text-sm">{{t.id}}</span>
+                                      </div>
+                                    </div>
+                                  </th>
+                                  <td>
+                                    {{t.description}}
+                                  </td>
+                                  <td>
+                                    {{formatDate(t.date_debut)}}
+                                  </td>
+                                  <td>
+                                    {{formatDate(t.date_fin)}}
+                                  </td>
+                                  <td>
+                                    <div *ngFor="let c of t.competences">
+                                        {{c.technologies}}
+                                    </div>
+                                  </td>
+                                  <td class="text-right">
+                                    <div ngbDropdown placement="bottom-right">
+                                      <a class="btn btn-sm btn-icon-only text-light"  ngbDropdownToggle>
+                                        <i class="fas fa-ellipsis-v"></i>
+                                      </a>
+                                      <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
+                                        <a class="dropdown-item" (click)="deletetach(t)">supprimer</a>
+                                        <a class="dropdown-item" [routerLink]="['/projets-management/update-projet',projet.id]">afficher tache</a>
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                          <div class="card-footer py-4">
+                            <nav aria-label="...">
+                              <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                              showFirstLastButtons
+                              aria-label="Select page of periodic elements">
+                              </mat-paginator>
+                            </nav>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Dark table -->
+                  </div>
+                <button style="margin-top: 20px;"class="btn btn-icon btn-3 btn-primary" type="button" (click)="show()">
                     <span class="btn-inner--icon"><i class="ni ni-check-bold"></i></span>
                     <span class="btn-inner--text">Hide/show Formulaire tche </span>
                 </button>
@@ -163,6 +234,7 @@
                                 </div>
                               </div>
                             </div>
+                            <button mat-button (click)="removeForm(i)">Supprimer cette compétence</button>
                           </div>     
                         
                         <div class="row align-items-center">
@@ -171,7 +243,7 @@
                             </div>
                             <div class="col-4 text-right">
                                 <button class="btn btn-icon btn-3 btn-primary" type="button"
-                                    (click)="ajoutTache()" [disabled]="projetform.invalid">
+                                    (click)="ajoutTache()" [disabled]="tacheform.invalid&&compform.invalid&&formGroup?.invalid">
                                     <span class="btn-inner--icon"><i class="ni ni-check-bold"></i></span>
                                     <span class="btn-inner--text">ajout tache</span>
                                 </button>
@@ -183,3 +255,6 @@
         </div>
     </div>
 </div>
+
+
+  

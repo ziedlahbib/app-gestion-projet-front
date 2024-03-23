@@ -28,7 +28,8 @@ export class GesuindesprojetsComponent implements OnInit {
   suprimer(projet:any){
     this.ps.deleteprojet(projet.id).subscribe(
       res=>{
-        console.log(res)
+        console.log(res);
+        this.toastrService.success(res.message)
         this.ps.getprojets().subscribe(
           data=>{
             this.projets=data;
