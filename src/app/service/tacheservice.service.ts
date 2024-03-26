@@ -8,14 +8,24 @@ import { Observable } from 'rxjs';
 })
 export class TacheserviceService {
   addtacheUrl="/api/tache/add-tache";
+  updatetacheUrl="/api/tache/update-tache";
   deletetacheUrl="/api/tache/delete-tache";
   gettachebyprojetUrl="/api/tache/get-tache-byprojet";
   affetercomptacheUrl="/api/tache/affecter-tache-compenence";
   desaffetercomptacheUrl="/api/tache/desaffecter-tache-compenence";
   affetertacheprojetUrl="/api/tache/affecter-tache-projet";
+  gettachebyIdUrl="/api/tache/get-tache";
   constructor(private http : HttpClient) { }
   gettachebyprojet(idp:Number): Observable<Tache[]>{
     return this.http.get<Tache[]>(`${this.gettachebyprojetUrl}/${idp}`);
+
+  }
+  gettachebyId(idt:Number): Observable<Tache>{
+    return this.http.get<Tache>(`${this.gettachebyIdUrl}/${idt}`);
+
+  }
+  updatetache(idt:Number,tache:Tache): Observable<Tache>{
+    return this.http.put<Tache>(`${this.updatetacheUrl}/${idt}`,tache);
 
   }
   deletetache(id :Number): Observable<any>{

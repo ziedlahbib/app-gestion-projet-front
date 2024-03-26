@@ -30,6 +30,7 @@ import { GesuindesprojetsComponent } from 'src/app/pages/gesuindesprojets/gesuin
 import { AjouterprojetComponent } from 'src/app/pages/gesuindesprojets/ajouterprojet/ajouterprojet.component';
 import { ModifierprojetComponent } from 'src/app/pages/gesuindesprojets/modifierprojet/modifierprojet.component';
 import { GestionDesCompetenceComponent } from 'src/app/pages/gestion-des-competence/gestion-des-competence.component';
+import { ModifiertacheComponent } from 'src/app/pages/gestiontache/modifiertache/modifiertache.component';
 
 
 
@@ -64,6 +65,7 @@ import { GestionDesCompetenceComponent } from 'src/app/pages/gestion-des-compete
     AjouterprojetComponent,
     ModifierprojetComponent,
     GestionDesCompetenceComponent,
+    ModifiertacheComponent
 
 
   ]

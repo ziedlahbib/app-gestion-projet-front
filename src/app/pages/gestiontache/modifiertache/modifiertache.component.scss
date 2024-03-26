@@ -1,0 +1,17 @@
+.competence-box {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  
+  button[mat-icon-button] {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: none;
+  }
+  
+  .competence-box:hover button[mat-icon-button] {
+    display: block;
+  }

@@ -13,6 +13,7 @@ import { GesuindesprojetsComponent } from 'src/app/pages/gesuindesprojets/gesuin
 import { AjouterprojetComponent } from 'src/app/pages/gesuindesprojets/ajouterprojet/ajouterprojet.component';
 import { ModifierprojetComponent } from 'src/app/pages/gesuindesprojets/modifierprojet/modifierprojet.component';
 import { GestionDesCompetenceComponent } from 'src/app/pages/gestion-des-competence/gestion-des-competence.component';
+import { ModifiertacheComponent } from 'src/app/pages/gestiontache/modifiertache/modifiertache.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
@@ -20,7 +21,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'tables',         component: TablesComponent },
     { path: 'icons',          component: IconsComponent },
     { path: 'maps',           component: MapsComponent },
-    { path: 'update-profile/:id',           component: UpdateProfileComponent },
+    { path: 'update-profile/:id',           component: UpdateProfileComponent},
     { path: 'update-user/:id',           component: ModifierUserComponent },
     { path: 'user-management',           component: GestiondesutilisateurComponent },
     { path: 'user-management/ajouter-utilisateur',           component: AjouterUtilisateurComponent },
@@ -28,4 +29,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'projets-management/ajouter-projet',           component: AjouterprojetComponent },
     { path: 'projets-management/update-projet/:id',           component: ModifierprojetComponent },
     { path: 'competence-management',           component: GestionDesCompetenceComponent },
+    { path: 'tache-management/update-tache/:id',           component: ModifiertacheComponent},
 ];

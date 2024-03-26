@@ -14,6 +14,7 @@ import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { HttpInterceptorService } from './service/http-interceptor.service';
 import { ToastrModule } from 'ngx-toastr';
+import { ModifiertacheComponent } from './pages/gestiontache/modifiertache/modifiertache.component';
 
 
 
@@ -41,7 +42,8 @@ import { ToastrModule } from 'ngx-toastr';
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    AuthLayoutComponent
+    AuthLayoutComponent,
+
 
 
  
