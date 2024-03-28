@@ -84,26 +84,6 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <mat-form-field>
-                      <mat-label>Technologies *</mat-label>
-                      <mat-select formControlName="competence">
-                        <mat-option *ngFor="let c of tech | keyvalue" [value]="c.value">{{c.value}}</mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                  </div>
-                  <div class="form-group">
-                    <mat-form-field>
-                      <mat-label>Niveau *</mat-label>
-                      <mat-select formControlName="lvl">
-                        <mat-option value="1">1</mat-option>
-                        <mat-option value="2">2</mat-option>
-                        <mat-option value="3">3</mat-option>
-                        <mat-option value="4">4</mat-option>
-                        <mat-option value="5">5</mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                  </div>
-                  <div class="form-group">
                     <div class="input-group input-group-alternative"
                       [ngClass]="{ 'invalid-input': userform.get('password').invalid && userform.get('password').touched }">
                       <div class="input-group-prepend">

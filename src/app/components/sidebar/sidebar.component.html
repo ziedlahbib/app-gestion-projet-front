@@ -1,4 +1,4 @@
-<nav class="navbar navbar-vertical navbar-expand-md navbar-light bg-white" id="sidenav-main">
+<nav *ngIf="isReady" class="navbar navbar-vertical navbar-expand-md navbar-light bg-white" id="sidenav-main">
   <div class="container-fluid">
     <!-- Toggler -->
     <button class="navbar-toggler" type="button" (click)="isCollapsed=!isCollapsed"
@@ -15,7 +15,7 @@
       <!-- Navigation -->
       <ul class="navbar-nav">
         <ng-container *ngFor="let menuItem of menuItems">
-          <li class="{{menuItem.class}} nav-item" routerLinkActive="active" [ngClass]="{ 'show-submenu': menuItem.showSubmenu }">
+          <li class="{{menuItem.class}} nav-item"  *ngIf="menuItem.visibility" routerLinkActive="active" [ngClass]="{ 'show-submenu': menuItem.showSubmenu }">
             <a (click)="toggleSubmenu(menuItem)" class="nav-link" style="cursor: pointer;">
               <i class="ni {{menuItem.icon}}"></i>
               {{menuItem.title}}

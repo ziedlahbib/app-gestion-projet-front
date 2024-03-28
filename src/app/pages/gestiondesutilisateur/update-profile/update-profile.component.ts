@@ -93,8 +93,6 @@ export class UpdateProfileComponent implements OnInit {
       prenom: [data?.prenom, Validators.required],
       email: [data?.email, [Validators.required,Validators.email],[this.emailValidator]],
       role: [data?.roles?.name],
-      competence: [data?.userCompetences?.competence?.technologies],
-      lvl: [data?.userCompetences?.lvl],
     
     });
 

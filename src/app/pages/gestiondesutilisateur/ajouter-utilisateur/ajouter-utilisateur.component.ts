@@ -38,8 +38,6 @@ export class AjouterUtilisateurComponent implements OnInit {
       role: ['', Validators.required],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
-      competence: ['', Validators.required],
-      lvl: ['', Validators.required],
     
     }, {
       validator: this.ConfirmedValidator('password', 'confirmPassword')
