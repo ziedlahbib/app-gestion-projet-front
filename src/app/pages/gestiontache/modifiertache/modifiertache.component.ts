@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Observable, catchError, map, of } from 'rxjs';
 import { Competence } from 'src/app/model/competence';
 import { Tache } from 'src/app/model/tache';
 import { User } from 'src/app/model/user';
@@ -21,8 +22,9 @@ export class ModifiertacheComponent implements OnInit {
   isReady:boolean=false;
   tache:Tache;
   competencelist:Competence[];
-  users:User[];
+  users:User[]= [];
   userRating: number = 0;
+  userRatingsMap: Map<Number, Observable<Number>> = new Map<Number, Observable<Number>>();
   starRating = 0; 
   constructor(private formBuilder: FormBuilder, private route: Router,
     private router:ActivatedRoute,private toastrService: ToastrService,
@@ -33,12 +35,10 @@ export class ModifiertacheComponent implements OnInit {
     this.initcompForm();
     this.getcompetences();
     this.getusers();
+
+
   }
-  onRatingChange(rating: number, idu: Number): void {
-    this.userRating = rating;
-    console.log('Received rating change event. New rating:', rating);
-    // Optionally, you can add more debugging logs or logic here.
-  }
+
   
   afectertachdev(idu:Number){
     this.ts.affectertachedev(idu,this.router.snapshot.params['id'],this.tache).subscribe(
@@ -52,6 +52,7 @@ export class ModifiertacheComponent implements OnInit {
       data=>{
         console.log(data)
         this.users=data;
+        this.fetchUserRatings();
       }
     )
   }
@@ -82,6 +83,27 @@ export class ModifiertacheComponent implements OnInit {
     const datePipe = new DatePipe('en-US'); // Change 'en-US' to your desired locale
     return datePipe.transform(formattedDate, 'yyyy-MM-dd'); // Adjust the format as needed
   }
+  onRatingChange(rating: number,idu:number) {
+    // Handle the rating change here, for example, you can update a property like userRating
+    this.userRating = rating;
+    console.log(rating,this.tache.id)
+    console.log(idu)
+    this.ts.rate(rating,this.router.snapshot.params['id'],idu).subscribe(
+      res=>{
+        console.log(res)
+      }
+    )
+  }
+  fetchUserRatings(): void {
+    this.users.forEach(user => {
+      console.log('Fetching rating for user ID:', user.id);
+      this.ts.gettacheuserrateId(this.tache.id, user.id).subscribe(rate => {
+        this.userRatingsMap.set(user.id, of(rate)); // Assuming rate is a number
+        console.log('Received rating for user ID:', user.id, 'Rate:', rate);
+      });
+    });
+  }
+  
   initcompForm() {
     this.compform = this.formBuilder.group({
       selectedCompetenceId: [''],

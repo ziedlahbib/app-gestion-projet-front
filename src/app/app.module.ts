@@ -15,6 +15,7 @@ import { ComponentsModule } from './components/components.module';
 import { HttpInterceptorService } from './service/http-interceptor.service';
 import { ToastrModule } from 'ngx-toastr';
 import { ModifiertacheComponent } from './pages/gestiontache/modifiertache/modifiertache.component';
+import { RateStarComponent } from './pages/rate-star/rate-star.component';
 
 
 
@@ -43,6 +44,7 @@ import { ModifiertacheComponent } from './pages/gestiontache/modifiertache/modif
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
+   
 
 
 

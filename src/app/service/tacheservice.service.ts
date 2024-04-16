@@ -16,17 +16,29 @@ export class TacheserviceService {
   affetertacheprojetUrl="/api/tache/affecter-tache-projet";
   affetertachedevUrl="/api/tache/affecter-tache-dev";
   gettachebyIdUrl="/api/tache/get-tache";
+  gettacheuserrateIdUrl="/api/tache/rate-user-tache-number";
   rateurl="/api/tache/rate-user-tache"
   constructor(private http : HttpClient) { }
-  rate(note:Number,idt:Number,idu:Number):Observable<any>{
-    return this.http.post<any>(`${this.rateurl}/${idt}/${idu}`,note);
+  rate(note: number, idt: number, idu: number): Observable<any> {
+    // Create an object with the note as a property
+    const requestBody = { note: note };
+  console.log(requestBody)
+    // Send the object as the request body
+    return this.http.put<any>(`${this.rateurl}/${idt}/${idu}`, requestBody.note);
   }
+  
+  
+  
   gettachebyprojet(idp:Number): Observable<Tache[]>{
     return this.http.get<Tache[]>(`${this.gettachebyprojetUrl}/${idp}`);
 
   }
   gettachebyId(idt:Number): Observable<Tache>{
     return this.http.get<Tache>(`${this.gettachebyIdUrl}/${idt}`);
+
+  }
+  gettacheuserrateId(idt:Number,idu:Number): Observable<Number>{
+    return this.http.get<Number>(`${this.gettacheuserrateIdUrl}/${idt}/${idu}`);
 
   }
   updatetache(idt:Number,tache:Tache): Observable<Tache>{

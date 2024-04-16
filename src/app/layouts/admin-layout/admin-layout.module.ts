@@ -31,6 +31,7 @@ import { AjouterprojetComponent } from 'src/app/pages/gesuindesprojets/ajouterpr
 import { ModifierprojetComponent } from 'src/app/pages/gesuindesprojets/modifierprojet/modifierprojet.component';
 import { GestionDesCompetenceComponent } from 'src/app/pages/gestion-des-competence/gestion-des-competence.component';
 import { ModifiertacheComponent } from 'src/app/pages/gestiontache/modifiertache/modifiertache.component';
+import { RateStarComponent } from 'src/app/pages/rate-star/rate-star.component';
 
 
 
@@ -65,7 +66,8 @@ import { ModifiertacheComponent } from 'src/app/pages/gestiontache/modifiertache
     AjouterprojetComponent,
     ModifierprojetComponent,
     GestionDesCompetenceComponent,
-    ModifiertacheComponent
+    ModifiertacheComponent,
+    RateStarComponent,
 
 
   ]

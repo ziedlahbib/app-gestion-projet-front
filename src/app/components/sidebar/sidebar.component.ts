@@ -130,9 +130,9 @@ checkRouteVisibility(path: string): boolean {
     case '/projets-management':
       return this.isSuperadmin() ||this.isChefProjet()||this.isResponsable()||this.isDeveloppeur();
       case '/projets-management/ajouter-projet':
-        return this.isSuperadmin() ||this.isChefProjet()||this.isResponsable()
-    case '/competence-management/':
-      return this.isChefProjet();
+      return this.isSuperadmin() ||this.isChefProjet()||this.isResponsable()
+    case '/competence-management':
+      return this.isSuperadmin() ||this.isChefProjet()||this.isResponsable();
     default:
       return false; // By default, hide routes that don't require special visibility conditions
   }

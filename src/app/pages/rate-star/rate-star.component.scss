@@ -1,0 +1,16 @@
+.rating {
+    .star {
+      color: black; /* Default color for stars */
+      cursor: pointer;
+      font-size: 24px;
+    }
+  
+    .star.active {
+      color: gray; /* Color for inactive stars */
+    }
+  
+    .star.yellow {
+      color: yellow; /* Color for active stars */
+    }
+  }
+  
