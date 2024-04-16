@@ -33,7 +33,7 @@ import { GestionDesCompetenceComponent } from 'src/app/pages/gestion-des-compete
 import { ModifiertacheComponent } from 'src/app/pages/gestiontache/modifiertache/modifiertache.component';
 import { RateStarComponent } from 'src/app/pages/rate-star/rate-star.component';
 import { CalendarComponent } from 'src/app/calendar/calendar.component';
-import { FullCalendarModule } from '@fullcalendar/angular'; // Import FullCalendar
+
 
 
 
@@ -48,7 +48,7 @@ import { FullCalendarModule } from '@fullcalendar/angular'; // Import FullCalend
     MatPaginatorModule,MatFormFieldModule, MatSelectModule, MatInputModule,
     FormsModule,
     ReactiveFormsModule,
-    FullCalendarModule
+
  
 
   ],
