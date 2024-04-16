@@ -14,6 +14,7 @@ import { AjouterprojetComponent } from 'src/app/pages/gesuindesprojets/ajouterpr
 import { ModifierprojetComponent } from 'src/app/pages/gesuindesprojets/modifierprojet/modifierprojet.component';
 import { GestionDesCompetenceComponent } from 'src/app/pages/gestion-des-competence/gestion-des-competence.component';
 import { ModifiertacheComponent } from 'src/app/pages/gestiontache/modifiertache/modifiertache.component';
+import { CalendarComponent } from 'src/app/calendar/calendar.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
@@ -30,4 +31,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'projets-management/update-projet/:id',           component: ModifierprojetComponent },
     { path: 'competence-management',           component: GestionDesCompetenceComponent },
     { path: 'tache-management/update-tache/:id',           component: ModifiertacheComponent},
+    { path: 'calendrier',           component: CalendarComponent},
 ];

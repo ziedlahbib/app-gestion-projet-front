@@ -31,28 +31,47 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="alert alert-warning"
-                                        *ngIf="projetform.get('date_limite')?.hasError('required')">
-                                        Date est obligatoire </div>
+                                            *ngIf="projetform.get('date_limite')?.hasError('required')">
+                                            Date est obligatoire </div>
                                         <div class="input-group input-group-alternative">
 
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i
                                                         class="ni ni-calendar-grid-58"></i></span>
                                             </div>
-                                            <input class="form-control datepicker" placeholder="Select date" formControlName="date_limite" type="Date" />
+                                            <input class="form-control datepicker" placeholder="Select date"
+                                                formControlName="startDate" type="Date" />
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <div class="alert alert-warning"
+                                            *ngIf="projetform.get('date_limite')?.hasError('required')">
+                                            Date est obligatoire </div>
+                                        <div class="input-group input-group-alternative">
+
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i
+                                                        class="ni ni-calendar-grid-58"></i></span>
+                                            </div>
+                                            <input class="form-control datepicker" placeholder="Select date"
+                                                formControlName="endDate" type="Date" />
+                                        </div>
+                                    </div>
+                                    <input [style.background]="color" [colorPicker]="color"
+                                        (colorPickerChange)="color=$event" />
 
                                 </div>
                             </div>
                             <form [formGroup]="cdpform">
                                 <div class="form-group" *ngIf="isSuperadmin()||isResponsable()">
                                     <mat-form-field>
-                                      <mat-label>Chef de projet</mat-label>
-                                      <mat-select formControlName="selectedCdpId">
-                                        <mat-option *ngIf="!Cdp || Cdp.length === 0" [value]="null">Loading...</mat-option>
-                                        <mat-option *ngFor="let cdpr of Cdp" [value]="cdpr.id">{{ cdpr.username }}</mat-option>
-                                      </mat-select>                                      
+                                        <mat-label>Chef de projet</mat-label>
+                                        <mat-select formControlName="selectedCdpId">
+                                            <mat-option *ngIf="!Cdp || Cdp.length === 0"
+                                                [value]="null">Loading...</mat-option>
+                                            <mat-option *ngFor="let cdpr of Cdp" [value]="cdpr.id">{{ cdpr.username
+                                                }}</mat-option>
+                                        </mat-select>
                                     </mat-form-field>
                                 </div>
                             </form>
@@ -68,7 +87,7 @@
                                     </button>
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                     </form>
                 </div>
             </div>

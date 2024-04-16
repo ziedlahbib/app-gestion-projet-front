@@ -17,7 +17,7 @@ export const ROUTES: RouteInfo[] = [
     // { path: '/maps', title: 'Maps',  icon:'ni-pin-3 text-orange', class: '' },
     // { path: '/user-profile', title: 'User profile',  icon:'ni-single-02 text-yellow', class: '', },
     // { path: '/tables', title: 'Tables',  icon:'ni-bullet-list-67 text-red', class: '' },
-    // { path: '/login', title: 'Login',  icon:'ni-key-25 text-info', class: '' },
+    { path: '/calendrier', title: 'Calendrier',  icon:'ni-key-25 text-info', class: '',visibility:true, },
     // { path: '/register', title: 'Register',  icon:'ni-circle-08 text-pink', class: '' },
     { path: '/user-management', title: 'Gestion des utilisateurs',icon:'ni-circle-08 text-pink',visibility:true,class: '',children: [
       {
@@ -132,6 +132,8 @@ checkRouteVisibility(path: string): boolean {
       case '/projets-management/ajouter-projet':
       return this.isSuperadmin() ||this.isChefProjet()||this.isResponsable()
     case '/competence-management':
+      return this.isSuperadmin() ||this.isChefProjet()||this.isResponsable();
+    case '/calendrier':
       return this.isSuperadmin() ||this.isChefProjet()||this.isResponsable();
     default:
       return false; // By default, hide routes that don't require special visibility conditions

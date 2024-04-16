@@ -33,7 +33,9 @@ export class AjouterprojetComponent implements OnInit {
   initForm() {
     this.projetform = this.formBuilder.group({
       nom_projet: ['', [Validators.required]],
-      date_limite: ['', Validators.required],
+      startDate: ['', Validators.required],
+      endDate: ['', Validators.required],
+      color:['', Validators.required]
 
     
     });
