@@ -10,6 +10,7 @@ import { AuthServiceService } from './auth-service.service';
 export class UserServiceService {
 
   getbyusersurl="/api/user/get-users";
+  getbyusersbytacheurl="/api/tache/get-users-by-tache"
   getbycdpurl="/api/user/get-cdp";
   adduserUrl="/api/auth/signup-superadmin";
   addnormaluserUrl="/api/auth/signup"
@@ -50,6 +51,10 @@ export class UserServiceService {
   
   getuserById(iduser :Number): Observable<User>{
     return this.http.get<User>(`${this.getbyuserbyIdsurl}/${iduser}`);
+
+  }
+  getuserBytache(idt :Number): Observable<User[]>{
+    return this.http.get<User[]>(`${this.getbyusersbytacheurl}/${idt}`);
 
   }
   deleteUser(id :Number): Observable<any>{

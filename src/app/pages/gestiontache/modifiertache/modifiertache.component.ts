@@ -23,6 +23,7 @@ export class ModifiertacheComponent implements OnInit {
   tache:Tache;
   competencelist:Competence[];
   users:User[]= [];
+  userstache:User[]= [];
   userRating: number = 0;
   userRatingsMap: Map<Number, Observable<Number>> = new Map<Number, Observable<Number>>();
   starRating = 0; 
@@ -35,15 +36,37 @@ export class ModifiertacheComponent implements OnInit {
     this.initcompForm();
     this.getcompetences();
     this.getusers();
+    this.getusersbytache();
+
 
 
   }
-
+  getusersbytache(){
+    console.log('Inside getusersbytache method'); // Add this line for debugging
+    this.us.getuserBytache(this.router.snapshot.params['id']).subscribe(
+      data=>{
+        console.log(data)
+        this.userstache=data;
+        this.fetchUserRatings();
+      }
+    )
+  }
   
   afectertachdev(idu:Number){
     this.ts.affectertachedev(idu,this.router.snapshot.params['id'],this.tache).subscribe(
       res=>{
         console.log(res);
+        this.getusers();
+        this.getusersbytache();
+      }
+    )
+  }
+  desafectertachdev(idu:Number){
+    this.ts.desaffectertachedev(idu,this.router.snapshot.params['id'],this.tache).subscribe(
+      res=>{
+        console.log(res);
+        this.getusers();
+        this.getusersbytache();
       }
     )
   }

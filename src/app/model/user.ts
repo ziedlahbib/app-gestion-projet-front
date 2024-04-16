@@ -11,6 +11,6 @@ export class User {
     active:Boolean;
     roles:Role;
     rating:Number;
-
+    status:string
 
 }

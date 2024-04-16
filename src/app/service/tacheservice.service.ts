@@ -15,6 +15,7 @@ export class TacheserviceService {
   desaffetercomptacheUrl="/api/tache/desaffecter-tache-compenence";
   affetertacheprojetUrl="/api/tache/affecter-tache-projet";
   affetertachedevUrl="/api/tache/affecter-tache-dev";
+  desaffetertachedevUrl="/api/tache/desaffecter-tache-dev";
   gettachebyIdUrl="/api/tache/get-tache";
   gettacheuserrateIdUrl="/api/tache/rate-user-tache-number";
   rateurl="/api/tache/rate-user-tache"
@@ -62,5 +63,8 @@ export class TacheserviceService {
   }
   affectertachedev(idu:Number,idt:Number,tache:any):Observable<any>{
     return this.http.put<any>(`${this.affetertachedevUrl}/${idu}/${idt}`,tache);
+  }
+  desaffectertachedev(idu:Number,idt:Number,tache:any):Observable<any>{
+    return this.http.put<any>(`${this.desaffetertachedevUrl}/${idu}/${idt}`,tache);
   }
 }
