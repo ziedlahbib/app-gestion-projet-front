@@ -14,8 +14,13 @@ export class TacheserviceService {
   affetercomptacheUrl="/api/tache/affecter-tache-compenence";
   desaffetercomptacheUrl="/api/tache/desaffecter-tache-compenence";
   affetertacheprojetUrl="/api/tache/affecter-tache-projet";
+  affetertachedevUrl="/api/tache/affecter-tache-dev";
   gettachebyIdUrl="/api/tache/get-tache";
+  rateurl="/api/tache/rate-user-tache"
   constructor(private http : HttpClient) { }
+  rate(note:Number,idt:Number,idu:Number):Observable<any>{
+    return this.http.post<any>(`${this.rateurl}/${idt}/${idu}`,note);
+  }
   gettachebyprojet(idp:Number): Observable<Tache[]>{
     return this.http.get<Tache[]>(`${this.gettachebyprojetUrl}/${idp}`);
 
@@ -42,5 +47,8 @@ export class TacheserviceService {
   }
   affectertacheprojet(idp:Number,idt:Number,tache:any):Observable<Tache>{
     return this.http.put<Tache>(`${this.affetertacheprojetUrl}/${idp}/${idt}`,tache);
+  }
+  affectertachedev(idu:Number,idt:Number,tache:any):Observable<any>{
+    return this.http.put<any>(`${this.affetertachedevUrl}/${idu}/${idt}`,tache);
   }
 }

@@ -9,15 +9,26 @@ import { Observable } from 'rxjs';
 export class ProjetServiceService {
   addprojetUrl="/api/projet/add-projet";
   getprojetssurl="/api/projet/get-projets";
+  getprojetsbycdpsurl="/api/projet/get-projet-buuser";
+  getprojetsbydevsurl="/api/projet/get-projet-bydevloppeur";
   supprimerurl="/api/projet/delete-projet";
   modifierprojeturl="/api/projet/update-projet";
   getprojetbyidurl="/api/projet/get-projet";
+  affeterprojetcdpUrl="/api/projet/affecter-projet-cdp"
   constructor(private http : HttpClient) { }
   ajoutprojet(projet :Projet): Observable<Projet>{
     return this.http.post<Projet>(`${this.addprojetUrl}`,projet);
   }
   getprojets(): Observable<Projet[]>{
     return this.http.get<Projet[]>(`${this.getprojetssurl}`);
+
+  }
+  getprojetsbycdp(idu:Number): Observable<Projet[]>{
+    return this.http.get<Projet[]>(`${this.getprojetsbycdpsurl}/${idu}`);
+
+  }
+  getprojetsbydev(idu:Number): Observable<Projet[]>{
+    return this.http.get<Projet[]>(`${this.getprojetsbydevsurl}/${idu}`);
 
   }
   getprojetbyid(id:Number): Observable<Projet>{
@@ -29,4 +40,7 @@ export class ProjetServiceService {
   }
   modifierprojet(id:Number,projet:Projet): Observable<any>{
     return this.http.put<any>(`${this.modifierprojeturl}/${id}`,projet)}
+  affecterprojetcdp(idu:Number,idp:Number,projet:any):Observable<Projet>{
+      return this.http.put<Projet>(`${this.affeterprojetcdpUrl}/${idu}/${idp}`,projet);
+    }
 }

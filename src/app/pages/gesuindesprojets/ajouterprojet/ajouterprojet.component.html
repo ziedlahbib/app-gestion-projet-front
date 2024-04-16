@@ -4,7 +4,7 @@
     <span class="mask bg-gradient-danger opacity-8"></span>
     <!-- Header container -->
 </div>
-<div class="container-fluid mt--7">
+<div class="container-fluid mt--7" *ngIf="isReady">
     <div class="row">
         <div class="col-xl-8 order-xl-1">
             <div class="card bg-secondary shadow">
@@ -45,6 +45,17 @@
 
                                 </div>
                             </div>
+                            <form [formGroup]="cdpform">
+                                <div class="form-group" *ngIf="isSuperadmin()||isResponsable()">
+                                    <mat-form-field>
+                                      <mat-label>Chef de projet</mat-label>
+                                      <mat-select formControlName="selectedCdpId">
+                                        <mat-option *ngIf="!Cdp || Cdp.length === 0" [value]="null">Loading...</mat-option>
+                                        <mat-option *ngFor="let cdpr of Cdp" [value]="cdpr.id">{{ cdpr.username }}</mat-option>
+                                      </mat-select>                                      
+                                    </mat-form-field>
+                                </div>
+                            </form>
                             <div class="row align-items-center">
                                 <div class="col-8">
                                     <h3 style="color: red;" class="mb-0">(*) Champ obligatoire</h3>

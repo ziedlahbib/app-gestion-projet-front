@@ -10,6 +10,7 @@ import { AuthServiceService } from './auth-service.service';
 export class UserServiceService {
 
   getbyusersurl="/api/user/get-users";
+  getbycdpurl="/api/user/get-cdp";
   adduserUrl="/api/auth/signup-superadmin";
   addnormaluserUrl="/api/auth/signup"
   existuserbuusernamesurl="/api/user/exist-userbyusername";
@@ -26,6 +27,10 @@ export class UserServiceService {
   
   getusers(): Observable<User[]>{
     return this.http.get<User[]>(`${this.getbyusersurl}`);
+
+  }
+  getcdp(): Observable<User[]>{
+    return this.http.get<User[]>(`${this.getbycdpurl}`);
 
   }
   existuserByusername(username :string): Observable<Boolean>{

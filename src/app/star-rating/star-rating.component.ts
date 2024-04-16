@@ -7,16 +7,17 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class StarRatingComponent {
   @Input() rating: number = 0;
+  @Output() ratingChange: EventEmitter<number> = new EventEmitter<number>();
 
   constructor() { }
 
   ngOnInit(): void {
-  
   }
+
   getStars(): number[] {
     return Array(Math.ceil(this.rating)).fill(0).map((x, i) => i + 1);
   }
-  
+
   getStarClass(star: number): string[] {
     if (this.rating >= star) {
       return ['full'];
@@ -26,6 +27,11 @@ export class StarRatingComponent {
       return ['empty'];
     }
   }
-  
 
+  rateStar(star: number): void {
+    this.rating = star;
+    this.ratingChange.emit(this.rating);
+    console.log('Rating changed to:', this.rating);
+  }
+  
 }

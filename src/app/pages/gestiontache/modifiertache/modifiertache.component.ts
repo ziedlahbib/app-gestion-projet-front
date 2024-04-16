@@ -5,8 +5,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Competence } from 'src/app/model/competence';
 import { Tache } from 'src/app/model/tache';
+import { User } from 'src/app/model/user';
 import { CompetenceService } from 'src/app/service/competence.service';
 import { TacheserviceService } from 'src/app/service/tacheservice.service';
+import { UserServiceService } from 'src/app/service/user-service.service';
 
 @Component({
   selector: 'app-modifiertache',
@@ -19,14 +21,39 @@ export class ModifiertacheComponent implements OnInit {
   isReady:boolean=false;
   tache:Tache;
   competencelist:Competence[];
+  users:User[];
+  userRating: number = 0;
+  starRating = 0; 
   constructor(private formBuilder: FormBuilder, private route: Router,
     private router:ActivatedRoute,private toastrService: ToastrService,
-    private ts:TacheserviceService,private cs :CompetenceService) { }
+    private ts:TacheserviceService,private cs :CompetenceService,private us:UserServiceService) { }
 
   ngOnInit(): void {
     this.get(this.router.snapshot.params['id']);
     this.initcompForm();
-    this.getcompetences()
+    this.getcompetences();
+    this.getusers();
+  }
+  onRatingChange(rating: number, idu: Number): void {
+    this.userRating = rating;
+    console.log('Received rating change event. New rating:', rating);
+    // Optionally, you can add more debugging logs or logic here.
+  }
+  
+  afectertachdev(idu:Number){
+    this.ts.affectertachedev(idu,this.router.snapshot.params['id'],this.tache).subscribe(
+      res=>{
+        console.log(res);
+      }
+    )
+  }
+  getusers(){
+    this.us.getusers().subscribe(
+      data=>{
+        console.log(data)
+        this.users=data;
+      }
+    )
   }
   get(id:number){
     this.ts.gettachebyId(id).subscribe(
@@ -106,5 +133,15 @@ export class ModifiertacheComponent implements OnInit {
 
       }
     )
+  }
+  getFormattedRole(role: string): string {
+    if (role.startsWith('ROLE_')) {
+      const formattedRole = role.replace('ROLE_', '');
+      const words = formattedRole.split('_');
+      const capitalizedWords = words.map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase());
+      return capitalizedWords.join(' ');
+    } else {
+      return role; // If the role doesn't start with "ROLE_", return it as is
+    }
   }
 }

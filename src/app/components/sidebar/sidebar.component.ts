@@ -38,7 +38,8 @@ export const ROUTES: RouteInfo[] = [
         path: '/projets-management/ajouter-projet',
         title: 'Ajouter un projet',
         icon: '',
-        class: ''
+        class: '',
+        visibility: true
       },
       {
         path: '/projets-management',
@@ -76,6 +77,10 @@ export class SidebarComponent implements OnInit {
     this.menuItems = ROUTES.map((route) => ({
       ...route,
       visibility: this.checkRouteVisibility(route.path),
+      children: route.children ? route.children.map(child => ({
+        ...child,
+        visibility: this.checkRouteVisibility(child.path) // Set visibility for child routes
+      })) : undefined
   }));
     this.router.events.subscribe((event) => {
       this.isCollapsed = true;
@@ -112,18 +117,22 @@ isResponsable():boolean{
 }
 isDeveloppeur():boolean{
   let role = localStorage.getItem('role' || '');
-  return role=="ROLE_RESPONSABLE";
+  return role=="ROLE_DEVELOPPEUR";
 }
 checkRouteVisibility(path: string): boolean {
   // Check the path to determine visibility based on user role
   switch (path) {
     case '/user-management':
       return this.isSuperadmin();
+    case '/user-management/ajouter-utilisateur':
+      return this.isSuperadmin();
     // Add more cases for other paths as needed
     case '/projets-management':
-      return this.isSuperadmin() ||this.isChefProjet()||this.isResponsable();
-    case '/competence-management':
-      return this.isSuperadmin();
+      return this.isSuperadmin() ||this.isChefProjet()||this.isResponsable()||this.isDeveloppeur();
+      case '/projets-management/ajouter-projet':
+        return this.isSuperadmin() ||this.isChefProjet()||this.isResponsable()
+    case '/competence-management/':
+      return this.isChefProjet();
     default:
       return false; // By default, hide routes that don't require special visibility conditions
   }

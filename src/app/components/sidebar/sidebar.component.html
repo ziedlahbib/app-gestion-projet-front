@@ -22,8 +22,8 @@
             </a>
             <!-- Display submenu if menuItem has children and showSubmenu is true -->
             <ul *ngIf="menuItem.children && menuItem.children.length && menuItem.showSubmenu" class="submenu">
-              <li *ngFor="let child of menuItem.children" class="{{child.class}} nav-item" routerLinkActive="active">
-                <a class="nav-link" style="cursor: pointer;" [routerLink]="[child.path]">
+              <li *ngFor="let child of menuItem.children" class="{{child.class}} nav-item"  routerLinkActive="active">
+                <a *ngIf="child.visibility" class="nav-link" style="cursor: pointer;" [routerLink]="[child.path]">
                   {{child.title}}
                 </a>
               </li>

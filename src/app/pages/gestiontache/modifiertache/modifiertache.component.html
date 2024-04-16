@@ -1,115 +1,181 @@
-<div *ngIf="isReady"  class="card bg-secondary shadow">
-    <div class="card-header bg-white border-0">
-        <div class="row align-items-center">
-            <div class="col-8">
-                <h3 class="mb-0">Formulaire</h3>
-            </div>
-        </div>
+<div *ngIf="isReady" class="card bg-secondary shadow">
+  <div class="card-header bg-white border-0">
+    <div class="row align-items-center">
+      <div class="col-8">
+        <h3 class="mb-0">Formulaire</h3>
+      </div>
     </div>
-    <div  class="card-body">
-        <form [formGroup]="tacheform">
-            <h6 class="heading-small text-muted mb-4">information</h6>
-            <div class="pl-lg-4">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <div class="alert alert-warning"
-                                *ngIf="tacheform.get('description')?.hasError('required')">
-                                description est obligatoire </div>
-                            <label class="form-control-label" for="input-username">Description
-                                *</label>
-                            <input type="text" class="form-control form-control-alternative"
-                                formControlName="description">
-                        </div>
-                        <div class="form-group">
-                            <div class="alert alert-warning"
-                                *ngIf="tacheform.get('date_debut')?.hasError('required')">
-                                Date est obligatoire </div>
-                                <label class="form-control-label" for="input-username">Date debut
-                                    *</label>
-                            <div class="input-group input-group-alternative">
-
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i
-                                            class="ni ni-calendar-grid-58"></i></span>
-                                </div>
-                                <input class="form-control datepicker" placeholder="Select date"
-                                    formControlName="date_debut" type="Date" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="alert alert-warning"
-                                *ngIf="tacheform.get('date_fin')?.hasError('required')">
-                                Date est obligatoire </div>
-                                <label class="form-control-label" for="input-username">Date fin
-                                    *</label>
-                            <div class="input-group input-group-alternative">
-
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i
-                                            class="ni ni-calendar-grid-58"></i></span>
-                                </div>
-                                <input class="form-control datepicker" placeholder="Select date"
-                                    formControlName="date_fin" type="Date" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="tacheform">
+      <h6 class="heading-small text-muted mb-4">information</h6>
+      <div class="pl-lg-4">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <div class="alert alert-warning" *ngIf="tacheform.get('description')?.hasError('required')">
+                description est obligatoire </div>
+              <label class="form-control-label" for="input-username">Description
+                *</label>
+              <input type="text" class="form-control form-control-alternative" formControlName="description">
             </div>
-        </form>
-        <hr class="my-4" />
-        <h6 class="heading-small text-muted mb-4">Compétence</h6>
-        <div class="row" *ngIf="isReady">
-          <div class="col-md-12" *ngFor="let comp of tache?.competences">
-            <div class="competence-box" (mouseenter)="comp.hover = true" (mouseleave)="comp.hover = false">
-              <div class="form-group">
-                <mat-label>Technologies: {{ comp?.technologies }}</mat-label>
+            <div class="form-group">
+              <div class="alert alert-warning" *ngIf="tacheform.get('date_debut')?.hasError('required')">
+                Date est obligatoire </div>
+              <label class="form-control-label" for="input-username">Date debut
+                *</label>
+              <div class="input-group input-group-alternative">
+
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                </div>
+                <input class="form-control datepicker" placeholder="Select date" formControlName="date_debut"
+                  type="Date" />
               </div>
-              <button *ngIf="comp.hover" mat-icon-button color="warn" (click)="desaffectercomptache(comp)">
-                <mat-icon>close</mat-icon>
-              </button>
+            </div>
+            <div class="form-group">
+              <div class="alert alert-warning" *ngIf="tacheform.get('date_fin')?.hasError('required')">
+                Date est obligatoire </div>
+              <label class="form-control-label" for="input-username">Date fin
+                *</label>
+              <div class="input-group input-group-alternative">
+
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                </div>
+                <input class="form-control datepicker" placeholder="Select date" formControlName="date_fin"
+                  type="Date" />
+              </div>
             </div>
           </div>
         </div>
-        
-        <hr class="my-4" />
-        <div>
-          <form [formGroup]="compform">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <mat-form-field>
-                    <mat-label>Technologies *</mat-label>
-                    <mat-select formControlName="selectedCompetenceId">
-                      <mat-option *ngFor="let competence of competencelist" [value]="competence.id"
-                        >{{ competence.technologies}}</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-              </div>
-            </div>
-            </form>
-            <div class="col-4 text-right">
-                <button class="btn btn-icon btn-3 btn-primary" type="button" (click)="affectercomptache()">
-                  <span class="btn-inner--icon"><i class="ni ni-check-bold"></i></span>
-                  <span class="btn-inner--text">ajouter competence</span>
-                </button>
-              </div>
+      </div>
+    </form>
+    <hr class="my-4" />
+    <h6 class="heading-small text-muted mb-4">Compétence</h6>
+    <div class="row" *ngIf="isReady">
+      <div class="col-md-12" *ngFor="let comp of tache?.competences">
+        <div class="competence-box" (mouseenter)="comp.hover = true" (mouseleave)="comp.hover = false">
+          <div class="form-group">
+            <mat-label>Technologies: {{ comp?.technologies }}</mat-label>
+          </div>
+          <button *ngIf="comp.hover" mat-icon-button color="warn" (click)="desaffectercomptache(comp)">
+            <mat-icon>close</mat-icon>
+          </button>
         </div>
-        <hr class="my-4" />
-        <div>                          
-        <div class="row align-items-center">
-            <div class="col-8">
-                <h3 style="color: red;" class="mb-0">(*) Champ obligatoire</h3>
-            </div>
-            <div class="col-4 text-right">
-                <button class="btn btn-icon btn-3 btn-primary" type="button"
-                    (click)="modifier()" [disabled]="tacheform.invalid">
-                    <span class="btn-inner--icon"><i class="ni ni-check-bold"></i></span>
-                    <span class="btn-inner--text">modifier tache</span>
-                </button>
-            </div>
-        </div>
+      </div>
     </div>
-</div>
+
+    <hr class="my-4" />
+    <div>
+      <form [formGroup]="compform">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <mat-form-field>
+                <mat-label>Technologies *</mat-label>
+                <mat-select formControlName="selectedCompetenceId">
+                  <mat-option *ngFor="let competence of competencelist" [value]="competence.id">{{
+                    competence.technologies}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="col-4 text-right">
+        <button class="btn btn-icon btn-3 btn-primary" type="button" (click)="affectercomptache()">
+          <span class="btn-inner--icon"><i class="ni ni-check-bold"></i></span>
+          <span class="btn-inner--text">ajouter competence</span>
+        </button>
+      </div>
+    </div>
+    <hr class="my-4" />
+    <div>
+      <div class="row align-items-center">
+        <div class="col-8">
+          <h3 style="color: red;" class="mb-0">(*) Champ obligatoire</h3>
+        </div>
+        <div class="col-4 text-right">
+          <button class="btn btn-icon btn-3 btn-primary" type="button" (click)="modifier()"
+            [disabled]="tacheform.invalid">
+            <span class="btn-inner--icon"><i class="ni ni-check-bold"></i></span>
+            <span class="btn-inner--text">modifier tache</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Table -->
+    <div class="card shadow" style="min-height: calc(100vh - 170px);margin: 20px;">
+      <div class="card-header border-0">
+        <h3 class="mb-0">Liste des utilisateurs</h3>
+      </div>
+      <div class="table-responsive">
+        <table class="table align-items-center table-flush">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Nom</th>
+              <th scope="col">Prenom</th>
+              <th scope="col">Identifiant</th>
+              <th scope="col">E-mail</th>
+              <th scope="col">Note</th>
+              <th scope="col">Role</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let user of users">
+            <tr>
+              <th scope="row">
+                <div class="media align-items-center">
+                  <div class="media-body">
+                    <span class="mb-0 text-sm">{{user.id}}</span>
+                  </div>
+                </div>
+              </th>
+              <td>
+                {{user.nom}}
+              </td>
+              <td>
+                <i class="bg-warning"></i> {{user.prenom}}
+              </td>
+              <td>
+                {{user.username}}
+              </td>
+              <td>
+                {{user.email}}
+              </td>
+              <td>
+                <ngb-rating [max]="5" [(rate)]="starRating" [readonly]="false"></ngb-rating>
+
+              </td>
+              <td>
+                {{getFormattedRole(user?.roles.name)}}
+              </td>
+              <td class="text-right">
+                <div ngbDropdown placement="bottom-right">
+                  <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
+                    <i class="fas fa-ellipsis-v"></i>
+                  </a>
+                  <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
+                    <a class="dropdown-item" (click)="afectertachdev(user.id)">affecter utilisateur</a>
+                    <a class="dropdown-item" [routerLink]="['/update-user',user.id]">déaffecter utilisateur</a>
+
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card-footer py-4">
+        <nav aria-label="...">
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+            aria-label="Select page of periodic elements">
+          </mat-paginator>
+        </nav>
+      </div>
+    </div>
+    <!-- Dark table -->
+  </div>
 </div>
