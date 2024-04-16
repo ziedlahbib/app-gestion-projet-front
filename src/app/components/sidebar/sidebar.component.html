@@ -16,7 +16,7 @@
       <ul class="navbar-nav">
         <ng-container *ngFor="let menuItem of menuItems">
           <li class="{{menuItem.class}} nav-item"  *ngIf="menuItem.visibility" routerLinkActive="active" [ngClass]="{ 'show-submenu': menuItem.showSubmenu }">
-            <a (click)="toggleSubmenu(menuItem)" class="nav-link" style="cursor: pointer;">
+            <a (click)="toggleSubmenu(menuItem)" class="nav-link" style="cursor: pointer;" [routerLink]="[menuItem.path]">
               <i class="ni {{menuItem.icon}}"></i>
               {{menuItem.title}}
             </a>

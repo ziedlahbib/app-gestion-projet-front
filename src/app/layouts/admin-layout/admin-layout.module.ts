@@ -32,7 +32,7 @@ import { ModifierprojetComponent } from 'src/app/pages/gesuindesprojets/modifier
 import { GestionDesCompetenceComponent } from 'src/app/pages/gestion-des-competence/gestion-des-competence.component';
 import { ModifiertacheComponent } from 'src/app/pages/gestiontache/modifiertache/modifiertache.component';
 import { RateStarComponent } from 'src/app/pages/rate-star/rate-star.component';
-import { CalendarComponent } from 'src/app/calendar/calendar.component';
+import { CalendarComponent, ChunkPipe } from 'src/app/calendar/calendar.component';
 
 
 
@@ -48,6 +48,7 @@ import { CalendarComponent } from 'src/app/calendar/calendar.component';
     MatPaginatorModule,MatFormFieldModule, MatSelectModule, MatInputModule,
     FormsModule,
     ReactiveFormsModule,
+
 
  
 
@@ -71,6 +72,7 @@ import { CalendarComponent } from 'src/app/calendar/calendar.component';
     ModifiertacheComponent,
     RateStarComponent,
     CalendarComponent,
+    ChunkPipe
 
 
   ]
