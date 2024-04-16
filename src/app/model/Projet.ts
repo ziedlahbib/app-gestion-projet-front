@@ -6,5 +6,5 @@ export class Projet {
     startDate:Date;
     endDate:Date;
     chefDeProjet:User;
-    color;
+    color:string
 }

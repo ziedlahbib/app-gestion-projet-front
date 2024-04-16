@@ -6,7 +6,7 @@
     </div>
 </div>
 <!-- Page content -->
-<div class="container-fluid mt--7" >
+<div class="container-fluid mt--7">
     <!-- Table -->
     <div class="row">
         <div class="col">
@@ -35,18 +35,20 @@
                     <tbody>
                         <tr *ngFor="let row of calendar | chunk: 7; let i = index">
                             <td class="calendar-day" [ngClass]="{'past-date': c.isPastDate, 'today': c.isToday}"
-                                *ngFor="let c of row; let j = index">
-                                <div class="calendar-day-header" [ngClass]="{'blue-date': c.isToday}">
-                                    <strong>{{c.date.getDate()}}</strong> <strong
-                                        *ngIf="c.isToday || (i==0 && j==0) || (c.date.getDate() == 1)">
-                                        {{monthNames[c.date.getMonth()]}}</strong>
+                            *ngFor="let c of row; let j = index">
+                            <div class="calendar-day-header" [ngClass]="{'blue-date': c.isToday}">
+                                <strong>{{c.date.getDate()}}</strong>
+                                <div *ngIf="c.title">
+                                    <div [style.backgroundColor]="c.color" class="project-color"></div>
+                                    {{ c.title }}
                                 </div>
-                            </td>
+                            </div>
+                        </td>
+                        
                         </tr>
                     </tbody>
                 </table>
             </div>
-
         </div>
     </div>
 </div>
