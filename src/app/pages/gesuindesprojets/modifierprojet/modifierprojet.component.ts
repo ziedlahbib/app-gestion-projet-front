@@ -77,7 +77,9 @@ export class ModifierprojetComponent implements OnInit {
   initForm(data) {
     this.projetform = this.formBuilder.group({
       nom_projet: [data?.nom_projet, [Validators.required]],
-      date_limite: [this.formatDate(data?.date_limite), Validators.required],
+      startDate: [this.formatDate(data?.startDate), Validators.required],
+      endDate: [this.formatDate(data?.startDate), Validators.required],
+      color:[data?.color, Validators.required]
     });
     this.projetform.valueChanges.subscribe(
       data => {

@@ -20,7 +20,8 @@
                 <tr>
                   <th scope="col">Id</th>
                   <th scope="col">Nom du projet</th>
-                  <th scope="col">Date limite</th>
+                  <th scope="col">Date debut</th>
+                  <th scope="col">Date fin</th>
                   <th scope="col"></th>
                 </tr>
               </thead>
@@ -37,9 +38,11 @@
                     {{projet.nom_projet}}
                   </td>
                   <td>
-                    {{formatDate(projet.date_limite)}}
+                    {{formatDate(projet.startDate)}}
                   </td>
-                  
+                  <td>
+                    {{formatDate(projet.endDate)}}
+                  </td>
                   <td class="text-right">
                     <div ngbDropdown placement="bottom-right">
                       <a class="btn btn-sm btn-icon-only text-light"  ngbDropdownToggle>
