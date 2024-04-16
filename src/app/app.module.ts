@@ -16,7 +16,7 @@ import { HttpInterceptorService } from './service/http-interceptor.service';
 import { ToastrModule } from 'ngx-toastr';
 import { ModifiertacheComponent } from './pages/gestiontache/modifiertache/modifiertache.component';
 import { RateStarComponent } from './pages/rate-star/rate-star.component';
-import { CalendarComponent } from './calendar/calendar.component';
+
 
 
 

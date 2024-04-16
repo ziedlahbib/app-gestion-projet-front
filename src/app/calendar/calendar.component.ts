@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CalendarOptions } from '@fullcalendar/core';
+// import { CalendarOptions } from '@fullcalendar/core';
 
 @Component({
   selector: 'app-calendar',
@@ -7,12 +7,12 @@ import { CalendarOptions } from '@fullcalendar/core';
   styleUrls: ['./calendar.component.scss']
 })
 export class CalendarComponent implements OnInit {
-  calendarOptions: CalendarOptions = {
-    initialView: 'dayGridMonth', // Set the initial view
-    events: [
-      // Define your events here
-    ]
-  };
+  // calendarOptions: CalendarOptions = {
+  //   initialView: 'dayGridMonth', // Set the initial view
+  //   events: [
+  //     // Define your events here
+  //   ]
+  // };
   constructor() { }
 
   ngOnInit(): void {
