@@ -121,6 +121,7 @@
               <th scope="col">E-mail</th>
               <th scope="col">Note</th>
               <th scope="col">Role</th>
+              <th scope="col">status</th>
               <th scope="col"></th>
             </tr>
           </thead>
@@ -147,17 +148,18 @@
               </td>
               <td>
                 
-                <app-rate-star
+                <app-rate-star *ngIf="isChefProjet()&&user?.roles.name=='ROLE_DEVELOPPEUR'"
                 [maxStars]="5"
                 [value]="userRatingsMap.get(user.id) | async"
                 (valueChange)="onRatingChange($event,user.id)"
               ></app-rate-star>
-              
+              <app-star-rating *ngIf="!isChefProjet()" [rating]="userRatingsMap.get(user.id) | async"></app-star-rating>
 
               </td>
               <td>
                 {{getFormattedRole(user?.roles.name)}}
               </td>
+              <td>{{user?.status}} </td>
               <td class="text-right">
                 <div ngbDropdown placement="bottom-right">
                   <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
@@ -197,6 +199,7 @@
               <th scope="col">E-mail</th>
               <th scope="col">Note</th>
               <th scope="col">Role</th>
+              <th scope="col">status</th>
               <th scope="col"></th>
             </tr>
           </thead>
@@ -222,26 +225,20 @@
                 {{user.email}}
               </td>
               <td>
-                
-                <app-rate-star
-                [maxStars]="5"
-                [value]="userRatingsMap.get(user.id) | async"
-                (valueChange)="onRatingChange($event,user.id)"
-              ></app-rate-star>
-              
+                <app-star-rating [rating]=user.rating></app-star-rating>
 
               </td>
               <td>
                 {{getFormattedRole(user?.roles.name)}}
               </td>
+              <td>{{user?.status}} </td>
               <td class="text-right">
-                <div ngbDropdown placement="bottom-right">
+                <div ngbDropdown placement="bottom-right" *ngIf="user.status=='disponible'">
                   <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
                     <i class="fas fa-ellipsis-v"></i>
                   </a>
                   <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
-                    <a *ngIf="user.status=='disponible'" class="dropdown-item" (click)="afectertachdev(user.id)">affecter utilisateur</a>
-                    <a *ngIf="user.status=='non disponible'" class="dropdown-item" (click)="desafectertachdev(user.id)">désaffecter utilisateur</a>
+                    <a  class="dropdown-item" (click)="afectertachdev(user.id)">affecter utilisateur</a>
 
                   </div>
                 </div>

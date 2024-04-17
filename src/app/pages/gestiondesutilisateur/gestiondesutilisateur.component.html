@@ -25,6 +25,7 @@
                 <th scope="col">E-mail</th>
                 <th scope="col">Note</th>
                 <th scope="col">Role</th>
+                <th scope="col">status</th>
                 <th scope="col"></th>
               </tr>
             </thead>
@@ -56,6 +57,7 @@
                 <td>
                   {{getFormattedRole(user?.roles.name)}}
                 </td>
+                <td>{{user?.status}}</td>
                 <td class="text-right">
                   <div ngbDropdown placement="bottom-right">
                     <a class="btn btn-sm btn-icon-only text-light"  ngbDropdownToggle>

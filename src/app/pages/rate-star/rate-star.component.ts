@@ -10,9 +10,11 @@ export class RateStarComponent {
   @Input() value: number = 0;
   @Output() valueChange = new EventEmitter<number>();
   stars: number[]; 
+
   constructor() {
-    this.stars = Array(this.maxStars).fill(0).map((x, i) => i);
+    this.stars = Array(this.maxStars).fill(0).map((x, i) => i); // Start from 0
   }
+
   rateStar(index: number) {
     this.value = index;
     this.valueChange.emit(this.value);

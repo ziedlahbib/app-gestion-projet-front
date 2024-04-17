@@ -1,3 +1,5 @@
 <div class="rating">
-    <span class="star" (click)="rateStar(i)" *ngFor="let star of stars; let i = index" [class.active]="i < value" [class.yellow]="i <= value">&#9733;</span>
-</div>
+    <span class="star" (click)="rateStar(i+1)" *ngFor="let star of stars; let i = index"
+      [class.active]="i < value" [class.yellow]="i < value">&#9733;</span>
+  </div>
+  
