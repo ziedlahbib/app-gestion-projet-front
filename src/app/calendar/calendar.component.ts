@@ -72,6 +72,7 @@ export class CalendarComponent implements OnInit {
         console.log(data);
         this.u = data;
         this.getuprojets(); // Call the method here after user data is retrieved
+        
       }
     );
   }
@@ -107,9 +108,6 @@ export class CalendarComponent implements OnInit {
     console.log("Projects for Calendar:", this.projets); // Log filtered projects
     this.calendar.forEach(day => {
       const projectsForDay = this.projets.filter(proj => this.isProjectInRange(proj, day.date));
-      console.log("Projects for Day:", projectsForDay);
-      console.log("Day:", day); // Log the current calendar day
-      console.log("Is projectsForDay empty?", projectsForDay.length === 0); // Log if projectsForDay is empty
       if (projectsForDay.length > 0) {
         day.color = projectsForDay[0].color; // Assign the color of the first project to the day
         day.title = projectsForDay[0].nom_projet; // Assign the name of the first project to the day title
