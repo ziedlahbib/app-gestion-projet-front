@@ -13,7 +13,7 @@ declare interface RouteInfo {
 }
 export const ROUTES: RouteInfo[] = [
     // { path: '/dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: ''  },
-    { path: '/icons', title: 'Icons',  icon:'ni-planet text-blue', class: '', visibility:true,},
+    //{ path: '/icons', title: 'Icons',  icon:'ni-planet text-blue', class: '', visibility:true,},
     // { path: '/maps', title: 'Maps',  icon:'ni-pin-3 text-orange', class: '' },
     // { path: '/user-profile', title: 'User profile',  icon:'ni-single-02 text-yellow', class: '', },
     // { path: '/tables', title: 'Tables',  icon:'ni-bullet-list-67 text-red', class: '' },
@@ -135,7 +135,7 @@ checkRouteVisibility(path: string): boolean {
     case '/competence-management':
       return this.isSuperadmin() ||this.isChefProjet()||this.isResponsable();
     case '/calendrier':
-      return this.isSuperadmin() ||this.isChefProjet()||this.isResponsable();
+      return this.isSuperadmin() ||this.isChefProjet()||this.isResponsable()||this.isDeveloppeur();
     case '/icons':
       return this.isSuperadmin() ||this.isChefProjet()||this.isResponsable()||this.isDeveloppeur();
       case '/task':

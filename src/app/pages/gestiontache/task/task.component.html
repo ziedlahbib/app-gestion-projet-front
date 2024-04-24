@@ -6,27 +6,62 @@
   </div>
 </div>
 <div *ngIf="isReady">
-  <div class="card-container" *ngFor="let task of tasks;let idx = index">
-    <div class="card">
-      <h2></h2>
-      <p class="description">{{taches[idx]?.description}}</p>
-      <span>
-        <i class="ni ni-calendar-grid-58 text-pink"></i>
-        <p>Date debut</p>
-      </span>
-      <p class="description">{{formatDate(taches[idx]?.date_debut)}}</p>
-       <span>
-        <i class="ni ni-calendar-grid-58 text-pink"></i>
-        <p>Date fin</p>
-      </span>
-      <p class="description">{{formatDate(taches[idx]?.date_fin)}}</p>
-      <p class="description">{{projet[idx]?.nom_projet}}</p>
-      <span>
-        <i class="ni ni-circle-08 text-pink"></i>
-        <p>Chef du projet</p>
-      </span>
-      <p class="description">{{projet[idx]?.chefDeProjet?.nom}} {{projet[idx]?.chefDeProjet?.prenom}}</p>
-      <p>{{task.status}}</p>
+  <div class="card-container">
+    <div class="card" *ngFor="let task of tasks; let idx = index">
+      <div class="card-header">
+        <h2>{{ taches[idx]?.description }}</h2>
+      </div>
+      <div class="card-content">
+        <div class="icon-title">
+          <span>
+            <i class="ni ni-calendar-grid-58 text-pink"></i>
+            <p>Date début</p>
+          </span>
+          <p class="description">{{ formatDate(taches[idx]?.date_debut) }}</p>
+        </div>
+        <div class="icon-title">
+          <span>
+            <i class="ni ni-calendar-grid-58 text-pink"></i>
+            <p>Date fin</p>
+          </span>
+          <p class="description">{{ formatDate(taches[idx]?.date_fin) }}</p>
+        </div>
+        <div class="icon-title">
+          <span>
+            <i class="ni ni-tag text-pink"></i>
+            <p>Technologies</p>
+          </span>
+          <div class="technologies">
+            <ng-container *ngFor="let c of taches[idx]?.competences; let last = last">
+              <a class="description" style="color: blue;">#{{c.technologies}}</a>
+              <span *ngIf="!last">, </span> <!-- Display comma if not the last technology -->
+            </ng-container>
+          </div>
+        </div>
+        <div class="icon-title">
+          <span>
+            <i class="ni ni-circle-08 text-pink"></i>
+            <p>Chef du projet</p>
+          </span>
+          <p class="description">{{ projet[idx]?.chefDeProjet?.nom }} {{ projet[idx]?.chefDeProjet?.prenom }}</p>
+        </div>
+        <div class="icon-title">
+          <span>
+            <i class="ni ni-briefcase-248 text-pink"></i>
+            <p>Nom du projet</p>
+          </span>
+          <p class="description">{{ projet[idx]?.nom_projet }}</p>
+        </div>
+        <div class="button-container">
+          <button class="btn btn-primary"
+            [routerLink]="['/tache-management/update-tache',task.id.tacheId]">Détail</button>
+        </div>
+      </div>
+      <div class="card-footer">
+        <p *ngIf="task.status=='à faire'" style="color: yellow;">{{ task.status }}</p>
+        <p *ngIf="task.status=='en cours'" style="color: green;">{{ task.status }}</p>
+        <p *ngIf="task.status=='terminer'" style="color: red;">{{ task.status }}</p>
+      </div>
     </div>
   </div>
 </div>

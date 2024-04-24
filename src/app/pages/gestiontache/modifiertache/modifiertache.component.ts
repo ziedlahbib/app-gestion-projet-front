@@ -201,5 +201,8 @@ export class ModifiertacheComponent implements OnInit {
     let role = localStorage.getItem('role' || '');
     return role == "ROLE_CHEF_DE_PROJET";
   }
-
+  isDeveloppeur(): boolean {
+    let role = localStorage.getItem('role' || '');
+    return role == "ROLE_DEVELOPPEUR";
+  }
 }

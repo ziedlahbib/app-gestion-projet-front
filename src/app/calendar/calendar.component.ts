@@ -146,7 +146,7 @@ export class CalendarComponent implements OnInit {
 
   isDeveloppeur(): boolean {
     let role = localStorage.getItem('role' || '');
-    return role == "ROLE_RESPONSABLE";
+    return role == "ROLE_DEVELOPPEUR";
   }
 
   private generateCalendarDays(monthIndex: number): void {
