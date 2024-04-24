@@ -4,6 +4,9 @@ import { jwtDecode } from "jwt-decode";
 import { UserServiceService } from 'src/app/service/user-service.service';
 import { TacheserviceService } from 'src/app/service/tacheservice.service';
 import { Tache } from 'src/app/model/tache';
+import { ProjetServiceService } from 'src/app/service/projet-service.service';
+import { Projet } from 'src/app/model/Projet';
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
@@ -14,8 +17,9 @@ export class TaskComponent implements OnInit {
   user: User;
   taches: Tache[]=[];
   tasks: any[];
+  projet:Projet[]=[]
 
-  constructor(private us: UserServiceService, private ts: TacheserviceService) { }
+  constructor(private us: UserServiceService, private ts: TacheserviceService,private ps:ProjetServiceService) { }
 
   ngOnInit(): void {
     this.getuserbyid();
@@ -39,8 +43,17 @@ export class TaskComponent implements OnInit {
         this.tasks = data;
         for (let task of data) {
           this.affichetachedetail(task.id.tacheId);
+          this.getprojetbytacheid(task.id.tacheId);
         }
 
+      }
+    )
+  }
+  getprojetbytacheid(tacheid:Number){
+    this.ps.getprojettachebyid(tacheid).subscribe(
+      tache=>{
+        console.log(tache);
+        this.projet.push(tache);
       }
     )
   }
@@ -52,5 +65,10 @@ export class TaskComponent implements OnInit {
         console.log("tache", this.taches)
       }
     )
+  }
+  formatDate(date: string): string {
+    const formattedDate = new Date(date);
+    const datePipe = new DatePipe('en-US'); // Change 'en-US' to your desired locale
+    return datePipe.transform(formattedDate, 'yyyy-MM-dd'); // Adjust the format as needed
   }
 }

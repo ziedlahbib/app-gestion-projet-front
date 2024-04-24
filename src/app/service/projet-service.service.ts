@@ -14,6 +14,7 @@ export class ProjetServiceService {
   supprimerurl="/api/projet/delete-projet";
   modifierprojeturl="/api/projet/update-projet";
   getprojetbyidurl="/api/projet/get-projet";
+  getprojetbytacheidurl="/api/projet/get-projet-by-tacheid";
   affeterprojetcdpUrl="/api/projet/affecter-projet-cdp"
   constructor(private http : HttpClient) { }
   ajoutprojet(projet :Projet): Observable<Projet>{
@@ -33,6 +34,10 @@ export class ProjetServiceService {
   }
   getprojetbyid(id:Number): Observable<Projet>{
     return this.http.get<Projet>(`${this.getprojetbyidurl}/${id}`);
+
+  }
+  getprojettachebyid(id:Number): Observable<Projet>{
+    return this.http.get<Projet>(`${this.getprojetbytacheidurl}/${id}`);
 
   }
   deleteprojet(id :Number): Observable<any>{

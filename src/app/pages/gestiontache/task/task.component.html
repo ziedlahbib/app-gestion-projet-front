@@ -10,6 +10,22 @@
     <div class="card">
       <h2></h2>
       <p class="description">{{taches[idx]?.description}}</p>
+      <span>
+        <i class="ni ni-calendar-grid-58 text-pink"></i>
+        <p>Date debut</p>
+      </span>
+      <p class="description">{{formatDate(taches[idx]?.date_debut)}}</p>
+       <span>
+        <i class="ni ni-calendar-grid-58 text-pink"></i>
+        <p>Date fin</p>
+      </span>
+      <p class="description">{{formatDate(taches[idx]?.date_fin)}}</p>
+      <p class="description">{{projet[idx]?.nom_projet}}</p>
+      <span>
+        <i class="ni ni-circle-08 text-pink"></i>
+        <p>Chef du projet</p>
+      </span>
+      <p class="description">{{projet[idx]?.chefDeProjet?.nom}} {{projet[idx]?.chefDeProjet?.prenom}}</p>
       <p>{{task.status}}</p>
     </div>
   </div>
