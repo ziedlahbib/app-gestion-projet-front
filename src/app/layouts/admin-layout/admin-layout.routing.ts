@@ -15,6 +15,7 @@ import { ModifierprojetComponent } from 'src/app/pages/gesuindesprojets/modifier
 import { GestionDesCompetenceComponent } from 'src/app/pages/gestion-des-competence/gestion-des-competence.component';
 import { ModifiertacheComponent } from 'src/app/pages/gestiontache/modifiertache/modifiertache.component';
 import { CalendarComponent } from 'src/app/calendar/calendar.component';
+import { TaskComponent } from 'src/app/pages/gestiontache/task/task.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
@@ -32,4 +33,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'competence-management',           component: GestionDesCompetenceComponent },
     { path: 'tache-management/update-tache/:id',           component: ModifiertacheComponent},
     { path: 'calendrier',           component: CalendarComponent},
+    { path: 'task',           component: TaskComponent},
 ];

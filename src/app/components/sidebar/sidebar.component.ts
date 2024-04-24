@@ -13,11 +13,12 @@ declare interface RouteInfo {
 }
 export const ROUTES: RouteInfo[] = [
     // { path: '/dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: ''  },
-    //  { path: '/icons', title: 'Icons',  icon:'ni-planet text-blue', class: '', visibility:true,},
+    { path: '/icons', title: 'Icons',  icon:'ni-planet text-blue', class: '', visibility:true,},
     // { path: '/maps', title: 'Maps',  icon:'ni-pin-3 text-orange', class: '' },
     // { path: '/user-profile', title: 'User profile',  icon:'ni-single-02 text-yellow', class: '', },
     // { path: '/tables', title: 'Tables',  icon:'ni-bullet-list-67 text-red', class: '' },
     { path: '/calendrier', title: 'Calendrier',  icon:'ni ni-calendar-grid-58 text-pink', class: '',visibility:true, },
+    { path: '/task', title: 'Taches',  icon:'ni-bullet-list-67k', class: '',visibility:true, },
     // { path: '/register', title: 'Register',  icon:'ni-circle-08 text-pink', class: '' },
     { path: '/user-management', title: 'Gestion des utilisateurs',icon:'ni-circle-08 text-pink',visibility:true,class: '',children: [
       {
@@ -135,8 +136,10 @@ checkRouteVisibility(path: string): boolean {
       return this.isSuperadmin() ||this.isChefProjet()||this.isResponsable();
     case '/calendrier':
       return this.isSuperadmin() ||this.isChefProjet()||this.isResponsable();
-    // case '/icons':
-    //   return this.isSuperadmin() ||this.isChefProjet()||this.isResponsable();
+    case '/icons':
+      return this.isSuperadmin() ||this.isChefProjet()||this.isResponsable();
+      case '/task':
+        return this.isDeveloppeur();
     default:
       return false; // By default, hide routes that don't require special visibility conditions
   }

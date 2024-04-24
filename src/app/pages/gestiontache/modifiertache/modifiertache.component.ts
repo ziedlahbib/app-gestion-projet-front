@@ -51,7 +51,15 @@ export class ModifiertacheComponent implements OnInit {
       }
     )
   }
-  
+  todotachdev(idu:Number){
+    this.ts.todotachedev(idu,this.router.snapshot.params['id'],this.tache).subscribe(
+      res=>{
+        console.log(res);
+        this.getusers();
+        this.getusersbytache();
+      }
+    )
+  }
   afectertachdev(idu:Number){
     this.ts.affectertachedev(idu,this.router.snapshot.params['id'],this.tache).subscribe(
       res=>{

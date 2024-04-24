@@ -33,6 +33,7 @@ import { GestionDesCompetenceComponent } from 'src/app/pages/gestion-des-compete
 import { ModifiertacheComponent } from 'src/app/pages/gestiontache/modifiertache/modifiertache.component';
 import { RateStarComponent } from 'src/app/pages/rate-star/rate-star.component';
 import { CalendarComponent, ChunkPipe } from 'src/app/calendar/calendar.component';
+import { TaskComponent } from 'src/app/pages/gestiontache/task/task.component';
 
 
 
@@ -72,7 +73,8 @@ import { CalendarComponent, ChunkPipe } from 'src/app/calendar/calendar.componen
     ModifiertacheComponent,
     RateStarComponent,
     CalendarComponent,
-    ChunkPipe
+    ChunkPipe,
+    TaskComponent,
 
 
   ]

@@ -1,0 +1,16 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body">
+      <!-- Card stats -->
+    </div>
+  </div>
+</div>
+<div *ngIf="isReady">
+  <div class="card-container" *ngFor="let task of tasks;let idx = index">
+    <div class="card">
+      <h2></h2>
+      <p class="description">{{taches[idx]?.description}}</p>
+      <p>{{task.status}}</p>
+    </div>
+  </div>
+</div>

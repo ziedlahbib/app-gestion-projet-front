@@ -1,4 +1,11 @@
 <div *ngIf="isReady" class="card bg-secondary shadow">
+  <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+      <div class="header-body">
+        <!-- Card stats -->
+      </div>
+    </div>
+  </div>
   <div class="card-header bg-white border-0">
     <div class="row align-items-center">
       <div class="col-8">
@@ -166,6 +173,7 @@
                     <i class="fas fa-ellipsis-v"></i>
                   </a>
                   <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
+                    <a *ngIf="user.status=='disponible'" class="dropdown-item" (click)="todotachdev(user.id)">à faire</a>
                     <a *ngIf="user.status=='disponible'" class="dropdown-item" (click)="afectertachdev(user.id)">affecter utilisateur</a>
                     <a *ngIf="user.status=='non disponible'" class="dropdown-item" (click)="desafectertachdev(user.id)">désaffecter utilisateur</a>
 
@@ -237,6 +245,10 @@
                   <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
                     <i class="fas fa-ellipsis-v"></i>
                   </a>
+                  <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
+                    <a  class="dropdown-item" (click)="todotachdev(user.id)">à faire</a>
+
+                  </div>
                   <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
                     <a  class="dropdown-item" (click)="afectertachdev(user.id)">affecter utilisateur</a>
 

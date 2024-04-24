@@ -17,6 +17,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { ModifiertacheComponent } from './pages/gestiontache/modifiertache/modifiertache.component';
 import { RateStarComponent } from './pages/rate-star/rate-star.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { TaskComponent } from './pages/gestiontache/task/task.component';
 
 
 
@@ -45,6 +46,7 @@ import { CalendarComponent } from './calendar/calendar.component';
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
+
 
    
 

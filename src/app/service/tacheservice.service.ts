@@ -11,9 +11,11 @@ export class TacheserviceService {
   updatetacheUrl="/api/tache/update-tache";
   deletetacheUrl="/api/tache/delete-tache";
   gettachebyprojetUrl="/api/tache/get-tache-byprojet";
+  gettacheuserIdUrl="/api/tache/get-tachesByUserId"
   affetercomptacheUrl="/api/tache/affecter-tache-compenence";
   desaffetercomptacheUrl="/api/tache/desaffecter-tache-compenence";
   affetertacheprojetUrl="/api/tache/affecter-tache-projet";
+  todotachedevUrl="/api/tache/todo-tache-dev";
   affetertachedevUrl="/api/tache/affecter-tache-dev";
   desaffetertachedevUrl="/api/tache/desaffecter-tache-dev";
   gettachebyIdUrl="/api/tache/get-tache";
@@ -32,6 +34,10 @@ export class TacheserviceService {
   
   gettachebyprojet(idp:Number): Observable<Tache[]>{
     return this.http.get<Tache[]>(`${this.gettachebyprojetUrl}/${idp}`);
+
+  }
+  gettachebyuserId(idu:Number): Observable<any[]>{
+    return this.http.get<any[]>(`${this.gettacheuserIdUrl}/${idu}`);
 
   }
   gettachebyId(idt:Number): Observable<Tache>{
@@ -60,6 +66,9 @@ export class TacheserviceService {
   }
   affectertacheprojet(idp:Number,idt:Number,tache:any):Observable<Tache>{
     return this.http.put<Tache>(`${this.affetertacheprojetUrl}/${idp}/${idt}`,tache);
+  }
+  todotachedev(idu:Number,idt:Number,tache:any):Observable<any>{
+    return this.http.put<any>(`${this.todotachedevUrl}/${idu}/${idt}`,tache);
   }
   affectertachedev(idu:Number,idt:Number,tache:any):Observable<any>{
     return this.http.put<any>(`${this.affetertachedevUrl}/${idu}/${idt}`,tache);
