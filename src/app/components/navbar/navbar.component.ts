@@ -1,11 +1,15 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
-import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { DatePipe, Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthServiceService } from 'src/app/service/auth-service.service';
 import { User } from 'src/app/model/user';
 import { jwtDecode } from "jwt-decode";
 import { UserServiceService } from 'src/app/service/user-service.service';
+import { TacheserviceService } from 'src/app/service/tacheservice.service';
+import { ProjetServiceService } from 'src/app/service/projet-service.service';
+import { Tache } from 'src/app/model/tache';
+import { Projet } from 'src/app/model/Projet';
 
 @Component({
   selector: 'app-navbar',
@@ -20,9 +24,13 @@ export class NavbarComponent implements OnInit {
   public listTitles: any[];
   public location: Location;
   user: User;
+  taches: Tache[]=[];
+  tasks: any[];
+  projet:Projet[]=[]
 
   constructor(location: Location, private element: ElementRef, private router: Router,
-    private authenticationService: AuthServiceService, private us: UserServiceService) {
+    private authenticationService: AuthServiceService, private us: UserServiceService,
+    private ts: TacheserviceService,private ps:ProjetServiceService) {
     this.location = location;
   }
 
@@ -39,7 +47,41 @@ export class NavbarComponent implements OnInit {
     });
 
   }
+  gettachebuuserid(userId: Number) {
+    this.ts.gettachebyuserId(userId).subscribe(
+      data => {
+        console.log(data);
+        this.tasks = data;
+        for (let task of data) {
+          this.affichetachedetail(task.id.tacheId);
+          this.getprojetbytacheid(task.id.tacheId);
+        }
 
+      }
+    )
+  }
+  getprojetbytacheid(tacheid:Number){
+    this.ps.getprojettachebyid(tacheid).subscribe(
+      tache=>{
+        console.log(tache);
+        this.projet.push(tache);
+      }
+    )
+  }
+  affichetachedetail(tacheid: Number) {
+    this.ts.gettachebyId(tacheid).subscribe(
+      res => {
+
+        this.taches.push(res);
+        console.log("tache", this.taches)
+      }
+    )
+  }
+  formatDate(date: string): string {
+    const formattedDate = new Date(date);
+    const datePipe = new DatePipe('en-US'); // Change 'en-US' to your desired locale
+    return datePipe.transform(formattedDate, 'yyyy-MM-dd'); // Adjust the format as needed
+  }
   getTitle() {
     var titlee = this.location.prepareExternalUrl(this.location.path());
     if (titlee.charAt(0) === '#') {
@@ -66,9 +108,16 @@ export class NavbarComponent implements OnInit {
         console.log(data);
         this.user = data;
         this.nom=data.nom;
-        this.prenom=data.prenom
+        this.prenom=data.prenom;
+        this.gettachebuuserid(data.id);
         this.isReady = true;
       }
     )
   }
+  showNotifications: boolean = false;
+
+toggleNotifications() {
+  this.showNotifications = !this.showNotifications;
+}
+
 }
