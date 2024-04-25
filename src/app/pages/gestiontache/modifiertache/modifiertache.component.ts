@@ -51,37 +51,63 @@ export class ModifiertacheComponent implements OnInit {
 
 
   }
-  gettachebuuserid(userId: Number) {
+  getusers() {
+    this.us.getusers().subscribe(
+      data => {
+        console.log(data);
+        this.users = data;
+  
+        // Initialize taches and projet lists with null values
+        this.taches = new Array(data.length).fill(null);
+        this.projet = new Array(data.length).fill(null);
+  
+        for (let i = 0; i < data.length; i++) {
+          const u = data[i];
+          if (u.status === 'non disponible') {
+            this.gettachebuuserid(u.id, i); // Pass index i to gettachebuuserid function
+          } else if (u.status == null || u.status === 'disponible') {
+            this.taches[i] = null;
+            this.projet[i] = null;
+          }
+        }
+        this.fetchUserRatings();
+      }
+    );
+  }
+  
+  gettachebuuserid(userId: Number, index: number) { // Add index parameter
     this.ts.gettachebyuserId(userId).subscribe(
       data => {
         this.tasks = data;
         for (let task of data) {
-          this.affichetachedetail(task.id.tacheId);
-          this.getprojetbytacheid(task.id.tacheId);
-
+          if (task.status === 'en cours') {
+            this.affichetachedetail(task.id.tacheId, index); // Pass index to affichetachedetail function
+            console.log(task);
+            this.getprojetbytacheid(task.id.tacheId, index); // Pass index to getprojetbytacheid function
+          }
         }
-        console.log(this.projet)
-        console.log(this.taches)
+        console.log(this.projet);
+        console.log(this.taches);
       }
-    )
+    );
   }
-  getprojetbytacheid(tacheid:Number){
+  
+  getprojetbytacheid(tacheid: number, index: number) { // Add index parameter
     this.ps.getprojettachebyid(tacheid).subscribe(
-      projet=>{
-   
-        this.projet.push(projet);
+      projet => {
+        this.projet[index] = projet; // Assign the project to the correct index
       }
-    )
+    );
   }
-  affichetachedetail(tacheid: Number) {
+  
+  affichetachedetail(tacheid: number, index: number) { // Add index parameter
     this.ts.gettachebyId(tacheid).subscribe(
       res => {
-
-        this.taches.push(res);
-  
+        this.taches[index] = res; // Assign the task to the correct index
       }
-    )
+    );
   }
+  
   getusersbytache(){
 
     this.us.getuserBytache(this.router.snapshot.params['id']).subscribe(
@@ -119,18 +145,7 @@ export class ModifiertacheComponent implements OnInit {
       }
     )
   }
-  getusers(){
-    this.us.getusers().subscribe(
-      data=>{
-   
-        this.users=data;
-        for(let u of data){
-            this.gettachebuuserid(u.id);
-        }
-        this.fetchUserRatings();
-      }
-    )
-  }
+
   get(id:number){
     this.ts.gettachebyId(id).subscribe(
       data => {
