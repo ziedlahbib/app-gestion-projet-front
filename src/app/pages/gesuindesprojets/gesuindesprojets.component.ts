@@ -23,7 +23,7 @@ export class GesuindesprojetsComponent implements OnInit {
     let user: any = jwtDecode(token || '');
     this.us.getuserById(user.jti).subscribe(
       data => {
-        console.log(data);
+
         this.u = data;
         this.isReady = true;
         this.getuprojets(); // Call the method here after user data is retrieved
@@ -35,7 +35,7 @@ export class GesuindesprojetsComponent implements OnInit {
     if(this.isChefProjet()){
           this.ps.getprojetsbycdp(this.u.id).subscribe(
             data=>{
-              console.log(data)
+
               this.projets=data;
             }
           )
@@ -43,7 +43,7 @@ export class GesuindesprojetsComponent implements OnInit {
     else if(this.isResponsable()||this.isSuperadmin()){
       this.ps.getprojets().subscribe(
         data=>{
-          console.log(data)
+          
           this.projets=data;
         }
       )
@@ -51,7 +51,7 @@ export class GesuindesprojetsComponent implements OnInit {
     else if(this.isDeveloppeur()){
       this.ps.getprojetsbydev(this.u.id).subscribe(
         data=>{
-          console.log(data)
+          
           this.projets=data;
         }
       )
@@ -61,7 +61,7 @@ export class GesuindesprojetsComponent implements OnInit {
   suprimer(projet:any){
     this.ps.deleteprojet(projet.id).subscribe(
       res=>{
-        console.log(res);
+
         this.toastrService.success(res.message)
         this.ps.getprojets().subscribe(
           data=>{

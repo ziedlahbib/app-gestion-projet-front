@@ -41,7 +41,7 @@ export class AjouterprojetComponent implements OnInit {
     });
     this.projetform.valueChanges.subscribe(
       data => {
-        console.log(this.projetform?.value);
+        (this.projetform?.value);
         
       }
     )
@@ -52,7 +52,7 @@ export class AjouterprojetComponent implements OnInit {
     });
     this.cdpform.valueChanges.subscribe(
       data => {
-        console.log(this.cdpform?.value);
+
       }
     )
     
@@ -67,7 +67,7 @@ export class AjouterprojetComponent implements OnInit {
     // };
     this.ps.ajoutprojet(this.projetform.value).subscribe(
       data => {
-        console.log(data)
+  
         const projetId = data.id;
         if(this.isResponsable()||this.isSuperadmin()){
           const userId = this.cdpform.value.selectedCdpId;
@@ -96,7 +96,7 @@ export class AjouterprojetComponent implements OnInit {
     this.us.getcdp().subscribe(
       data=>{
         this.Cdp=data;
-        console.log(data)
+  
       }
     )
   }
@@ -105,7 +105,7 @@ export class AjouterprojetComponent implements OnInit {
     let user: any = jwtDecode(token || '');
     this.us.getuserById(user.jti).subscribe(
       data => {
-        console.log(data);
+  ;
         this.u=data;
         this.isReady = true;
       }

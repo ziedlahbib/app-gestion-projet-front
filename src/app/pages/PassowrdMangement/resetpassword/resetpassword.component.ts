@@ -47,7 +47,7 @@ export class ResetpasswordComponent implements OnInit {
       });
     this.pwform.valueChanges.subscribe(
       data => {
-        console.log(this.pwform.value)
+        
       }
 
     )
@@ -57,12 +57,12 @@ export class ResetpasswordComponent implements OnInit {
     const controlValue = this.pwform.controls[controlName].value;
     this.router.queryParams.subscribe(
       data => {
-        console.log(data)
+        
         //this.value = data.filterValue
         this.us.resettpassword(controlValue,data?.['token']).subscribe(
           data => {
             this.message = data;
-            console.log(data);
+            ;
             this.toastrService.success(data.message)
             this.route.navigate(['/login'])
           }

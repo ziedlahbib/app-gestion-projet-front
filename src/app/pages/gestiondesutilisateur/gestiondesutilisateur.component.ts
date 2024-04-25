@@ -26,7 +26,7 @@ export class GestiondesutilisateurComponent implements OnInit {
 getusers(){
   this.us.getusers().subscribe(
     data=>{
-      console.log(data)
+
       this.users=data;
     }
   )
@@ -34,7 +34,7 @@ getusers(){
 suprimer(user :any){
   this.us.deleteUser(user.id).subscribe(
     res=>{
-      console.log(res)
+
       this.us.getusers().subscribe(
         data=>{
           this.users=data;
@@ -48,7 +48,7 @@ suprimer(user :any){
 activer(id:number,user :User){
   this.us.activeruser(id,user).subscribe(
     res=>{
-      console.log(res)
+
       this.us.getusers().subscribe(
         data=>{
           this.users=data;
@@ -62,7 +62,7 @@ activer(id:number,user :User){
 desactiver(id:number,user :User){
   this.us.desactiveruser(id,user).subscribe(
     res=>{
-      console.log(res)
+
       this.us.getusers().subscribe(
         data=>{
           this.users=data;

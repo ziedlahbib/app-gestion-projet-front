@@ -20,7 +20,7 @@
           <div class=" dropdown-header noti-title">
             <h6 class="text-overflow m-0">Welcome!</h6>
           </div>
-          <a routerLinkActive="active" class="dropdown-item" *ngFor="let task of tasks; let idx = index" [ngClass]="{ 'unread-task': task.eta === 'non lu' }" >
+          <a routerLinkActive="active" class="dropdown-item" *ngFor="let task of tasks; let idx = index" [ngClass]="{ 'unread-task': task.etat === 'non lu' }" >
             <span class="cursor-pointer" (click)="voirnotif(taches[idx])" [routerLink]="['/tache-management/update-tache',taches[idx]?.id]">vous avez été affecter au tache( {{ taches[idx]?.description }}) d'ID:{{ taches[idx]?.id }} du projet {{ projet[idx]?.nom_projet }} d'Id {{projet[idx]?.id}}
               du {{ formatDate(taches[idx]?.date_debut) }} au {{ formatDate(taches[idx]?.date_fin) }} 
             </span>

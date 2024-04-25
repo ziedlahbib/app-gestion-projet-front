@@ -47,7 +47,7 @@ export class NavbarComponent implements OnInit {
     this.us.prenom$.subscribe((prenom) => {
       this.prenom = prenom;
     });
-    this.notif= JSON.parse(localStorage.getItem('notif'));
+    
   }
   voirnotif(tache:any){
     this.ts.voirnotif(this.user.id,tache.id,tache).subscribe(
@@ -64,7 +64,7 @@ export class NavbarComponent implements OnInit {
   gettachebuuserid(userId: Number) {
     this.ts.gettachebyuserId(userId).subscribe(
       data => {
-        console.log(data);
+
         this.tasks = data;
         for (let task of data) {
           this.affichetachedetail(task.id.tacheId);
@@ -72,6 +72,7 @@ export class NavbarComponent implements OnInit {
           if(task.etat=="non lu"){
            this.notif++;
           }
+          console.log(this.notif)
           localStorage.setItem('notif',JSON.stringify(this.notif));
         }
 
@@ -81,7 +82,7 @@ export class NavbarComponent implements OnInit {
   getprojetbytacheid(tacheid:Number){
     this.ps.getprojettachebyid(tacheid).subscribe(
       projet=>{
-        console.log(projet);
+   
         this.projet.push(projet);
       }
     )
@@ -91,7 +92,7 @@ export class NavbarComponent implements OnInit {
       res => {
 
         this.taches.push(res);
-        console.log("tache", this.taches)
+  
       }
     )
   }
@@ -123,7 +124,7 @@ export class NavbarComponent implements OnInit {
     let user: any = jwtDecode(token || '');
     this.us.getuserById(user.jti).subscribe(
       data => {
-        console.log(data);
+
         this.user = data;
         this.nom=data.nom;
         this.prenom=data.prenom;

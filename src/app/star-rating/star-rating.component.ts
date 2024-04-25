@@ -31,7 +31,7 @@ export class StarRatingComponent {
   rateStar(star: number): void {
     this.rating = star;
     this.ratingChange.emit(this.rating);
-    console.log('Rating changed to:', this.rating);
+    
   }
   
 }

@@ -44,7 +44,7 @@ initcompForm() {
 
   this.compform.valueChanges.subscribe(
     data => {
-      console.log(this.compform?.value);
+
       
     }
   )
@@ -52,7 +52,7 @@ initcompForm() {
 suprimer(projet:any){
   this.cs.deletecomp(projet.id).subscribe(
     res=>{
-      console.log(res)
+  
       this.getcompetence();
     }
   )

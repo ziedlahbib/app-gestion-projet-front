@@ -46,7 +46,7 @@ export class AjouterUtilisateurComponent implements OnInit {
 
     this.userform.valueChanges.subscribe(
       data => {
-        console.log(this.userform?.value);
+
         
       }
     )
@@ -55,7 +55,7 @@ export class AjouterUtilisateurComponent implements OnInit {
   }
   usernameValidator: AsyncValidatorFn = (control: AbstractControl): Observable<ValidationErrors | null> => {
     const username = control.value;
-    console.log('Username validator called');
+
   
     if (!username) {
       // Return early if the username is empty
@@ -114,7 +114,7 @@ ajouter() {
 
   this.us.ajounormaltuser(this.userform.value).subscribe(
     data => {
-      console.log(data)
+  
       this.toastrService.success(data.message)
       this.route.navigate(['/user-management']);
 

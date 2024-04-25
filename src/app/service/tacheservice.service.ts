@@ -26,7 +26,7 @@ export class TacheserviceService {
   rate(note: number, idt: number, idu: number): Observable<any> {
     // Create an object with the note as a property
     const requestBody = { note: note };
-  console.log(requestBody)
+  
     // Send the object as the request body
     return this.http.put<any>(`${this.rateurl}/${idt}/${idu}`, requestBody.note);
   }

@@ -29,7 +29,7 @@ export class TaskComponent implements OnInit {
     let user: any = jwtDecode(token || '');
     this.us.getuserById(user.jti).subscribe(
       data => {
-        console.log(data);
+   
         this.user = data;
         this.gettachebuuserid(data.id);
         this.isReady = true;
@@ -39,7 +39,7 @@ export class TaskComponent implements OnInit {
   gettachebuuserid(userId: Number) {
     this.ts.gettachebyuserId(userId).subscribe(
       data => {
-        console.log(data);
+   
         this.tasks = data;
         for (let task of data) {
           this.affichetachedetail(task.id.tacheId);
@@ -52,7 +52,7 @@ export class TaskComponent implements OnInit {
   getprojetbytacheid(tacheid:Number){
     this.ps.getprojettachebyid(tacheid).subscribe(
       tache=>{
-        console.log(tache);
+
         this.projet.push(tache);
       }
     )
@@ -62,7 +62,7 @@ export class TaskComponent implements OnInit {
       res => {
 
         this.taches.push(res);
-        console.log("tache", this.taches)
+
       }
     )
   }

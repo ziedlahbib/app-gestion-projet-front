@@ -39,7 +39,7 @@ export class ModifierprojetComponent implements OnInit {
   gettachebyproject(){
     this.ts.gettachebyprojet(this.router.snapshot.params['id']).subscribe(
       data=>{
-        console.log(data)
+        
         this.listtache=data;
       }
     )
@@ -64,7 +64,7 @@ export class ModifierprojetComponent implements OnInit {
   
     // Add the new form group to the list of forms
     this.competencelistef.push(newFormGroup);
-    console.log(this.competencelistef); // Log the array for debugging
+   
   }
   
   getcompetences(){
@@ -83,7 +83,7 @@ export class ModifierprojetComponent implements OnInit {
     });
     this.projetform.valueChanges.subscribe(
       data => {
-        console.log(this.projetform?.value);
+        
       }
     ) 
   }
@@ -98,7 +98,7 @@ export class ModifierprojetComponent implements OnInit {
     });
     this.tacheform.valueChanges.subscribe(
       data => {
-        console.log(this.tacheform?.value);
+        
       }
     )
   }
@@ -108,7 +108,7 @@ export class ModifierprojetComponent implements OnInit {
     });
     this.compform.valueChanges.subscribe(
       data => {
-        console.log(this.compform?.value);
+        
       }
     )
   }
@@ -116,7 +116,7 @@ export class ModifierprojetComponent implements OnInit {
     this.ps.getprojetbyid(id ).subscribe(
       data => {
         this.projet = data;
-        console.log(data);
+        ;
         this.isReady=true;
         this.initForm(data);
       }
@@ -125,7 +125,7 @@ export class ModifierprojetComponent implements OnInit {
   modifier(){
     this.ps.modifierprojet(this.router.snapshot.params['id'],this.projetform.value).subscribe(
       data=>{
-        console.log(data);
+        ;
         this.toastrService.success("projet modifié avec succés")
         this.route.navigate(['/projets-management']);
       }
@@ -174,7 +174,7 @@ export class ModifierprojetComponent implements OnInit {
         )
         this.toastrService.success("tache ajouté avec succés")
     } else {
-      console.log('Invalid form data.');
+      
     }
   }
   isDeveloppeur(): boolean {

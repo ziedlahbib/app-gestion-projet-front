@@ -81,7 +81,7 @@ export class CalendarComponent implements OnInit {
     if (this.isChefProjet()) {
       this.ps.getprojetsbycdp(this.u.id).subscribe(
         data => {
-          console.log(data);
+
           this.projets = data;
           this.assignProjectsToCalendar();
         }
@@ -89,7 +89,7 @@ export class CalendarComponent implements OnInit {
     } else if (this.isResponsable() || this.isSuperadmin()) {
       this.ps.getprojets().subscribe(
         data => {
-          console.log(data);
+
           this.projets = data;
           this.assignProjectsToCalendar();
         }
@@ -97,7 +97,7 @@ export class CalendarComponent implements OnInit {
     } else if (this.isDeveloppeur()) {
       this.ps.getprojetsbydev(this.u.id).subscribe(
         data => {
-          console.log(data);
+
           this.projets = data;
           this.assignProjectsToCalendar();
         }
@@ -105,7 +105,7 @@ export class CalendarComponent implements OnInit {
     }
   }
   assignProjectsToCalendar() {
-    console.log("Projects for Calendar:", this.projets); // Log filtered projects
+
     this.calendar.forEach(day => {
       const projectsForDay = this.projets.filter(proj => this.isProjectInRange(proj, day.date));
       if (projectsForDay.length > 0) {
@@ -121,7 +121,7 @@ export class CalendarComponent implements OnInit {
       this.calendar.forEach(day => {
         day.projects = this.projets.filter(proj => {
           const isInRange = this.isProjectInRange(proj, day.date);
-          console.log(`Project ${proj.nom_projet} is in range for ${day.date}: ${isInRange}`);
+
           return isInRange;
         });
       });

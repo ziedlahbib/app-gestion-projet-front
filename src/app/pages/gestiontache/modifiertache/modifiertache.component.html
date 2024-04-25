@@ -254,7 +254,6 @@
                       <a class="dropdown-item" (click)="afectertachdev(user.id)">affecter utilisateur</a>
                     </ng-container>
                     <a *ngIf="user.status=='non disponible'"  class="dropdown-item" (click)="todotachdev(user.id)">à faire</a>
-                    <a *ngIf="user.status=='non disponible'" class="dropdown-item" (click)="desafectertachdev(user.id)">désaffecter utilisateur</a>
                   </div>
                 </div>                
               </td>

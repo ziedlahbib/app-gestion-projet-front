@@ -99,7 +99,7 @@ export class UpdateProfileComponent implements OnInit {
 
     this.userform.valueChanges.subscribe(
       data => {
-        console.log(this.userform?.value);
+
         
         
       }
@@ -112,7 +112,7 @@ export class UpdateProfileComponent implements OnInit {
       data => {
   
         this.user = data;
-        console.log(data);
+
         this.isReady=true;
         this.initForm(data);
 
@@ -123,7 +123,7 @@ export class UpdateProfileComponent implements OnInit {
   modifier(){
     this.us.modifierprofile(this.router.snapshot.params['id'],this.userform.value).subscribe(
       data=>{
-        console.log(data);
+
         this.us.setNom(data.user.nom);
         this.us.setPrenom(data.user.prenom);
         this.toastrService.success(data.message)

@@ -42,7 +42,7 @@ export class ModifierUserComponent implements OnInit {
   
       this.compform.valueChanges.subscribe(
         data => {
-          console.log(this.compform?.value);
+   
 
           
         }
@@ -55,7 +55,7 @@ export class ModifierUserComponent implements OnInit {
       const formData = this.compform.value;
       this.cs.affectercompuser(userId, formData.selectedCompetenceId, formData).subscribe(
         data => {
-          console.log(data);
+   
           this.get(userId);
         }
       );
@@ -64,7 +64,7 @@ export class ModifierUserComponent implements OnInit {
       const userId = this.router.snapshot.params['id']
       this.cs.desaffectercompuser(userId, comp.competence.id, comp).subscribe(
         data => {
-          console.log(data);
+
           this.get(userId);
         }
       );
@@ -149,7 +149,7 @@ export class ModifierUserComponent implements OnInit {
   
       this.userform.valueChanges.subscribe(
         data => {
-          console.log(this.userform?.value);
+
           
           
         }
@@ -162,7 +162,7 @@ export class ModifierUserComponent implements OnInit {
         data => {
     
           this.user = data;
-          console.log(data);
+
           this.isReady=true;
           this.initForm(data);
   
@@ -173,7 +173,7 @@ export class ModifierUserComponent implements OnInit {
     modifier(){
       this.us.modifieruser(this.router.snapshot.params['id'],this.userform.value).subscribe(
         data=>{
-          console.log(data);
+
           this.toastrService.success(data.message)
           this.route.navigate(['/user-management']);
         }

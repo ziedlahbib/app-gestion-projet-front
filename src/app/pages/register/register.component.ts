@@ -35,19 +35,19 @@ export class RegisterComponent implements OnInit {
 
     this.userform.valueChanges.subscribe(
       data => {
-        console.log(this.userform?.value);
+       
         
       }
     )
     this.userform.get('username')?.valueChanges.subscribe((value) => {
       // You can log the value here to see if the function is called
-      console.log(value);
+     
     });
     
   }
   usernameValidator: AsyncValidatorFn = (control: AbstractControl): Observable<ValidationErrors | null> => {
     const username = control.value;
-    console.log('Username validator called');
+   
   
     if (!username) {
       // Return early if the username is empty

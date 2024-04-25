@@ -97,7 +97,7 @@ getuserbyid() {
   let user: any = jwtDecode(token || '');
   this.us.getuserById(user.jti).subscribe(
     data => {
-      console.log(data);
+
       this.isReady = true;
       this.user = data;
 

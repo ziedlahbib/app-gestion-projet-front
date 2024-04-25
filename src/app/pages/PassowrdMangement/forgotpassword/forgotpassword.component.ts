@@ -26,7 +26,7 @@ export class ForgotpasswordComponent implements OnInit {
     });
     this.form.valueChanges.subscribe(
       data => {
-        console.log(this.form?.value);
+        
         
       }
     )
@@ -38,7 +38,7 @@ export class ForgotpasswordComponent implements OnInit {
       this.us.forgotPassword(controlValue).subscribe(
         data=>{
    
-          console.log(data);
+         
           this.toastrService.success(data.message)
           this.router.navigate(['/login'])
           this.mr=true;

@@ -19,8 +19,7 @@ export class AuthServiceService {
 
   registerSuccessfulLogin(data:any) {
     localStorage.setItem('autorisation',data.token);
-    console.log(data.roles)
-    console.log(data.token)
+    
     localStorage.setItem('role',data.roles);
 
   }
