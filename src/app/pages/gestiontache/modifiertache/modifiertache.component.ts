@@ -4,10 +4,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable, catchError, map, of } from 'rxjs';
+import { Projet } from 'src/app/model/Projet';
 import { Competence } from 'src/app/model/competence';
 import { Tache } from 'src/app/model/tache';
 import { User } from 'src/app/model/user';
 import { CompetenceService } from 'src/app/service/competence.service';
+import { ProjetServiceService } from 'src/app/service/projet-service.service';
 import { TacheserviceService } from 'src/app/service/tacheservice.service';
 import { UserServiceService } from 'src/app/service/user-service.service';
 
@@ -27,9 +29,12 @@ export class ModifiertacheComponent implements OnInit {
   userRating: number = 0;
   userRatingsMap: Map<Number, Observable<Number>> = new Map<Number, Observable<Number>>();
   starRating = 0; 
+  taches: Tache[]=[];
+  tasks: any[];
+  projet:Projet[]=[];
   constructor(private formBuilder: FormBuilder, private route: Router,
     private router:ActivatedRoute,private toastrService: ToastrService,
-    private ts:TacheserviceService,private cs :CompetenceService,private us:UserServiceService) { }
+    private ts:TacheserviceService,private cs :CompetenceService,private us:UserServiceService,private ps:ProjetServiceService) { }
 
   ngOnInit(): void {
     this.router.paramMap.subscribe(params => {
@@ -46,11 +51,42 @@ export class ModifiertacheComponent implements OnInit {
 
 
   }
+  gettachebuuserid(userId: Number) {
+    this.ts.gettachebyuserId(userId).subscribe(
+      data => {
+
+        this.tasks = data;
+        for (let task of data) {
+          this.affichetachedetail(task.id.tacheId);
+          this.getprojetbytacheid(task.id.tacheId);
+
+        }
+
+      }
+    )
+  }
+  getprojetbytacheid(tacheid:Number){
+    this.ps.getprojettachebyid(tacheid).subscribe(
+      projet=>{
+   
+        this.projet.push(projet);
+      }
+    )
+  }
+  affichetachedetail(tacheid: Number) {
+    this.ts.gettachebyId(tacheid).subscribe(
+      res => {
+
+        this.taches.push(res);
+  
+      }
+    )
+  }
   getusersbytache(){
-    console.log('Inside getusersbytache method'); // Add this line for debugging
+
     this.us.getuserBytache(this.router.snapshot.params['id']).subscribe(
       data=>{
-        console.log(data)
+
         this.userstache=data;
         this.fetchUserRatings();
       }
@@ -59,7 +95,7 @@ export class ModifiertacheComponent implements OnInit {
   todotachdev(idu:Number){
     this.ts.todotachedev(idu,this.router.snapshot.params['id'],this.tache).subscribe(
       res=>{
-        console.log(res);
+      
         this.getusers();
         this.getusersbytache();
       }
@@ -68,7 +104,7 @@ export class ModifiertacheComponent implements OnInit {
   afectertachdev(idu:Number){
     this.ts.affectertachedev(idu,this.router.snapshot.params['id'],this.tache).subscribe(
       res=>{
-        console.log(res);
+  
         this.getusers();
         this.getusersbytache();
       }
@@ -77,7 +113,7 @@ export class ModifiertacheComponent implements OnInit {
   desafectertachdev(idu:Number){
     this.ts.desaffectertachedev(idu,this.router.snapshot.params['id'],this.tache).subscribe(
       res=>{
-        console.log(res);
+
         this.getusers();
         this.getusersbytache();
       }
@@ -86,8 +122,11 @@ export class ModifiertacheComponent implements OnInit {
   getusers(){
     this.us.getusers().subscribe(
       data=>{
-        console.log(data)
+   
         this.users=data;
+        for(let u of data){
+            this.gettachebuuserid(u.id);
+        }
         this.fetchUserRatings();
       }
     )
@@ -96,7 +135,7 @@ export class ModifiertacheComponent implements OnInit {
     this.ts.gettachebyId(id).subscribe(
       data => {
         this.tache = data;
-        console.log(data);
+   ;
         this.isReady=true;
         this.initForm(data);
       }
@@ -110,7 +149,7 @@ export class ModifiertacheComponent implements OnInit {
     });
     this.tacheform.valueChanges.subscribe(
       data => {
-        console.log(this.tacheform?.value);
+
       }
     ) 
   }
@@ -122,20 +161,19 @@ export class ModifiertacheComponent implements OnInit {
   onRatingChange(rating: number,idu:number) {
     // Handle the rating change here, for example, you can update a property like userRating
     this.userRating = rating;
-    console.log(rating,this.tache.id)
-    console.log(idu)
+
     this.ts.rate(rating,this.router.snapshot.params['id'],idu).subscribe(
       res=>{
-        console.log(res)
+
       }
     )
   }
   fetchUserRatings(): void {
     this.users.forEach(user => {
-      console.log('Fetching rating for user ID:', user.id);
+
       this.ts.gettacheuserrateId(this.tache.id, user.id).subscribe(rate => {
         this.userRatingsMap.set(user.id, of(rate)); // Assuming rate is a number
-        console.log('Received rating for user ID:', user.id, 'Rate:', rate);
+
       });
     });
   }
@@ -149,7 +187,7 @@ export class ModifiertacheComponent implements OnInit {
 
     this.compform.valueChanges.subscribe(
       data => {
-        console.log(this.compform?.value);
+
 
         
       }
@@ -167,7 +205,7 @@ export class ModifiertacheComponent implements OnInit {
     const formData = this.compform.value;
     this.ts.affectercomptache(tacheid, formData.selectedCompetenceId, this.tache).subscribe(
       data => {
-        console.log(data);
+   ;
         this.get(this.router.snapshot.params['id']);
 
       }
@@ -177,7 +215,7 @@ export class ModifiertacheComponent implements OnInit {
     const tacheid = this.router.snapshot.params['id']
     this.ts.desaffectercomptache(tacheid, comp.id, this.tache).subscribe(
       data => {
-        console.log(data);
+   ;
         this.get(this.router.snapshot.params['id']);
       }
     );
@@ -185,7 +223,7 @@ export class ModifiertacheComponent implements OnInit {
   modifier(){
     this.ts.updatetache(this.router.snapshot.params['id'],this.tacheform.value).subscribe(
       data=>{
-        console.log(data);
+   ;
         this.toastrService.success("modifier avec succés");
         this.get(this.router.snapshot.params['id']);
 

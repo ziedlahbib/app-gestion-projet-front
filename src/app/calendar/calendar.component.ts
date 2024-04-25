@@ -69,7 +69,7 @@ export class CalendarComponent implements OnInit {
     let user: any = jwtDecode(token || '');
     this.us.getuserById(user.jti).subscribe(
       data => {
-        console.log(data);
+
         this.u = data;
         this.getuprojets(); // Call the method here after user data is retrieved
         

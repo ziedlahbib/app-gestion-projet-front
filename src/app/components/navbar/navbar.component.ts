@@ -72,7 +72,7 @@ export class NavbarComponent implements OnInit {
           if(task.etat=="non lu"){
            this.notif++;
           }
-          console.log(this.notif)
+  
           localStorage.setItem('notif',JSON.stringify(this.notif));
         }
 
