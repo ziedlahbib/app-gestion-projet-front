@@ -32,7 +32,12 @@ export class ModifiertacheComponent implements OnInit {
     private ts:TacheserviceService,private cs :CompetenceService,private us:UserServiceService) { }
 
   ngOnInit(): void {
-    this.get(this.router.snapshot.params['id']);
+    this.router.paramMap.subscribe(params => {
+      const id = Number(params.get('id')); // Convert string to number
+      if (id) {
+        this.get(id);
+      }
+    });
     this.initcompForm();
     this.getcompetences();
     this.getusers();

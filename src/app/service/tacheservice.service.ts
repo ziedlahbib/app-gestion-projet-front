@@ -16,6 +16,7 @@ export class TacheserviceService {
   desaffetercomptacheUrl="/api/tache/desaffecter-tache-compenence";
   affetertacheprojetUrl="/api/tache/affecter-tache-projet";
   todotachedevUrl="/api/tache/todo-tache-dev";
+  voirnotifUrl="/api/tache/voir-notif";
   affetertachedevUrl="/api/tache/affecter-tache-dev";
   desaffetertachedevUrl="/api/tache/desaffecter-tache-dev";
   gettachebyIdUrl="/api/tache/get-tache";
@@ -66,6 +67,9 @@ export class TacheserviceService {
   }
   affectertacheprojet(idp:Number,idt:Number,tache:any):Observable<Tache>{
     return this.http.put<Tache>(`${this.affetertacheprojetUrl}/${idp}/${idt}`,tache);
+  }
+  voirnotif(idu:Number,idt:Number,tache:any):Observable<any>{
+    return this.http.put<any>(`${this.voirnotifUrl}/${idu}/${idt}`,tache);
   }
   todotachedev(idu:Number,idt:Number,tache:any):Observable<any>{
     return this.http.put<any>(`${this.todotachedevUrl}/${idu}/${idt}`,tache);

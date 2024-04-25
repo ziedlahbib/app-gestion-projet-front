@@ -10,6 +10,7 @@ import { TacheserviceService } from 'src/app/service/tacheservice.service';
 import { ProjetServiceService } from 'src/app/service/projet-service.service';
 import { Tache } from 'src/app/model/tache';
 import { Projet } from 'src/app/model/Projet';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -26,7 +27,8 @@ export class NavbarComponent implements OnInit {
   user: User;
   taches: Tache[]=[];
   tasks: any[];
-  projet:Projet[]=[]
+  projet:Projet[]=[];
+  notif: number = 0;
 
   constructor(location: Location, private element: ElementRef, private router: Router,
     private authenticationService: AuthServiceService, private us: UserServiceService,
@@ -45,7 +47,19 @@ export class NavbarComponent implements OnInit {
     this.us.prenom$.subscribe((prenom) => {
       this.prenom = prenom;
     });
+    this.notif= JSON.parse(localStorage.getItem('notif'));
+  }
+  voirnotif(tache:any){
+    this.ts.voirnotif(this.user.id,tache.id,tache).subscribe(
+      data=>{
+        if(this.notif>0){
+          this.notif--;
+          localStorage.setItem('notif',JSON.stringify(this.notif));
 
+        }
+
+      }
+    )
   }
   gettachebuuserid(userId: Number) {
     this.ts.gettachebyuserId(userId).subscribe(
@@ -55,6 +69,10 @@ export class NavbarComponent implements OnInit {
         for (let task of data) {
           this.affichetachedetail(task.id.tacheId);
           this.getprojetbytacheid(task.id.tacheId);
+          if(task.etat=="non lu"){
+           this.notif++;
+          }
+          localStorage.setItem('notif',JSON.stringify(this.notif));
         }
 
       }
@@ -62,9 +80,9 @@ export class NavbarComponent implements OnInit {
   }
   getprojetbytacheid(tacheid:Number){
     this.ps.getprojettachebyid(tacheid).subscribe(
-      tache=>{
-        console.log(tache);
-        this.projet.push(tache);
+      projet=>{
+        console.log(projet);
+        this.projet.push(projet);
       }
     )
   }

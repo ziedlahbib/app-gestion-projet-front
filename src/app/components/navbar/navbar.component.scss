@@ -47,7 +47,12 @@
   .notification-item:last-child {
     border-bottom: none;
   }
-  .unread-task {
-    background-color: #e5e5e5; /* Grey background color for unread tasks */
+
+  .cursor-pointer {
+    cursor: pointer;
   }
+  .unread-task {
+    background-color: #ca9494; /* Grey background color for unread tasks */
+  }
+  
   

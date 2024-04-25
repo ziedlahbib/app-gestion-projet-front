@@ -13,21 +13,22 @@
         <a class="nav-link pr-0" role="button" ngbDropdownToggle>
           <button class="notification-btn" >
             <i class="ni ni-notification-70"></i>
-            <span class="notification-count">3</span>
+            <span class="notification-count">{{notif}}</span>
           </button>
         </a>
         <div class="dropdown-menu-arrow dropdown-menu-right" ngbDropdownMenu>
           <div class=" dropdown-header noti-title">
             <h6 class="text-overflow m-0">Welcome!</h6>
           </div>
-          <a routerLinkActive="active"  class="dropdown-item" *ngFor="let task of tasks; let idx = index">
-            <span>vous avez été affecter au tache {{ taches[idx]?.description }} du projet {{ projet[idx]?.nom_projet }} d'Id {{projet[idx]?.id}}
-              du {{ formatDate(taches[idx]?.date_debut) }} au {{ formatDate(taches[idx]?.date_fin) }}
+          <a routerLinkActive="active" class="dropdown-item" *ngFor="let task of tasks; let idx = index" [ngClass]="{ 'unread-task': task.eta === 'non lu' }" >
+            <span class="cursor-pointer" (click)="voirnotif(taches[idx])" [routerLink]="['/tache-management/update-tache',taches[idx]?.id]">vous avez été affecter au tache( {{ taches[idx]?.description }}) d'ID:{{ taches[idx]?.id }} du projet {{ projet[idx]?.nom_projet }} d'Id {{projet[idx]?.id}}
+              du {{ formatDate(taches[idx]?.date_debut) }} au {{ formatDate(taches[idx]?.date_fin) }} 
             </span>
           </a>
         </div>
       </li>
     </ul>
+    
     <!-- User -->
     <ul class="navbar-nav align-items-center d-none d-md-flex">
       <li class="nav-item" ngbDropdown placement="bottom-right">
