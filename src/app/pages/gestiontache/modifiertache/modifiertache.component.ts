@@ -54,14 +54,14 @@ export class ModifiertacheComponent implements OnInit {
   gettachebuuserid(userId: Number) {
     this.ts.gettachebyuserId(userId).subscribe(
       data => {
-
         this.tasks = data;
         for (let task of data) {
           this.affichetachedetail(task.id.tacheId);
           this.getprojetbytacheid(task.id.tacheId);
 
         }
-
+        console.log(this.projet)
+        console.log(this.taches)
       }
     )
   }
