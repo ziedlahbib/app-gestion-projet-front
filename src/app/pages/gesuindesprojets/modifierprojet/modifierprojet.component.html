@@ -70,7 +70,7 @@
                                     <div class="col-8">
                                         <h3 style="color: red;" class="mb-0">(*) Champ obligatoire</h3>
                                     </div>
-                                    <div class="col-4 text-right">
+                                    <div class="col-4 text-right" *ngIf="!isDeveloppeur()">
                                         <button class="btn btn-icon btn-3 btn-primary" type="button"
                                             (click)="modifier()" [disabled]="projetform.invalid">
                                             <span class="btn-inner--icon"><i class="ni ni-check-bold"></i></span>
@@ -131,7 +131,7 @@
                                         <i class="fas fa-ellipsis-v"></i>
                                       </a>
                                       <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
-                                        <a class="dropdown-item" (click)="deletetach(t)">supprimer</a>
+                                        <a class="dropdown-item" *ngIf="!isDeveloppeur()" (click)="deletetach(t)">supprimer</a>
                                         <a class="dropdown-item" [routerLink]="['/tache-management/update-tache',t.id]">afficher tache</a>
                                       </div>
                                     </div>
@@ -153,7 +153,7 @@
                     </div>
                     <!-- Dark table -->
                   </div>
-                <button style="margin-top: 20px;"class="btn btn-icon btn-3 btn-primary" type="button" (click)="show()">
+                <button style="margin-top: 20px;"class="btn btn-icon btn-3 btn-primary" type="button" *ngIf="!isDeveloppeur()" (click)="show()">
                     <span class="btn-inner--icon"><i class="ni ni-check-bold"></i></span>
                     <span class="btn-inner--text">Hide/show Formulaire tche </span>
                 </button>

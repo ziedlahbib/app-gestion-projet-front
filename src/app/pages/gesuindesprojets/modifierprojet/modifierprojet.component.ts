@@ -177,4 +177,8 @@ export class ModifierprojetComponent implements OnInit {
       console.log('Invalid form data.');
     }
   }
+  isDeveloppeur(): boolean {
+    let role = localStorage.getItem('role' || '');
+    return role == "ROLE_DEVELOPPEUR";
+  }
 }

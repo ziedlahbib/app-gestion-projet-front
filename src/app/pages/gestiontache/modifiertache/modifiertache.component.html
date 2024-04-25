@@ -113,11 +113,11 @@
       </div>
     </div>
     <!-- Table -->
-    <div class="card shadow" style="min-height: calc(100vh - 170px);margin: 20px;">
+    <div class="card shadow" >
       <div class="card-header border-0">
         <h3 class="mb-0">Liste des utilisateurs de la tache </h3>
       </div>
-      <div class="table-responsive">
+      <div class="table-responsive" style="min-height: calc(100vh - 140px);margin: 20px;">
         <table class="table align-items-center table-flush">
           <thead class="thead-light">
             <tr>
@@ -172,13 +172,16 @@
                   <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
                     <i class="fas fa-ellipsis-v"></i>
                   </a>
-                  <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow" >
-                    <a *ngIf="user.status=='disponible'" class="dropdown-item" (click)="todotachdev(user.id)">à faire</a>
-                    <a *ngIf="user.status=='disponible'" class="dropdown-item" (click)="afectertachdev(user.id)">affecter utilisateur</a>
+                  <div ngbDropdownMenu class="dropdown-menu-right dropdown-menu-arrow">
+                    <ng-container *ngIf="user.status=='disponible'">
+                      <a class="dropdown-item" (click)="todotachdev(user.id)">à faire</a>
+                      <a class="dropdown-item" (click)="afectertachdev(user.id)">affecter utilisateur</a>
+                    </ng-container>
                     <a *ngIf="user.status=='non disponible'" class="dropdown-item" (click)="desafectertachdev(user.id)">désaffecter utilisateur</a>
-
+                    <a *ngIf="user.status=='non disponible'"  class="dropdown-item" (click)="todotachdev(user.id)">à faire</a>
                   </div>
                 </div>
+                
               </td>
             </tr>
           </tbody>
@@ -192,11 +195,11 @@
         </nav>
       </div>
     </div>
-    <div class="card shadow" style="min-height: calc(100vh - 170px);margin: 20px;">
+    <div class="card shadow" >
       <div class="card-header border-0">
         <h3 class="mb-0">Liste des utilisateurs</h3>
       </div>
-      <div class="table-responsive">
+      <div class="table-responsive" style="min-height: calc(100vh - 140px);margin: 20px;">
         <table class="table align-items-center table-flush">
           <thead class="thead-light">
             <tr>
@@ -241,19 +244,19 @@
               </td>
               <td>{{user?.status}} </td>
               <td class="text-right">
-                <div ngbDropdown placement="bottom-right" *ngIf="user.status=='disponible'&&!isDeveloppeur()">
+                <div ngbDropdown placement="bottom-right" *ngIf="!isDeveloppeur()&&user.roles.name=='ROLE_DEVELOPPEUR'">
                   <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
                     <i class="fas fa-ellipsis-v"></i>
                   </a>
-                  <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
-                    <a  class="dropdown-item" (click)="todotachdev(user.id)">à faire</a>
-
+                  <div ngbDropdownMenu class="dropdown-menu-right dropdown-menu-arrow">
+                    <ng-container *ngIf="user.status=='disponible'">
+                      <a class="dropdown-item" (click)="todotachdev(user.id)">à faire</a>
+                      <a class="dropdown-item" (click)="afectertachdev(user.id)">affecter utilisateur</a>
+                    </ng-container>
+                    <a *ngIf="user.status=='non disponible'"  class="dropdown-item" (click)="todotachdev(user.id)">à faire</a>
+                    <a *ngIf="user.status=='non disponible'" class="dropdown-item" (click)="desafectertachdev(user.id)">désaffecter utilisateur</a>
                   </div>
-                  <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
-                    <a  class="dropdown-item" (click)="afectertachdev(user.id)">affecter utilisateur</a>
-
-                  </div>
-                </div>
+                </div>                
               </td>
             </tr>
           </tbody>

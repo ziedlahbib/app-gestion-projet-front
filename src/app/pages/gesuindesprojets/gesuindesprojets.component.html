@@ -8,8 +8,50 @@
   <!-- Page content -->
   <div class="container-fluid mt--7" *ngIf="isReady">
     <!--Card-->
-    <div>
-
+    <div *ngIf="isReady">
+      <div class="card-container">
+        <div class="card" *ngFor="let projet of projets">
+          <div class="card-header">
+            <h2>ID :{{projet.id}}</h2>
+          </div>
+          <div class="card-content">
+            <div class="icon-title">
+              <span>
+                <i class="ni ni-calendar-grid-58 text-pink"></i>
+                <p>Date début</p>
+              </span>
+              <p class="description">{{formatDate(projet.startDate)}}</p>
+            </div>
+            <div class="icon-title">
+              <span>
+                <i class="ni ni-calendar-grid-58 text-pink"></i>
+                <p>Date fin</p>
+              </span>
+              <p class="description">{{formatDate(projet.endDate)}}</p>
+            </div>
+            <div class="icon-title">
+              <span>
+                <i class="ni ni-circle-08 text-pink"></i>
+                <p>Chef du projet</p>
+              </span>
+              <p class="description">{{ projet?.chefDeProjet?.nom }} {{ projet?.chefDeProjet?.prenom }}</p>
+            </div>
+            <div class="icon-title">
+              <span>
+                <i class="ni ni-briefcase-248 text-pink"></i>
+                <p>Nom du projet</p>
+              </span>
+              <p class="description">{{ projet?.nom_projet }}</p>
+            </div>
+            <div class="button-container">
+              <button class="btn btn-danger"
+              (click)="suprimer(projet)">Supprimer</button>
+              <button class="btn btn-primary"
+              [routerLink]="['/projets-management/update-projet',projet.id]">Détail</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <!-- Table -->
     <div class="row">
