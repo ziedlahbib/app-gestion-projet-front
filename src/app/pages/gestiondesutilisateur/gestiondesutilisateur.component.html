@@ -26,10 +26,12 @@
                 <th scope="col">Note</th>
                 <th scope="col">Role</th>
                 <th scope="col">status</th>
+                <th scope="col">tache ID</th>
+                <th scope="col">projet Id</th>
                 <th scope="col"></th>
               </tr>
             </thead>
-            <tbody *ngFor="let user of users" >
+            <tbody *ngFor="let user of users;let idx=index" >
               <tr>
                 <th scope="row">
                   <div class="media align-items-center">
@@ -58,6 +60,8 @@
                   {{getFormattedRole(user?.roles.name)}}
                 </td>
                 <td>{{user?.status}}</td>
+                <td>{{taches[idx]?.id }} </td>
+                <td>{{projet[idx]?.id}} </td>
                 <td class="text-right">
                   <div ngbDropdown placement="bottom-right">
                     <a class="btn btn-sm btn-icon-only text-light"  ngbDropdownToggle>
