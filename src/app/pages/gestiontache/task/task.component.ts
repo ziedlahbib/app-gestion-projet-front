@@ -45,7 +45,7 @@ export class TaskComponent implements OnInit {
           this.affichetachedetail(task.id.tacheId);
           this.getprojetbytacheid(task.id.tacheId);
         }
-
+        console.log(this.tasks)
       }
     )
   }
@@ -70,5 +70,27 @@ export class TaskComponent implements OnInit {
     const formattedDate = new Date(date);
     const datePipe = new DatePipe('en-US'); // Change 'en-US' to your desired locale
     return datePipe.transform(formattedDate, 'yyyy-MM-dd'); // Adjust the format as needed
+  }
+  todotachdev(t:Tache){
+    this.ts.todotachedev(this.user.id,t.id,t).subscribe(
+      res=>{
+        this.getuserbyid();
+
+      }
+    )
+  }
+  afectertachdev(t:Tache){
+    this.ts.affectertachedev(this.user.id,t.id,t).subscribe(
+      res=>{
+        this.getuserbyid();
+      }
+    )
+  }
+  desafectertachdev(t:Tache){
+    this.ts.desaffectertachedev(this.user.id,t.id,t).subscribe(
+      res=>{
+        this.getuserbyid();
+      }
+    )
   }
 }

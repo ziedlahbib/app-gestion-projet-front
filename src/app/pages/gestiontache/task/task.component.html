@@ -9,8 +9,25 @@
   <div class="card-container">
     <div class="card" *ngFor="let task of tasks; let idx = index">
       <div class="card-header">
-        <h2>{{ taches[idx]?.description }}</h2>
+        <div class="header-content">
+          <h2>{{ taches[idx]?.description }}</h2>
+        </div>
+        <div class="dropdown-container">
+          <div ngbDropdown placement="bottom-right">
+            <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
+              <i class="fas fa-ellipsis-v"></i>
+            </a>
+            <div ngbDropdownMenu class="dropdown-menu-right dropdown-menu-arrow">
+              <ng-container >
+                <a class="dropdown-item" (click)="todotachdev(taches[idx])">à faire</a>
+                <a *ngIf="task.status=='à faire'" class="dropdown-item" (click)="afectertachdev(taches[idx])">affecter utilisateur</a>
+                <a *ngIf="task.status=='en cours'" class="dropdown-item" (click)="desafectertachdev(taches[idx])">désaffecter utilisateur</a>
+              </ng-container>
+            </div>
+          </div>
+        </div>
       </div>
+      
       <div class="card-content">
         <div class="icon-title">
           <span>

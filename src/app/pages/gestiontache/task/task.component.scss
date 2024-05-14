@@ -64,3 +64,17 @@
 .technologies a {
   margin-right: 5px; /* Add spacing between technologies */
 }
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.header-content {
+  flex-grow: 1;
+}
+
+.dropdown-container {
+  position: relative;
+}
