@@ -20,8 +20,8 @@
             <div ngbDropdownMenu class="dropdown-menu-right dropdown-menu-arrow">
               <ng-container >
                 <a class="dropdown-item" (click)="todotachdev(taches[idx])">à faire</a>
-                <a *ngIf="task.status=='à faire'" class="dropdown-item" (click)="afectertachdev(taches[idx])">affecter utilisateur</a>
-                <a *ngIf="task.status=='en cours'" class="dropdown-item" (click)="desafectertachdev(taches[idx])">désaffecter utilisateur</a>
+                <a *ngIf="task.status=='à faire'" class="dropdown-item" (click)="afectertachdev(taches[idx])">affecter tache</a>
+                <a *ngIf="task.status=='en cours'" class="dropdown-item" (click)="desafectertachdev(taches[idx])">terminer</a>
               </ng-container>
             </div>
           </div>
