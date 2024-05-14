@@ -38,9 +38,9 @@
                             *ngFor="let c of row; let j = index">
                             <div class="calendar-day-header" [ngClass]="{'blue-date': c.isToday}">
                                 <strong>{{c.date.getDate()}}</strong>
-                                <div *ngIf="c.title">
-                                    <div [style.backgroundColor]="c.color" class="project-color"></div>
-                                    {{ c.title }}
+                                <div *ngFor="let project of c.projects">
+                                    <div [style.backgroundColor]="project.color" class="project-color"></div>
+                                    {{ project.nom_projet }}
                                 </div>
                             </div>
                         </td>

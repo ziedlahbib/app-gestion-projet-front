@@ -105,15 +105,11 @@ export class CalendarComponent implements OnInit {
     }
   }
   assignProjectsToCalendar() {
-
     this.calendar.forEach(day => {
-      const projectsForDay = this.projets.filter(proj => this.isProjectInRange(proj, day.date));
-      if (projectsForDay.length > 0) {
-        day.color = projectsForDay[0].color; // Assign the color of the first project to the day
-        day.title = projectsForDay[0].nom_projet; // Assign the name of the first project to the day title
-      }
+        day.projects = this.projets.filter(proj => this.isProjectInRange(proj, day.date));
     });
-  }
+}
+
   
   
   populateCalendarWithProjects() {
