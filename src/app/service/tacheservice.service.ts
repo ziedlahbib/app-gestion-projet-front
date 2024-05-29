@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Tache } from '../model/tache';
 import { Observable } from 'rxjs';
+import { RecommendationResponse } from '../model/recommendationResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -42,10 +43,10 @@ export class TacheserviceService {
     return this.http.get<any[]>(`${this.gettacheuserIdUrl}/${idu}`);
 
   }
-  getrecomendtask(idt:Number): Observable<any[]>{
+  getrecomendtask(idt:Number): Observable<RecommendationResponse>{
     const url = `${this.recomendtacheUrl}/${idt}`;  // Ensure no extra slash here
     console.log('Request URL:', url);  // Debugging URL
-    return this.http.get<any[]>("http://localhost:8000/recommender/recommendations/"+idt);
+    return this.http.get<RecommendationResponse>("http://localhost:8000/recommender/recommendations/"+idt);
 
   }
   gettachebyId(idt:Number): Observable<Tache>{

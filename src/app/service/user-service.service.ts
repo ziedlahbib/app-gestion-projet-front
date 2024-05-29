@@ -11,6 +11,7 @@ export class UserServiceService {
 
   getbyusersurl="/api/user/get-users";
   getbyusersbytacheurl="/api/tache/get-users-by-tache"
+  getbyusersbytacheallurl="/api/tache/get-users-by-tache"
   getbycdpurl="/api/user/get-cdp";
   adduserUrl="/api/auth/signup-superadmin";
   addnormaluserUrl="/api/auth/signup"
@@ -55,6 +56,10 @@ export class UserServiceService {
   }
   getuserBytache(idt :Number): Observable<User[]>{
     return this.http.get<User[]>(`${this.getbyusersbytacheurl}/${idt}`);
+
+  }
+  getuserBytacheall(idt :Number): Observable<User[]>{
+    return this.http.get<User[]>(`${this.getbyusersbytacheallurl}/${idt}`);
 
   }
   deleteUser(id :Number): Observable<any>{

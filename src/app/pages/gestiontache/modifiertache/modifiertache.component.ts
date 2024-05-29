@@ -25,13 +25,17 @@ export class ModifiertacheComponent implements OnInit {
   tache:Tache;
   competencelist:Competence[];
   users:User[]= [];
+  recomendedusers:User[]= [];
   userstache:User[]= [];
   userRating: number = 0;
   userRatingsMap: Map<Number, Observable<Number>> = new Map<Number, Observable<Number>>();
   starRating = 0; 
   taches: Tache[]=[];
+  tachesr: Tache[]=[];
   tasks: any[];
   projet:Projet[]=[];
+  projetr:Projet[]=[];
+  isReadyru:boolean=false;
   constructor(private formBuilder: FormBuilder, private route: Router,
     private router:ActivatedRoute,private toastrService: ToastrService,
     private ts:TacheserviceService,private cs :CompetenceService,private us:UserServiceService,private ps:ProjetServiceService) { }
@@ -92,10 +96,12 @@ export class ModifiertacheComponent implements OnInit {
     );
   }
   
+  
   getprojetbytacheid(tacheid: number, index: number) { // Add index parameter
     this.ps.getprojettachebyid(tacheid).subscribe(
       projet => {
-        this.projet[index] = projet; // Assign the project to the correct index
+        this.projet[index] = projet; 
+        this.projetr[index] = projet; // Assign the project to the correct index
       }
     );
   }
@@ -103,7 +109,8 @@ export class ModifiertacheComponent implements OnInit {
   affichetachedetail(tacheid: number, index: number) { // Add index parameter
     this.ts.gettachebyId(tacheid).subscribe(
       res => {
-        this.taches[index] = res; // Assign the task to the correct index
+        this.taches[index] = res; 
+        this.tachesr[index] = res;// Assign the task to the correct index
       }
     );
   }
@@ -145,13 +152,49 @@ export class ModifiertacheComponent implements OnInit {
       }
     )
   }
-  getrecomendtask(){
+  getrecomendtask(): void {
     this.ts.getrecomendtask(this.router.snapshot.params['id']).subscribe(
-      data=>{
-        console.log(data);
+      data => {
+        console.log(data.Tasks);
+        for (let t of data.Tasks) {
+          this.us.getuserBytacheall(t).subscribe(
+            res => {
+              console.log(res);
+              // Check if the user already exists in the recomendedusers array before pushing
+              res.forEach(user => {
+                if (!this.recomendedusers.some(u => u.id === user.id)) {
+                  this.recomendedusers.push(user);
+                  console.log(user)
+                  this.fetchUserRatings();
+                }
+              });
+              this.isReadyru=true;
+              this.tachesr = new Array(this.recomendedusers.length).fill(null);
+              this.projetr = new Array(this.recomendedusers.length).fill(null);
+        
+              for (let i = 0; i < this.recomendedusers.length; i++) {
+                const u = this.recomendedusers[i];
+                if (u.status === 'non disponible') {
+                  this.gettachebuuserid(u.id, i); // Pass index i to gettachebuuserid function
+                } else if (u.status == null || u.status === 'disponible') {
+                  this.tachesr[i] = null;
+                  this.projetr[i] = null;
+                }
+              }
+             
+            },
+            error => {
+              console.error('Error fetching user by tache:', error);
+            }
+          );
+        }
+      },
+      error => {
+        console.error('Error fetching recommendations:', error);
       }
-    )
+    );
   }
+  
   get(id:number){
     this.ts.gettachebyId(id).subscribe(
       data => {
