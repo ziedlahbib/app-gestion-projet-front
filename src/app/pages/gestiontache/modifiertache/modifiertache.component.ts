@@ -145,7 +145,13 @@ export class ModifiertacheComponent implements OnInit {
       }
     )
   }
-
+  getrecomendtask(){
+    this.ts.getrecomendtask(this.router.snapshot.params['id']).subscribe(
+      data=>{
+        console.log(data);
+      }
+    )
+  }
   get(id:number){
     this.ts.gettachebyId(id).subscribe(
       data => {

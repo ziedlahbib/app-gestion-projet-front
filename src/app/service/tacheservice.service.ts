@@ -21,7 +21,8 @@ export class TacheserviceService {
   desaffetertachedevUrl="/api/tache/desaffecter-tache-dev";
   gettachebyIdUrl="/api/tache/get-tache";
   gettacheuserrateIdUrl="/api/tache/rate-user-tache-number";
-  rateurl="/api/tache/rate-user-tache"
+  rateurl="/api/tache/rate-user-tache";
+  recomendtacheUrl="/django/recommender/recommend";
   constructor(private http : HttpClient) { }
   rate(note: number, idt: number, idu: number): Observable<any> {
     // Create an object with the note as a property
@@ -39,6 +40,12 @@ export class TacheserviceService {
   }
   gettachebyuserId(idu:Number): Observable<any[]>{
     return this.http.get<any[]>(`${this.gettacheuserIdUrl}/${idu}`);
+
+  }
+  getrecomendtask(idt:Number): Observable<any[]>{
+    const url = `${this.recomendtacheUrl}/${idt}`;  // Ensure no extra slash here
+    console.log('Request URL:', url);  // Debugging URL
+    return this.http.get<any[]>("http://localhost:8000/recommender/recommendations/"+idt);
 
   }
   gettachebyId(idt:Number): Observable<Tache>{
