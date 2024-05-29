@@ -11,7 +11,7 @@ export class UserServiceService {
 
   getbyusersurl="/api/user/get-users";
   getbyusersbytacheurl="/api/tache/get-users-by-tache"
-  getbyusersbytacheallurl="/api/tache/get-users-by-tache"
+  getbyusersbytacheallurl="/api/tache/get-users-by-tache-all"
   getbycdpurl="/api/user/get-cdp";
   adduserUrl="/api/auth/signup-superadmin";
   addnormaluserUrl="/api/auth/signup"

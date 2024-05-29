@@ -159,7 +159,7 @@ export class ModifiertacheComponent implements OnInit {
         for (let t of data.Tasks) {
           this.us.getuserBytacheall(t).subscribe(
             res => {
-              console.log(res);
+              
               // Check if the user already exists in the recomendedusers array before pushing
               res.forEach(user => {
                 if (!this.recomendedusers.some(u => u.id === user.id)) {
@@ -168,6 +168,7 @@ export class ModifiertacheComponent implements OnInit {
                   this.fetchUserRatings();
                 }
               });
+              console.log(res);
               this.isReadyru=true;
               this.tachesr = new Array(this.recomendedusers.length).fill(null);
               this.projetr = new Array(this.recomendedusers.length).fill(null);
@@ -187,6 +188,7 @@ export class ModifiertacheComponent implements OnInit {
               console.error('Error fetching user by tache:', error);
             }
           );
+          
         }
       },
       error => {

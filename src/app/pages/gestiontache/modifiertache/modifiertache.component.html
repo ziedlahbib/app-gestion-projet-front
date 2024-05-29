@@ -209,6 +209,7 @@
               <th scope="col">Identifiant</th>
               <th scope="col">E-mail</th>
               <th scope="col">Note</th>
+              <th scope="col">Technologies</th>
               <th scope="col">Role</th>
               <th scope="col">status</th>
               <th scope="col">tache ID</th>
@@ -240,6 +241,11 @@
               <td>
                 <app-star-rating [rating]=user.rating></app-star-rating>
 
+              </td>
+              <td>
+                <div *ngFor="let c of user?.userCompetences">
+                    {{c.competence.technologies}}
+                </div>
               </td>
               <td>
                 {{getFormattedRole(user?.roles.name)}}
