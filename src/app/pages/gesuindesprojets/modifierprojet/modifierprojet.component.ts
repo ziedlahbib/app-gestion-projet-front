@@ -150,7 +150,6 @@ export class ModifierprojetComponent implements OnInit {
                   // Handle success response if needed
                   this.gettachebyproject();
                   this.get(this.router.snapshot.params['id']);
-                  this.toastrService.success("tache ajoutée avec succeé")
                 },
                 (error: any) => {
                   console.error('Error affecting competence to task:', error);
