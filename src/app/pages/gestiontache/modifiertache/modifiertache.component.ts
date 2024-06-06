@@ -203,7 +203,32 @@ export class ModifiertacheComponent implements OnInit {
   //     }
   //   );
   // }
- 
+  sortUsersByCompetenceAndRating(users: any[]): any[] {
+    // Helper function to get user's competences as a string array
+    const getCompetences = user => user.userCompetences.map(uc => uc.competence.technologies);
+  
+    // Loop through the original list of users
+    for (let i = 0; i < users.length - 1; i++) {
+      const competencesA = getCompetences(users[i]);
+  
+      for (let j = i + 1; j < users.length; j++) {
+        const competencesB = getCompetences(users[j]);
+  
+        // Check if both users have the same competence
+        if (JSON.stringify(competencesA) === JSON.stringify(competencesB)) {
+          // Compare ratings and swap if needed
+          if (users[j].rating > users[i].rating) {
+            const temp = users[i];
+            users[i] = users[j];
+            users[j] = temp;
+          }
+        }
+      }
+    }
+  
+    return users;
+  }
+  
   
   getrecomendtask(): void {
     const taskId = this.router.snapshot.params['id'];
@@ -214,10 +239,11 @@ export class ModifiertacheComponent implements OnInit {
           (responses: any[]) => {
             console.log('User Responses:', responses);
             // Filter users based on the role name 'ROLE_DEVELOPPEUR'
-            this.recomendedusers = responses.filter(user => user.roles && user.roles.name === 'ROLE_DEVELOPPEUR');
+            let filteredUsers = responses.filter(user => user.roles && user.roles.name === 'ROLE_DEVELOPPEUR');
             // console.log('Filtered User Responses:', filteredUsers);
             
-        
+            // Sort users by competence and within the same competence by rating
+            this.recomendedusers = this.sortUsersByCompetenceAndRating(filteredUsers);
             console.log('Sorted User Responses:', this.recomendedusers);
             this.isReadyru = true;
           },
