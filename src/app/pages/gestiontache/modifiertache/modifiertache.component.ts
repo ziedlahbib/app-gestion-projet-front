@@ -203,50 +203,7 @@ export class ModifiertacheComponent implements OnInit {
   //     }
   //   );
   // }
-
-  sortUsersByCompetenceAndRating(users: any[]): any[] {
-    // Helper function to get user's competences as a string array
-    const getCompetences = user => user.userCompetences.map(uc => uc.competence.technologies);
-  
-    // Group users by competence while preserving the order
-    const competenceGroups = new Map<string, any[]>();
-  
-    users.forEach(user => {
-      const competences = getCompetences(user);
-      competences.forEach(competence => {
-        if (!competenceGroups.has(competence)) {
-          competenceGroups.set(competence, []);
-        }
-        competenceGroups.get(competence).push(user);
-      });
-    });
-  
-    // Sort each competence group by rating
-    competenceGroups.forEach((group, competence) => {
-      group.sort((a, b) => a.rating - b.rating);
-    });
-  
-    // Sort users by their first competence and then reassemble the final list
-    const sortedUsers = [];
-  
-    users.forEach(user => {
-      const competences = getCompetences(user);
-      const sortedGroup = competences.length > 0 ? competenceGroups.get(competences[0]) : null;
-      if (sortedGroup) {
-        sortedGroup.forEach(sortedUser => {
-          if (sortedUser.id === user.id && !sortedUsers.includes(sortedUser)) {
-            sortedUsers.push(sortedUser);
-          }
-        });
-      }
-    });
-  
-    return sortedUsers;
-  }
-  
-  
-  
-  
+ 
   
   getrecomendtask(): void {
     const taskId = this.router.snapshot.params['id'];
@@ -257,11 +214,10 @@ export class ModifiertacheComponent implements OnInit {
           (responses: any[]) => {
             console.log('User Responses:', responses);
             // Filter users based on the role name 'ROLE_DEVELOPPEUR'
-            let filteredUsers = responses.filter(user => user.roles && user.roles.name === 'ROLE_DEVELOPPEUR');
+            this.recomendedusers = responses.filter(user => user.roles && user.roles.name === 'ROLE_DEVELOPPEUR');
             // console.log('Filtered User Responses:', filteredUsers);
             
-            // Sort users by competence and within the same competence by rating
-            this.recomendedusers = this.sortUsersByCompetenceAndRating(filteredUsers);
+        
             console.log('Sorted User Responses:', this.recomendedusers);
             this.isReadyru = true;
           },
