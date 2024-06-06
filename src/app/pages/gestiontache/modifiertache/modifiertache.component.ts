@@ -3,11 +3,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Observable, catchError, map, of } from 'rxjs';
+import { Observable, catchError, forkJoin, map, of } from 'rxjs';
 import { Projet } from 'src/app/model/Projet';
+import { RecommendationResponse } from 'src/app/model/RecommendationResponse ';
 import { Competence } from 'src/app/model/competence';
 import { Tache } from 'src/app/model/tache';
 import { User } from 'src/app/model/user';
+import { UserWithSortedCompetences } from 'src/app/model/userWithSortedCompetences';
 import { CompetenceService } from 'src/app/service/competence.service';
 import { ProjetServiceService } from 'src/app/service/projet-service.service';
 import { TacheserviceService } from 'src/app/service/tacheservice.service';
@@ -58,15 +60,20 @@ export class ModifiertacheComponent implements OnInit {
   getusers() {
     this.us.getusers().subscribe(
       data => {
-        console.log(data);
-        this.users = data;
-  
+        
+        for(let u of data){
+          if(u.roles.name=="ROLE_DEVELOPPEUR"){
+            this.users.push(u)
+          }
+        }
+        // this.users = data;
+        console.log(this.users);
         // Initialize taches and projet lists with null values
-        this.taches = new Array(data.length).fill(null);
-        this.projet = new Array(data.length).fill(null);
+        this.taches = new Array(this.users.length).fill(null);
+        this.projet = new Array(this.users.length).fill(null);
   
-        for (let i = 0; i < data.length; i++) {
-          const u = data[i];
+        for (let i = 0; i < this.users.length; i++) {
+          const u = this.users[i];
           if (u.status === 'non disponible') {
             this.gettachebuuserid(u.id, i); // Pass index i to gettachebuuserid function
           } else if (u.status == null || u.status === 'disponible') {
@@ -152,50 +159,125 @@ export class ModifiertacheComponent implements OnInit {
       }
     )
   }
-  getrecomendtask(): void {
-    this.ts.getrecomendtask(this.router.snapshot.params['id']).subscribe(
-      data => {
-        console.log(data.Tasks);
-        for (let t of data.Tasks) {
-          this.us.getuserBytacheall(t).subscribe(
-            res => {
+  // getrecomendtask(): void {
+  //   this.ts.getrecomendtask(this.router.snapshot.params['id']).subscribe(
+  //     data => {
+  //       console.log(data.Tasks);
+  //       for (let t of data.Tasks) {
+  //         this.us.getuserBytacheall(t).subscribe(
+  //           res => {
               
-              // Check if the user already exists in the recomendedusers array before pushing
-              res.forEach(user => {
-                if (!this.recomendedusers.some(u => u.id === user.id)) {
-                  this.recomendedusers.push(user);
-                  console.log(user)
-                  this.fetchUserRatings();
-                }
-              });
-              console.log(res);
-              this.isReadyru=true;
-              this.tachesr = new Array(this.recomendedusers.length).fill(null);
-              this.projetr = new Array(this.recomendedusers.length).fill(null);
+  //             // Check if the user already exists in the recomendedusers array before pushing
+  //             res.forEach(user => {
+  //               if (!this.recomendedusers.some(u => u.id === user.id)) {
+  //                 this.recomendedusers.push(user);
+  //                 console.log(user)
+  //                 this.fetchUserRatings();
+  //               }
+  //             });
+  //             console.log(res);
+  //             this.isReadyru=true;
+  //             this.tachesr = new Array(this.recomendedusers.length).fill(null);
+  //             this.projetr = new Array(this.recomendedusers.length).fill(null);
         
-              for (let i = 0; i < this.recomendedusers.length; i++) {
-                const u = this.recomendedusers[i];
-                if (u.status === 'non disponible') {
-                  this.gettachebuuserid(u.id, i); // Pass index i to gettachebuuserid function
-                } else if (u.status == null || u.status === 'disponible') {
-                  this.tachesr[i] = null;
-                  this.projetr[i] = null;
-                }
-              }
-             
-            },
-            error => {
-              console.error('Error fetching user by tache:', error);
-            }
-          );
+  //             for (let i = 0; i < this.recomendedusers.length; i++) {
+  //               const u = this.recomendedusers[i];
+  //               if (u.status === 'non disponible') {
+  //                 this.gettachebuuserid(u.id, i); // Pass index i to gettachebuuserid function
+  //               } else if (u.status == null || u.status === 'disponible') {
+  //                 this.tachesr[i] = null;
+  //                 this.projetr[i] = null;
+  //               }
+  //             }
+  //             this.recomendedusers.sort((a, b) => b.rating - a.rating);
+  //           },
+  //           error => {
+  //             console.error('Error fetching user by tache:', error);
+  //           }
+  //         );
           
+  //       }
+  //     },
+  //     error => {
+  //       console.error('Error fetching recommendations:', error);
+  //     }
+  //   );
+  // }
+
+  sortUsersByCompetenceAndRating(users: any[]): any[] {
+    // Helper function to get user's competences as a string array
+    const getCompetences = user => user.userCompetences.map(uc => uc.competence.technologies);
+  
+    // Group users by competence while preserving the order
+    const competenceGroups = new Map<string, any[]>();
+  
+    users.forEach(user => {
+      const competences = getCompetences(user);
+      competences.forEach(competence => {
+        if (!competenceGroups.has(competence)) {
+          competenceGroups.set(competence, []);
         }
+        competenceGroups.get(competence).push(user);
+      });
+    });
+  
+    // Sort each competence group by rating
+    competenceGroups.forEach((group, competence) => {
+      group.sort((a, b) => a.rating - b.rating);
+    });
+  
+    // Sort users by their first competence and then reassemble the final list
+    const sortedUsers = [];
+  
+    users.forEach(user => {
+      const competences = getCompetences(user);
+      const sortedGroup = competences.length > 0 ? competenceGroups.get(competences[0]) : null;
+      if (sortedGroup) {
+        sortedGroup.forEach(sortedUser => {
+          if (sortedUser.id === user.id && !sortedUsers.includes(sortedUser)) {
+            sortedUsers.push(sortedUser);
+          }
+        });
+      }
+    });
+  
+    return sortedUsers;
+  }
+  
+  
+  
+  
+  
+  getrecomendtask(): void {
+    const taskId = this.router.snapshot.params['id'];
+    this.ts.getrecomendtask(taskId).subscribe(
+      (data: any) => {
+        const userRequests = data.RecommendedUsers.map(user => this.us.getuserById(user.id));
+        forkJoin(userRequests).subscribe(
+          (responses: any[]) => {
+            console.log('User Responses:', responses);
+            // Filter users based on the role name 'ROLE_DEVELOPPEUR'
+            let filteredUsers = responses.filter(user => user.roles && user.roles.name === 'ROLE_DEVELOPPEUR');
+            // console.log('Filtered User Responses:', filteredUsers);
+            
+            // Sort users by competence and within the same competence by rating
+            this.recomendedusers = this.sortUsersByCompetenceAndRating(filteredUsers);
+            console.log('Sorted User Responses:', this.recomendedusers);
+            this.isReadyru = true;
+          },
+          error => {
+            console.error('Error fetching users:', error);
+          }
+        );
       },
       error => {
-        console.error('Error fetching recommendations:', error);
+        console.error('Error fetching recommendations', error);
       }
     );
   }
+  
+  
+  
   
   get(id:number){
     this.ts.gettachebyId(id).subscribe(

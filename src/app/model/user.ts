@@ -1,4 +1,5 @@
 import { Role } from "./role";
+import { UserCompetence } from "./userCompetence";
 
 export class User {
     id:Number;
@@ -10,7 +11,8 @@ export class User {
     resetToken:String;
     active:Boolean;
     roles:Role;
-    rating:Number;
-    status:string
+    rating:number;
+    status:string;
+    userCompetences:UserCompetence[]
 
 }
