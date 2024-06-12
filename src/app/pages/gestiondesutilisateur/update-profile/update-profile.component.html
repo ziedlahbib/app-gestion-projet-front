@@ -20,11 +20,12 @@
 
             <div class="input-group mb-3">
               <div class="input-group-prepend">
-                <span class="input-group-text">Upload</span>
+                <span class="input-group-text">Photo de profile :</span>
               </div>
               <div class="custom-file">
                 <input type="file" class="custom-file-input" id="inputGroupFile01" (change)="selectFile($event);upload()">
-                <label class="custom-file-label" for="inputGroupFile01 ">Choose file</label>
+                <label *ngIf="user.file==null" class="custom-file-label" for="inputGroupFile01 ">Choisir une fichier</label>
+                <label *ngIf="user.file!=null" class="custom-file-label" for="inputGroupFile01 ">{{user?.file?.name}}</label>
               </div>
             </div>
             <div class="card-body">

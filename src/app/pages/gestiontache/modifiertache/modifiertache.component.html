@@ -113,15 +113,88 @@
       </div>
     </div>
     <!-- Table -->
+    <div class="card shadow" style="margin: 30px;" >
+      <button class="btn btn-icon btn-3 btn-primary" type="button" (click)="getrecomendtask()" style="margin: 30px;">
+        <span class="btn-inner--icon"><i class="ni ni-check-bold"></i></span>
+        <span class="btn-inner--text">utilisateurs recommandés</span>
+        </button>
+        <div *ngIf="isReadyru" >
+          <div class="card-header border-0">
+            <h3 class="mb-0">Liste des utilisateurs recommandés</h3>
+          </div>
+          <div class="table-responsive" style="min-height: calc(100vh - 140px);margin: 20px;">
+            <table class="table align-items-center table-flush">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Nom</th>
+                  <th scope="col">Prenom</th>
+                  <th scope="col">Identifiant</th>
+                  <th scope="col">E-mail</th>
+                  <th scope="col">Note</th>
+                  <th scope="col">Technologies</th>
+                  <th scope="col">status</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let user of recomendedusers;let idx=index">
+                <tr>
+                  <td>
+                    {{user.nom}}
+                  </td>
+                  <td>
+                    <i class="bg-warning"></i> {{user.prenom}}
+                  </td>
+                  <td>
+                    {{user.username}}
+                  </td>
+                  <td>
+                    {{user.email}}
+                  </td>
+                  <td>
+                    <app-star-rating [rating]=user.rating></app-star-rating>
+    
+                  </td>
+                  <td>
+                    <div *ngFor="let c of user?.userCompetences">
+                        {{c.competence.technologies}}
+                    </div>
+                  </td>
+                  <td>{{user?.status}} </td>
+                  <td class="text-right">
+                    <div ngbDropdown placement="bottom-right" *ngIf="!isDeveloppeur()&&user.roles.name=='ROLE_DEVELOPPEUR'">
+                      <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
+                        <i class="fas fa-ellipsis-v"></i>
+                      </a>
+                      <div ngbDropdownMenu class="dropdown-menu-right dropdown-menu-arrow">
+                        <ng-container *ngIf="user.status=='disponible'">
+                          <a class="dropdown-item" (click)="todotachdev(user.id)">à faire</a>
+                          <a class="dropdown-item" (click)="afectertachdev(user.id)">affecter utilisateur</a>
+                        </ng-container>
+                        <a *ngIf="user.status=='non disponible'"  class="dropdown-item" (click)="todotachdev(user.id)">à faire</a>
+                      </div>
+                    </div>                
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      <div class="card-footer py-4">
+        <nav aria-label="...">
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+            aria-label="Select page of periodic elements">
+          </mat-paginator>
+        </nav>
+      </div>
+    </div>
     <div class="card shadow" >
       <div class="card-header border-0">
         <h3 class="mb-0">Liste des utilisateurs de la tache </h3>
       </div>
-      <div class="table-responsive" style="min-height: calc(100vh - 140px);margin: 20px;">
+      <div class="table-responsive" >
         <table class="table align-items-center table-flush">
           <thead class="thead-light">
             <tr>
-              <th scope="col">Id</th>
               <th scope="col">Nom</th>
               <th scope="col">Prenom</th>
               <th scope="col">Identifiant</th>
@@ -134,13 +207,6 @@
           </thead>
           <tbody *ngFor="let user of userstache">
             <tr>
-              <th scope="row">
-                <div class="media align-items-center">
-                  <div class="media-body">
-                    <span class="mb-0 text-sm">{{user.id}}</span>
-                  </div>
-                </div>
-              </th>
               <td>
                 {{user.nom}}
               </td>
@@ -280,96 +346,7 @@
       </div>
     </div> -->
 
-    <div class="card shadow" >
-      <button class="btn btn-icon btn-3 btn-primary" type="button" (click)="getrecomendtask()">
-        <span class="btn-inner--icon"><i class="ni ni-check-bold"></i></span>
-        <span class="btn-inner--text">utilisateurs recommandés</span>
-        </button>
-        <div *ngIf="isReadyru" >
-          <div class="card-header border-0">
-            <h3 class="mb-0">Liste des utilisateurs recommandés</h3>
-          </div>
-          <div class="table-responsive" style="min-height: calc(100vh - 140px);margin: 20px;">
-            <table class="table align-items-center table-flush">
-              <thead class="thead-light">
-                <tr>
-                  <th scope="col">Id</th>
-                  <th scope="col">Nom</th>
-                  <th scope="col">Prenom</th>
-                  <th scope="col">Identifiant</th>
-                  <th scope="col">E-mail</th>
-                  <th scope="col">Note</th>
-                  <th scope="col">Technologies</th>
-                  <th scope="col">Role</th>
-                  <th scope="col">status</th>
-                  <th scope="col">tache ID</th>
-                  <th scope="col">projet Id</th>
-                  <th scope="col"></th>
-                </tr>
-              </thead>
-              <tbody *ngFor="let user of recomendedusers;let idx=index">
-                <tr>
-                  <th scope="row">
-                    <div class="media align-items-center">
-                      <div class="media-body">
-                        <span class="mb-0 text-sm">{{user.id}}</span>
-                      </div>
-                    </div>
-                  </th>
-                  <td>
-                    {{user.nom}}
-                  </td>
-                  <td>
-                    <i class="bg-warning"></i> {{user.prenom}}
-                  </td>
-                  <td>
-                    {{user.username}}
-                  </td>
-                  <td>
-                    {{user.email}}
-                  </td>
-                  <td>
-                    <app-star-rating [rating]=user.rating></app-star-rating>
-    
-                  </td>
-                  <td>
-                    <div *ngFor="let c of user?.userCompetences">
-                        {{c.competence.technologies}}
-                    </div>
-                  </td>
-                  <td>
-                    {{getFormattedRole(user?.roles.name)}}
-                  </td>
-                  <td>{{user?.status}} </td>
-                  <td>{{tachesr[idx]?.id }} </td>
-                  <td>{{projetr[idx]?.id}} </td>
-                  <td class="text-right">
-                    <div ngbDropdown placement="bottom-right" *ngIf="!isDeveloppeur()&&user.roles.name=='ROLE_DEVELOPPEUR'">
-                      <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
-                        <i class="fas fa-ellipsis-v"></i>
-                      </a>
-                      <div ngbDropdownMenu class="dropdown-menu-right dropdown-menu-arrow">
-                        <ng-container *ngIf="user.status=='disponible'">
-                          <a class="dropdown-item" (click)="todotachdev(user.id)">à faire</a>
-                          <a class="dropdown-item" (click)="afectertachdev(user.id)">affecter utilisateur</a>
-                        </ng-container>
-                        <a *ngIf="user.status=='non disponible'"  class="dropdown-item" (click)="todotachdev(user.id)">à faire</a>
-                      </div>
-                    </div>                
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      <div class="card-footer py-4">
-        <nav aria-label="...">
-          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
-            aria-label="Select page of periodic elements">
-          </mat-paginator>
-        </nav>
-      </div>
-    </div>
+
     <!-- Dark table -->
   </div>
 </div>
