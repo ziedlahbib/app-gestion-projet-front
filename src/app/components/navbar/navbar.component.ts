@@ -21,6 +21,7 @@ export class NavbarComponent implements OnInit {
   isReady: boolean = false;
   nom: String = '';
   prenom: String = '';
+  id: String = '';
   public focus;
   public listTitles: any[];
   public location: Location;
@@ -29,7 +30,7 @@ export class NavbarComponent implements OnInit {
   tasks: any[];
   projet:Projet[]=[];
   notif: number = 0;
-
+  imageUrl: string;
   constructor(location: Location, private element: ElementRef, private router: Router,
     private authenticationService: AuthServiceService, private us: UserServiceService,
     private ts: TacheserviceService,private ps:ProjetServiceService) {
@@ -47,7 +48,10 @@ export class NavbarComponent implements OnInit {
     this.us.prenom$.subscribe((prenom) => {
       this.prenom = prenom;
     });
-    
+    this.us.id$.subscribe((id) => {
+      this.id = id;
+      console.log(this.id)
+    });
   }
   voirnotif(tache:any){
     this.ts.voirnotif(this.user.id,tache.id,tache).subscribe(
@@ -128,7 +132,11 @@ export class NavbarComponent implements OnInit {
         this.user = data;
         this.nom=data.nom;
         this.prenom=data.prenom;
+        this.id=data.file.id.toString();
+        console.log(this.id)
         this.gettachebuuserid(data.id);
+        this.imageUrl = `http://localhost:8081/File/file/${this.user.file.id}`;
+        console.log(this.imageUrl);
         this.isReady = true;
       }
     )

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, catchError, map, tap, throwError } from 'rxjs';
 import { User } from '../model/user';
 import { AuthServiceService } from './auth-service.service';
+import { FileDB } from '../model/fileDB';
 
 @Injectable({
   providedIn: 'root'
@@ -25,8 +26,21 @@ export class UserServiceService {
   desactiveruserurl="/api/user/desactiver-user"
   forgotpassworduril="/api/forgot";
   resetpassworduril="/api/reset";
+  uploadfilefurl="/api/File/uploadf";
+  getfiledetailurl="/api/File/filesdetail";
+  affecterfileurl="/api/user/affecter-file-utilisateur";
   constructor(private http : HttpClient,private authService :AuthServiceService) { }
-  
+  upload(file :File): Observable<Number>{
+    const formData: FormData = new FormData();
+    formData.append('file', file);
+    return this.http.post<Number>(`${this.uploadfilefurl}`,formData)
+    };
+    getFilesdetail(id:Number): Observable<FileDB> {
+      return this.http.get<FileDB>(`${this.getfiledetailurl}/${id}`);
+    }
+    affecterfileauuser(id:number,idf:number,user :User):Observable<User>{
+      return this.http.put<User>(`${this.affecterfileurl}/${id}/${idf}`,user);
+    }
   getusers(): Observable<User[]>{
     return this.http.get<User[]>(`${this.getbyusersurl}`);
 
@@ -111,7 +125,15 @@ export class UserServiceService {
   nom$: Observable<String> = this.nomSubject.asObservable();
   private prenomSubject = new BehaviorSubject<String>('');
   prenom$: Observable<String> = this.prenomSubject.asObservable();
+  private idSubject = new BehaviorSubject<String>('');
+  id$: Observable<String> = this.idSubject.asObservable();
+  setID(id: String): void {
+    this.idSubject.next(id);
+  }
 
+  getId(): String {
+    return this.nomSubject.value;
+  }
   setNom(nom: String): void {
     this.nomSubject.next(nom);
   }

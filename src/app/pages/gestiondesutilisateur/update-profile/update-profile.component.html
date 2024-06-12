@@ -17,6 +17,16 @@
                 </div>
               </div>
             </div>
+
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Upload</span>
+              </div>
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="inputGroupFile01" (change)="selectFile($event);upload()">
+                <label class="custom-file-label" for="inputGroupFile01 ">Choose file</label>
+              </div>
+            </div>
             <div class="card-body">
               <form [formGroup]="userform">
                 <h6 class="heading-small text-muted mb-4">information</h6>

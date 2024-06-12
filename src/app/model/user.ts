@@ -1,3 +1,4 @@
+import { FileDB } from "./fileDB";
 import { Role } from "./role";
 import { UserCompetence } from "./userCompetence";
 
@@ -13,6 +14,7 @@ export class User {
     roles:Role;
     rating:number;
     status:string;
-    userCompetences:UserCompetence[]
+    userCompetences:UserCompetence[];
+    file:FileDB;
 
 }
