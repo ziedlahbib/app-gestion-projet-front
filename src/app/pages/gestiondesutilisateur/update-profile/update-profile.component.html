@@ -26,6 +26,7 @@
                 <input type="file" class="custom-file-input" id="inputGroupFile01" (change)="selectFile($event);upload()">
                 <label *ngIf="user.file==null" class="custom-file-label" for="inputGroupFile01 ">Choisir une fichier</label>
                 <label *ngIf="user.file!=null" class="custom-file-label" for="inputGroupFile01 ">{{user?.file?.name}}</label>
+                <label *ngIf="file!=null" class="custom-file-label" for="inputGroupFile01 ">{{file.name}}</label>
               </div>
             </div>
             <div class="card-body">
@@ -40,7 +41,7 @@
                         <label class="form-control-label" for="input-username">Identifiant *</label>
                         <input type="text" id="input-username" class="form-control form-control-alternative"
                           formControlName="username"
-                          [ngClass]="{ 'invalid-input': userform.get('username').invalid && userform.get('username').touched }">
+                          [ngClass]="{ 'invalid-input': userform.get('username').invalid && userform.get('username').touched }" >
                       </div>
                     </div>
                     <div class="col-lg-6">

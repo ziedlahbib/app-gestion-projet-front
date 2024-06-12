@@ -27,6 +27,7 @@ export class AuthServiceService {
   logout() {
     localStorage.removeItem('autorisation');
     localStorage.removeItem('role');
+    console.log('loging out')
     this.router.navigate(['/login']);
   }
   setToken(token: string): void {

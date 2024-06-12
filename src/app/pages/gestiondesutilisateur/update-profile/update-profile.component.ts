@@ -7,6 +7,7 @@ import { ERole } from 'src/app/model/erole';
 import { FileDB } from 'src/app/model/fileDB';
 import { technologies } from 'src/app/model/technologies';
 import { User } from 'src/app/model/user';
+import { AuthServiceService } from 'src/app/service/auth-service.service';
 import { UserServiceService } from 'src/app/service/user-service.service';
 
 @Component({
@@ -25,7 +26,8 @@ export class UpdateProfileComponent implements OnInit {
   currentFile: any;
   file: FileDB;
   constructor(private formBuilder: FormBuilder, private route: Router,
-    private router: ActivatedRoute, private us: UserServiceService, private toastrService: ToastrService) { }
+    private router: ActivatedRoute, private us: UserServiceService, private toastrService: ToastrService,
+    private authenticationService: AuthServiceService) { }
 
   ngOnInit(): void {
     this.get(this.router.snapshot.params['id'])
@@ -130,11 +132,21 @@ export class UpdateProfileComponent implements OnInit {
 
         this.us.setNom(data.user.nom);
         this.us.setPrenom(data.user.prenom);
-        
+        console.log(this.userform.get('username').value)
+        console.log(this.user.username)
+        if(this.userform.get('username').value!=this.user.username){
+          this.toastrService.success("identifiant a changé changer !!reconnecter avec le nouveau identifiant");
+          this.logout()
+        }else{
+          this.route.navigate(['/user-management']);
+        }
         this.toastrService.success(data.message)
-        this.route.navigate(['/user-management']);
+        
       }
     )
+  }
+  logout() {
+    this.authenticationService.logout();
   }
   // In your component class
   getFormattedRole(role: string): string {
