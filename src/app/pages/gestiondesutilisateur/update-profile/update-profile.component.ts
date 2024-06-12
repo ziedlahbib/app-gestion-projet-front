@@ -137,8 +137,6 @@ export class UpdateProfileComponent implements OnInit {
         if(this.userform.get('username').value!=this.user.username){
           this.toastrService.success("identifiant a changé changer !!reconnecter avec le nouveau identifiant");
           this.logout()
-        }else{
-          this.route.navigate(['/user-management']);
         }
         this.toastrService.success(data.message)
         
