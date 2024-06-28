@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
   public projectsPerMonth: { month: number, projects: number }[] = [];
   public years: number[] = [];
   public selectedYear: number = 2024;
+  public isReady:boolean=false;
 
   constructor(private statistique: StatitstiqueService) { }
 
@@ -80,7 +81,9 @@ export class DashboardComponent implements OnInit {
     this.statistique.getmostusertask().subscribe(
       data => {
         this.user = data;
+        this.isReady=true;
         console.log(data);
+        console.log(this.isReady)
       }
     );
   }

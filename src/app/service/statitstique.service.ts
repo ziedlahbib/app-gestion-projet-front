@@ -10,8 +10,8 @@ export class StatitstiqueService {
   mostusertaskUrl="/api/statistic/most-tasks";
   projectpermonthurl="/api/statistic/projects-per-month";
   constructor(private http : HttpClient) { }
-  getmostusertask(): Observable<any>{
-    return this.http.get<any>(`${this.mostusertaskUrl}`);
+  getmostusertask(): Observable<User>{
+    return this.http.get<User>(`${this.mostusertaskUrl}`);
 
   }
 
