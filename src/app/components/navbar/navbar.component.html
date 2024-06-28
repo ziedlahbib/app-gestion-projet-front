@@ -35,7 +35,8 @@
         <a class="nav-link pr-0" role="button" ngbDropdownToggle>
           <div class="media align-items-center">
             <span class="avatar avatar-sm rounded-circle">
-              <img alt="Image placeholder" src="http://localhost:8081/File/file/{{id}}">
+              <img *ngIf="id==null" alt="Image placeholder" src="assets/img/theme/team-4-800x800.jpg">
+              <img *ngIf="id!=null"  alt="Image placeholder" src="http://localhost:8081/File/file/{{id}}">
             </span>
             <div class="media-body ml-2 d-none d-lg-block">
               <span class="mb-0 text-sm  font-weight-bold">{{nom}} {{prenom}}</span>

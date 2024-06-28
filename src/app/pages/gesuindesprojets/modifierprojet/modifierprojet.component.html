@@ -155,7 +155,7 @@
                   </div>
                 <button style="margin-top: 20px;"class="btn btn-icon btn-3 btn-primary" type="button" *ngIf="!isDeveloppeur()" (click)="show()">
                     <span class="btn-inner--icon"><i class="ni ni-check-bold"></i></span>
-                    <span class="btn-inner--text">Hide/show Formulaire tche </span>
+                    <span class="btn-inner--text">Afficher/Masquer Formulaire d'ajout tache </span>
                 </button>
                 <div *ngIf="showform"  class="card bg-secondary shadow">
                     <div class="card-header bg-white border-0">
@@ -263,7 +263,7 @@
                                 <button class="btn btn-icon btn-3 btn-primary" type="button"
                                     (click)="ajoutTache()" [disabled]="tacheform.invalid&&compform.invalid&&formGroup?.invalid">
                                     <span class="btn-inner--icon"><i class="ni ni-check-bold"></i></span>
-                                    <span class="btn-inner--text">ajout tache</span>
+                                    <span class="btn-inner--text">ajouter tache</span>
                                 </button>
                             </div>
                         </div>

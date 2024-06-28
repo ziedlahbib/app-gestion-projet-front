@@ -24,10 +24,11 @@
               </div>
               <div class="custom-file">
                 <input type="file" class="custom-file-input" id="inputGroupFile01" (change)="selectFile($event);upload()">
-                <label *ngIf="user.file==null" class="custom-file-label" for="inputGroupFile01 ">Choisir une fichier</label>
-                <label *ngIf="user.file!=null" class="custom-file-label" for="inputGroupFile01 ">{{user?.file?.name}}</label>
-                <label *ngIf="file!=null" class="custom-file-label" for="inputGroupFile01 ">{{file.name}}</label>
-              </div>
+                <label *ngIf="user.file==null" class="custom-file-label mb-0 mr-2" for="inputGroupFile01">Choisir une fichier</label>
+                <label *ngIf="user.file!=null" class="custom-file-label mb-0 mr-2" for="inputGroupFile01">{{user?.file?.name}}</label>
+                <label *ngIf="file!=null" class="custom-file-label mb-0 mr-2" for="inputGroupFile01">{{file.name}}</label>
+            </div>
+            
             </div>
             <div class="card-body">
               <form [formGroup]="userform">
@@ -78,7 +79,7 @@
                 </div>
                 <hr class="my-4" />
                 <!-- Address -->
-                <h6 class="heading-small text-muted mb-4">autre</h6>
+                <h6 class="heading-small text-muted mb-4">Autre</h6>
                 <div class="pl-lg-4">
                   <div class="row">
                     <div class="col-md-12">
@@ -136,7 +137,7 @@
                   <div class="col-4 text-right">
                     <button class="btn btn-icon btn-3 btn-primary" type="button" (click)="modifier()"  [disabled]="userform.invalid">
                       <span class="btn-inner--icon"><i class="ni ni-check-bold"></i></span>
-                      <span class="btn-inner--text">modifier</span>
+                      <span class="btn-inner--text">Modifier</span>
                     </button>
                   </div>
                 </div>

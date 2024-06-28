@@ -132,11 +132,16 @@ export class NavbarComponent implements OnInit {
         this.user = data;
         this.nom=data.nom;
         this.prenom=data.prenom;
-        this.id=data.file.id.toString();
-        console.log(this.id)
-        this.gettachebuuserid(data.id);
-        this.imageUrl = `http://localhost:8081/File/file/${this.user.file.id}`;
+        if(data.file!=null){
+          this.id=data.file.id.toString();
+          console.log(this.id)
+          this.imageUrl = `http://localhost:8081/File/file/${this.user.file.id}`;
         console.log(this.imageUrl);
+        }
+        else{
+          this.id=null;
+        }
+        this.gettachebuuserid(data.id);
         this.isReady = true;
       }
     )

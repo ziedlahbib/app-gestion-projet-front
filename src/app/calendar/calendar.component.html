@@ -11,15 +11,20 @@
     <div class="row">
         <div class="col">
             <div class="card shadow" style="min-height: calc(100vh - 170px);">
-                <div>
+                <br />
+                <div style="padding-left: 10px;">
                     {{displayMonth}}
                 </div>
-                <div>
-                    <a type="button"  (click)="setCurrentMonth()"  >Today</a>
-                    <input type="button" class="btn btn-outline-danger"  (click)="decreaseMonth()" value="-" />
-                    <input type="button" class="btn btn-outline-success" (click)="increaseMonth()" value="+" />
+                
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <a  style="padding-left: 8px;"  type="button" (click)="setCurrentMonth()">Today</a>
+                    <div>
+                        <input type="button" class="btn btn-outline-danger" (click)="decreaseMonth()" value="-" />
+                        <input type="button" class="btn btn-outline-success" (click)="increaseMonth()" value="+" />
+                    </div>
                 </div>
-
+                <br />
+               
                 <table class='calendar-table' *ngIf="calendar">
                     <thead>
                         <tr>

@@ -18,7 +18,6 @@
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
               <tr>
-                <th scope="col">Id</th>
                 <th scope="col">Nom</th>
                 <th scope="col">Prenom</th>
                 <th scope="col">Identifiant</th>
@@ -70,8 +69,8 @@
                     <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
                       <a class="dropdown-item" (click)="suprimer(user)">supprimer</a>
                       <a class="dropdown-item" [routerLink]="['/update-user',user.id]">afficher utilisateur</a>
-                      <a *ngIf="user.active==false" class="dropdown-item" (click)="activer(user.id,user)">activé utilisateur</a>
-                      <a  *ngIf="user.active==true"class="dropdown-item" (click)="desactiver(user.id,user)">desactivé utilisateur</a>
+                      <a *ngIf="user.active==false" class="dropdown-item" (click)="activer(user.id,user)">activer utilisateur</a>
+                      <a  *ngIf="user.active==true"class="dropdown-item" (click)="desactiver(user.id,user)">desactiver utilisateur</a>
                     </div>
                   </div>
                 </td>
