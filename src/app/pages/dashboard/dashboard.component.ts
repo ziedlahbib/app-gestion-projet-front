@@ -1,13 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import Chart from 'chart.js';
-
-// core components
-import {
-  chartOptions,
-  parseOptions,
-  chartExample1,
-  chartExample2
-} from "../../variables/charts";
+import { StatitstiqueService } from 'src/app/service/statitstique.service';
+import { User } from 'src/app/model/user';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,45 +10,118 @@ import {
 })
 export class DashboardComponent implements OnInit {
 
-  public datasets: any;
-  public data: any;
   public salesChart;
-  public clicked: boolean = true;
-  public clicked1: boolean = false;
+  public ordersChart;
+  public user: User;
+  public projectsPerMonth: { month: number, projects: number }[] = [];
+  public years: number[] = [];
+  public selectedYear: number = 2024;
+
+  constructor(private statistique: StatitstiqueService) { }
 
   ngOnInit() {
+    this.populateYears();
+    this.getmosttaskuser();
+    this.getprojectpermonth(this.selectedYear);
 
-    this.datasets = [
-      [0, 20, 10, 30, 15, 40, 20, 60, 60],
-      [0, 20, 5, 25, 10, 30, 15, 40, 40]
-    ];
-    this.data = this.datasets[0];
-
-
-    var chartOrders = document.getElementById('chart-orders');
-
-    parseOptions(Chart, chartOptions());
-
-
-    var ordersChart = new Chart(chartOrders, {
-      type: 'bar',
-      options: chartExample2.options,
-      data: chartExample2.data
-    });
-
-    var chartSales = document.getElementById('chart-sales');
+    const chartSales = document.getElementById('chart-sales');
+    const chartOrders = document.getElementById('chart-orders');
 
     this.salesChart = new Chart(chartSales, {
-			type: 'line',
-			options: chartExample1.options,
-			data: chartExample1.data
-		});
+      type: 'line',
+      data: {
+        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        datasets: [{
+          label: "Projets",
+          data: [], // Initial data will be updated
+          fill: false,
+          borderColor: 'rgba(75, 192, 192, 1)',
+          tension: 0.1
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+              stepSize: 5
+            }
+          }]
+        }
+      }
+    });
+
+    this.ordersChart = new Chart(chartOrders, {
+      type: 'bar',
+      data: {
+        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        datasets: [{
+          label: "Projets",
+          data: [], // Initial data will be updated
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+              stepSize: 5
+            }
+          }]
+        }
+      }
+    });
   }
 
+  getmosttaskuser() {
+    this.statistique.getmostusertask().subscribe(
+      data => {
+        this.user = data;
+        console.log(data);
+      }
+    );
+  }
 
-  public updateOptions() {
-    this.salesChart.data.datasets[0].data = this.data;
+  getprojectpermonth(year: number) {
+    this.statistique.getProjectsPerMonth(year).subscribe(
+      data => {
+        this.projectsPerMonth = data.map(item => {
+          const parts = item.split(', ');
+          return {
+            month: parseInt(parts[0].split(': ')[1]),
+            projects: parseInt(parts[1].split(': ')[1])
+          };
+        });
+        console.log(this.projectsPerMonth);
+        this.updateCharts();
+      }
+    );
+  }
+
+  populateYears() {
+    for (let year = 2024; year <= 2060; year++) {
+      this.years.push(year);
+    }
+  }
+
+  onYearChange(event: any) {
+    this.selectedYear = event.target.value;
+    this.getprojectpermonth(this.selectedYear);
+  }
+
+  updateCharts() {
+    const chartData = new Array(12).fill(0);
+    this.projectsPerMonth.forEach(item => {
+      chartData[item.month - 1] = item.projects; // months are 1-based, array is 0-based
+    });
+
+    this.salesChart.data.datasets[0].data = chartData;
     this.salesChart.update();
-  }
 
+    this.ordersChart.data.datasets[0].data = chartData;
+    this.ordersChart.update();
+  }
 }

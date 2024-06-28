@@ -12,7 +12,7 @@ declare interface RouteInfo {
     children?: RouteInfo[];
 }
 export const ROUTES: RouteInfo[] = [
-    // { path: '/dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: ''  },
+     { path: '/dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: '' ,visibility:true },
     //{ path: '/icons', title: 'Icons',  icon:'ni-planet text-blue', class: '', visibility:true,},
     // { path: '/maps', title: 'Maps',  icon:'ni-pin-3 text-orange', class: '' },
     // { path: '/user-profile', title: 'User profile',  icon:'ni-single-02 text-yellow', class: '', },
@@ -140,6 +140,8 @@ checkRouteVisibility(path: string): boolean {
       return this.isSuperadmin() ||this.isChefProjet()||this.isResponsable()||this.isDeveloppeur();
       case '/task':
         return this.isDeveloppeur();
+        case '/dashboard':
+          return this.isSuperadmin() ||this.isResponsable();
     default:
       return false; // By default, hide routes that don't require special visibility conditions
   }
